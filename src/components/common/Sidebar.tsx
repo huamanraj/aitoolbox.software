@@ -11,12 +11,8 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import {
   Menu,
   Mail,
-  Siren,
-  Cookie,
-  ReceiptText,
   MessagesSquare,
   ImageIcon,
-  Scale,
   Box,
   Youtube,
   Code,
@@ -26,7 +22,7 @@ import {
   FileSpreadsheet,
   Lightbulb,
   Settings,
-  Search, 
+  Search,
   Menu as MenuIcon,
   Rocket,
   Video,
@@ -35,11 +31,7 @@ import {
   Package,
   Globe,
 } from "lucide-react";
-import {
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-} from "@/components/ui/tooltip";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 
 // Tool interface definition
 interface Tool {
@@ -145,39 +137,17 @@ const aiTools: Tool[] = [
     href: "/blog",
     icon: <PenTool className="h-5 w-5" />,
   },
-  {
-    name: "Privacy-Policy",
-    href: "/privacy-policy",
-    icon: <Scale className="h-5 w-5"/>,
-  },
-  {
-    name: "Cookie-Policy",
-    href: "/cookie-policy",
-    icon: <Cookie className="h-5 w-5"/>,
-  },
-  {
-    name: "Terms of Service",
-    href: "/terms-of-service",
-    icon: <ReceiptText className="h-5 w-5"/>,
-  },
-  {
-    name: "DMCA Policy",
-    href: "/dmca-policy",
-    icon: <Siren className="h-5 w-5"/>,
-  },
 ];
 
 export default function Sidebar() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isCollapsed, setIsCollapsed] = useState(false);
   const pathname = usePathname();
-  const isMobile =  useIsMobile();
+  const isMobile = useIsMobile();
 
   // Filter tools based on search query (disabled when collapsed)
   const filteredTools = aiTools.filter((tool) =>
-    isCollapsed
-      ? true
-      : tool.name.toLowerCase().includes(searchQuery.toLowerCase())
+    isCollapsed ? true : tool.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const sidebarContent = (
@@ -209,15 +179,15 @@ export default function Sidebar() {
           </Button>
         )}
       </div>
-
+      
       {/* Scrollable Tools List - CALCULATED HEIGHT */}
       <div className="flex-1 overflow-hidden">
-        <div
+        <div 
           className="h-full overflow-y-auto px-2 py-2 sidebar-scrollbar"
-          style={{
-            maxHeight: "calc(100% - 0px)",
-            scrollbarWidth: "thin",
-            scrollbarColor: "hsl(var(--border)) transparent",
+          style={{ 
+            maxHeight: 'calc(100% - 0px)',
+            scrollbarWidth: 'thin',
+            scrollbarColor: 'hsl(var(--border)) transparent'
           }}
         >
           <div className="space-y-1">
@@ -255,18 +225,15 @@ export default function Sidebar() {
           </div>
         </div>
       </div>
-
+      
       {/* Settings Button - FIXED HEIGHT */}
-      <div className="h-24 flex-shrink-0 bg-background border-t p-3 flex flex-col items-center">
+      <div className="h-16 flex-shrink-0 bg-background border-t p-3 flex items-center">
         <Tooltip delayDuration={200}>
           <TooltipTrigger asChild>
             <Link href="/settings" className="w-full">
               <Button
                 variant="outline"
-                className={cn(
-                  "w-full gap-2",
-                  isCollapsed ? "justify-center" : "justify-start"
-                )}
+                className={cn("w-full gap-2", isCollapsed ? "justify-center" : "justify-start")}
                 size="sm"
               >
                 <Settings className="h-4 w-4" />
@@ -274,16 +241,8 @@ export default function Sidebar() {
               </Button>
             </Link>
           </TooltipTrigger>
-          {isCollapsed && (
-            <TooltipContent side="right">Settings</TooltipContent>
-          )}
+          {isCollapsed && <TooltipContent side="right">Settings</TooltipContent>}
         </Tooltip>
-        <div className="text-xs flex pt-2">
-          <a href="/privacy-policy">Privacy Policy</a>
-          <a href="/terms-of-service">Terms of Services</a>
-          <a href="/cookie-policy">Cookies Policy</a>
-          <a href="/dmca-policy">DMCA Policy</a>
-        </div>
       </div>
     </div>
   );
@@ -307,9 +266,9 @@ export default function Sidebar() {
     <>
       <Sheet>
         <SheetTrigger asChild>
-          <Button
-            variant="outline"
-            size="icon"
+          <Button 
+            variant="outline" 
+            size="icon" 
             className="fixed top-3 left-4 z-40 md:hidden"
           >
             <Menu className="h-5 w-5" />
@@ -323,3 +282,4 @@ export default function Sidebar() {
     </>
   );
 }
+  

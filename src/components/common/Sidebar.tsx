@@ -278,12 +278,7 @@ export default function Sidebar() {
             <TooltipContent side="right">Settings</TooltipContent>
           )}
         </Tooltip>
-        <div className="text-xs flex pt-2">
-          <a href="/privacy-policy">Privacy Policy</a>
-          <a href="/terms-of-service">Terms of Services</a>
-          <a href="/cookie-policy">Cookies Policy</a>
-          <a href="/dmca-policy">DMCA Policy</a>
-        </div>
+      
       </div>
     </div>
   );

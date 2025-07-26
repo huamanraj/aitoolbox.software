@@ -257,7 +257,7 @@ export default function Sidebar() {
       </div>
 
       {/* Settings Button - FIXED HEIGHT */}
-      <div className="h-24 flex-shrink-0 bg-background border-t p-3 flex flex-col items-center">
+      <div className="h-14 flex-shrink-0 bg-background border-t p-3 flex flex-col items-center">
         <Tooltip delayDuration={200}>
           <TooltipTrigger asChild>
             <Link href="/settings" className="w-full">
@@ -278,12 +278,6 @@ export default function Sidebar() {
             <TooltipContent side="right">Settings</TooltipContent>
           )}
         </Tooltip>
-        <div className="text-xs flex pt-2">
-          <a href="/privacy-policy">Privacy Policy</a>
-          <a href="/terms-of-service">Terms of Services</a>
-          <a href="/cookie-policy">Cookies Policy</a>
-          <a href="/dmca-policy">DMCA Policy</a>
-        </div>
       </div>
     </div>
   );

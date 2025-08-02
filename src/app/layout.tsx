@@ -35,6 +35,7 @@ export const metadata: Metadata = {
     "artificial intelligence",
     "productivity tools",
     "trip planner",
+    "project recommender"
   ],
   authors: [{ name: "AIToolbox" }],
   creator: "AIToolbox",

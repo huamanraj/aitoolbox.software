@@ -31,155 +31,72 @@ export default function Footer() {
 
   return (
     <footer className="w-full border-t bg-background text-muted-foreground text-sm mt-8">
-      <div className="max-w-6xl mx-auto w-full px-6 py-12">
-        {/* Mobile Layout */}
-        <div className="md:hidden space-y-12">
-          {/* First Row: Logo and Tools Col 1 */}
-          <div className="flex justify-center items-start gap-16">
-            {/* Logo */}
-            <div className="flex flex-col items-center gap-3">
-              <img
-                src="/logo.png"
-                alt="AIToolbox Logo"
-                className="h-12 w-auto"
-              />
-              <span className="font-mono text-lg text-foreground">
-                AIToolbox
-              </span>
-            </div>
-            {/* Tools Col - 1 */}
-            <div>
-              <ul className="space-y-2">
-                {toolsCol1.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="group relative w-max block hover:text-foreground"
-                    >
-                      {link.name}
-                      <span className="absolute -bottom-0.5 left-0 w-0 group-hover:w-full transition-all h-0.5 bg-foreground"></span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
 
-          {/* Second Row: Tools Col 2 and Info Col */}
-          <div className="flex justify-center items-start gap-16">
-            {/* Tools Col - 2 */}
-            <div>
-              <ul className="space-y-2">
-                {toolsCol2.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="group relative w-max block hover:text-foreground"
-                    >
-                      {link.name}
-                      <span className="absolute -bottom-0.5 left-0 w-0 group-hover:w-full transition-all h-0.5 bg-foreground"></span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            {/* Info Col */}
-            <div>
-              <ul className="space-y-2">
-                {infoLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="group relative w-max block hover:text-foreground"
-                    >
-                      {link.name}
-                      <span className="absolute -bottom-0.5 left-0 w-0 group-hover:w-full transition-all h-0.5 bg-foreground"></span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+      <div className="max-w-6xl mx-auto w-full px-4 py-8 grid grid-cols-1 md:grid-cols-5 gap-8 items-start">
+        {/* Logo */}
+        <div className="flex flex-col items-start gap-2 md:col-span-2">
+          <img
+            src="/logo.png"
+            alt="AIToolbox Logo"
+            className="h-10 w-auto mb-2"
+          />
+          <span className="font-mono text-lg text-foreground">AIToolbox</span>
         </div>
-
-        {/* Desktop Layout */}
-        <div className="hidden md:grid md:grid-cols-5 gap-8 items-start">
-          {/* Logo */}
-          <div className="flex flex-col items-start gap-2 md:col-span-2">
-            <img
-              src="/logo.png"
-              alt="AIToolbox Logo"
-              className="h-10 w-auto mb-2"
-            />
-            <span className="font-mono text-lg text-foreground">AIToolbox</span>
-          </div>
-          {/* Tools Col - 1 */}
-          <div>
-            <ul className="space-y-1">
-              {toolsCol1.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="group relative w-max block hover:text-foreground"
-                  >
-                    {link.name}
-                    <span className="absolute -bottom-0.5 left-0 w-0 group-hover:w-full transition-all h-0.5 bg-foreground"></span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          {/* Tools Col - 2 */}
-          <div>
-            <ul className="space-y-1">
-              {toolsCol2.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="group relative w-max block hover:text-foreground"
-                  >
-                    {link.name}
-                    <span className="absolute -bottom-0.5 left-0 w-0 group-hover:w-full transition-all h-0.5 bg-foreground"></span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          {/* Info Col */}
-          <div>
-            <ul className="space-y-1">
-              {infoLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="group relative w-max block hover:text-foreground"
-                  >
-                    {link.name}
-                    <span className="absolute -bottom-0.5 left-0 w-0 group-hover:w-full transition-all h-0.5 bg-foreground"></span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* Tools Col - 1 */}
+        <div>
+          <ul className="space-y-1">
+            {toolsCol1.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className="group relative w-max block hover:text-foreground">
+                  {link.name}
+                  <span className="absolute -bottom-0.5 left-0 w-0 group-hover:w-full transition-all h-0.5 bg-foreground"></span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        {/* Tools Col - 2 */}
+        <div>
+          <ul className="space-y-1">
+            {toolsCol2.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className="group relative w-max block hover:text-foreground">
+                  {link.name}
+                  <span className="absolute -bottom-0.5 left-0 w-0 group-hover:w-full transition-all h-0.5 bg-foreground"></span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        {/* Info Col */}
+        <div>
+          <ul className="space-y-1">
+            {infoLinks.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className="group relative w-max block hover:text-foreground">
+                  {link.name}
+                  <span className="absolute -bottom-0.5 left-0 w-0 group-hover:w-full transition-all h-0.5 bg-foreground"></span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto w-full px-6 pb-6 flex flex-col md:flex-row justify-between items-center border-t pt-6">
-        
+      <div className="max-w-6xl mx-auto w-full px-4 pb-4 flex flex-col md:flex-row justify-between items-center border-t pt-4">
+        <div className="font-mono text-md text-foreground mb-2 md:mb-0">
+          @aiToolbox
+        </div>
         <div className="flex flex-col md:flex-row items-center gap-4">
           <div className="text-xs text-muted-foreground">
             &copy; {new Date().getFullYear()} AI Toolbox. All rights reserved.
           </div>
           <div className="flex gap-4 text-xs">
             {legalLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="group relative w-max block hover:text-foreground"
-              >
-                {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 group-hover:w-full transition-all h-0.5 bg-foreground"></span>
-              </Link>
+              <Link key={link.href} href={link.href} className="group relative w-max block hover:text-foreground">
+                  {link.name}
+                  <span className="absolute -bottom-1 left-0 w-0 group-hover:w-full transition-all h-0.5 bg-foreground"></span>
+                </Link>
             ))}
           </div>
         </div>

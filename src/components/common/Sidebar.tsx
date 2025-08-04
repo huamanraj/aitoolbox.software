@@ -35,12 +35,9 @@ import {
   Package,
   Globe,
   MapPin,
-<<<<<<< HEAD
   FileUser,
-=======
   Target,
   Linkedin,
->>>>>>> d693c8fc139606acedffceae2f659a7f5b7b2976
 } from "lucide-react";
 import {
   Tooltip,

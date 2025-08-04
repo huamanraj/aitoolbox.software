@@ -21,12 +21,9 @@ import {
   Search,
   Globe,
   Map,
-<<<<<<< HEAD
   FileUser,
-=======
   Brain,
   Linkedin,
->>>>>>> d693c8fc139606acedffceae2f659a7f5b7b2976
 } from "lucide-react";
 
 // List of AI tools

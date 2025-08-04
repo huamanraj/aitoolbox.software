@@ -35,11 +35,8 @@ export const metadata: Metadata = {
     "artificial intelligence",
     "productivity tools",
     "trip planner",
-<<<<<<< HEAD
     "Cover letter generator",
-=======
-    "project recommender"
->>>>>>> d693c8fc139606acedffceae2f659a7f5b7b2976
+    "project recommender",
   ],
   authors: [{ name: "AIToolbox" }],
   creator: "AIToolbox",

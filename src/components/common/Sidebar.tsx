@@ -35,7 +35,12 @@ import {
   Package,
   Globe,
   MapPin,
+<<<<<<< HEAD
   FileUser,
+=======
+  Target,
+  Linkedin,
+>>>>>>> d693c8fc139606acedffceae2f659a7f5b7b2976
 } from "lucide-react";
 import {
   Tooltip,
@@ -73,6 +78,11 @@ const aiTools: Tool[] = [
     icon: <Globe className="h-5 w-5" />,
   },
   {
+    name: "LinkedIn Post Generator",
+    href: "/linkedin-post-generator",
+    icon: <Linkedin className="h-5 w-5" />,
+  },
+  {
     name: "Trip Planner",
     href: "/trip-planner",
     icon: <MapPin className="h-5 w-5" />,
@@ -86,6 +96,11 @@ const aiTools: Tool[] = [
     name: "Logo Generator",
     href: "/logo-generator",
     icon: <Box className="h-5 w-5" />,
+  },
+  {
+    name: "Project Recommender",
+    href: "/project-recommender",
+    icon: <Target className="h-5 w-5" />,
   },
   {
     name: "YouTube Summarizer",
@@ -269,7 +284,7 @@ export default function Sidebar() {
       </div>
 
       {/* Settings Button - FIXED HEIGHT */}
-      <div className="h-24 flex-shrink-0 bg-background border-t p-3 flex flex-col items-center">
+      <div className="h-14 flex-shrink-0 bg-background border-t p-3 flex flex-col items-center">
         <Tooltip delayDuration={200}>
           <TooltipTrigger asChild>
             <Link href="/settings" className="w-full">
@@ -290,7 +305,6 @@ export default function Sidebar() {
             <TooltipContent side="right">Settings</TooltipContent>
           )}
         </Tooltip>
-      
       </div>
     </div>
   );

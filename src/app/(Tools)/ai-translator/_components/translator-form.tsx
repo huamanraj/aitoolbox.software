@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import * as z from "zod"
-import { Button } from "@/components/ui/button"
+import * as React from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -13,23 +13,23 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
+} from "@/components/ui/form";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Globe, Loader2, ArrowRightLeft } from "lucide-react"
+} from "@/components/ui/card";
+import { Globe, Loader2, ArrowRightLeft } from "lucide-react";
 
 // Define form schema
 const formSchema = z.object({
@@ -45,10 +45,10 @@ const formSchema = z.object({
   preserveFormatting: z.boolean({
     required_error: "Please specify if formatting should be preserved.",
   }),
-})
+});
 
 // Define form values type
-export type TranslatorFormValues = z.infer<typeof formSchema>
+export type TranslatorFormValues = z.infer<typeof formSchema>;
 
 // List of languages
 const languages = [
@@ -72,17 +72,14 @@ const languages = [
   "Thai",
   "Indonesian",
   "Greek",
-]
+];
 
 interface TranslatorFormProps {
-  onSubmit: (data: TranslatorFormValues) => void
-  isLoading: boolean
+  onSubmit: (data: TranslatorFormValues) => void;
+  isLoading: boolean;
 }
 
-export function TranslatorForm({
-  onSubmit,
-  isLoading,
-}: TranslatorFormProps) {
+export function TranslatorForm({ onSubmit, isLoading }: TranslatorFormProps) {
   const form = useForm<TranslatorFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -91,18 +88,18 @@ export function TranslatorForm({
       text: "",
       preserveFormatting: true,
     },
-  })
+  });
 
   // Function to swap source and target languages
   const handleSwapLanguages = () => {
-    const sourceLanguage = form.getValues("sourceLanguage")
-    const targetLanguage = form.getValues("targetLanguage")
-    
+    const sourceLanguage = form.getValues("sourceLanguage");
+    const targetLanguage = form.getValues("targetLanguage");
+
     if (sourceLanguage && targetLanguage) {
-      form.setValue("sourceLanguage", targetLanguage)
-      form.setValue("targetLanguage", sourceLanguage)
+      form.setValue("sourceLanguage", targetLanguage);
+      form.setValue("targetLanguage", sourceLanguage);
     }
-  }
+  };
 
   return (
     <Card className="border-gray-200 shadow-md">
@@ -133,7 +130,7 @@ export function TranslatorForm({
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          {languages.map(language => (
+                          {languages.map((language) => (
                             <SelectItem key={language} value={language}>
                               {language}
                             </SelectItem>
@@ -145,7 +142,6 @@ export function TranslatorForm({
                   )}
                 />
               </div>
-              
               <Button
                 type="button"
                 variant="outline"
@@ -153,7 +149,7 @@ export function TranslatorForm({
                 onClick={handleSwapLanguages}
                 className="h-10 w-10 rounded-full border-2 border-gray-200 bg-white hover:bg-gray-50 self-center md:self-end mb-1"
               >
-                <ArrowRightLeft className="h-4 w-4 text-blue-600" />
+                <ArrowRightLeft className="h-4 w-4" />
                 <span className="sr-only">Swap languages</span>
               </Button>
               
@@ -174,7 +170,7 @@ export function TranslatorForm({
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          {languages.map(language => (
+                          {languages.map((language) => (
                             <SelectItem key={language} value={language}>
                               {language}
                             </SelectItem>
@@ -209,10 +205,10 @@ export function TranslatorForm({
               )}
             />
 
-            <Button 
-              type="submit" 
-              disabled={isLoading} 
-              className="w-full bg-black hover:bg-gray-800 text-white font-semibold py-3 text-lg shadow-lg transition-all duration-200 transform hover:scale-[1.02]"
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="w-full  text-white font-semibold py-3 text-lg shadow-lg cursor-pointer "
             >
               {isLoading ? (
                 <>
@@ -230,5 +226,5 @@ export function TranslatorForm({
         </Form>
       </CardContent>
     </Card>
-  )
-} 
+  );
+}

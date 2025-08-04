@@ -21,7 +21,12 @@ import {
   Search,
   Globe,
   Map,
+<<<<<<< HEAD
   FileUser,
+=======
+  Brain,
+  Linkedin,
+>>>>>>> d693c8fc139606acedffceae2f659a7f5b7b2976
 } from "lucide-react";
 
 // List of AI tools
@@ -45,6 +50,13 @@ const aiTools = [
     href: "/ai-translator",
     icon: <Globe className="h-6 w-6" />,
     description: "Translate text between multiple languages",
+    category: "writing"
+  },
+  {
+    name: "LinkedIn Post Generator",
+    href: "/linkedin-post-generator",
+    icon: <Linkedin className="h-6 w-6" />,
+    description: "Create engaging professional LinkedIn posts",
     category: "writing"
   },
   {
@@ -124,6 +136,14 @@ const aiTools = [
   description: "Plan your travels intelligently with AI",
   category: "travel"
 },
+{
+  name: "AI Project Recommender",
+  href: "/project-recommender",
+  icon: <Brain className="h-6 w-6" />, 
+  description: "Get personalized project ideas based on your skills",
+  category: "learning"
+}
+
 ];
 
 const categories = [...new Set(aiTools.map(tool => tool.category))];

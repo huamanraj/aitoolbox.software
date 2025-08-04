@@ -21,6 +21,7 @@ import {
   Search,
   Globe,
   Map,
+  FileUser,
 } from "lucide-react";
 
 // List of AI tools
@@ -100,6 +101,13 @@ const aiTools = [
     href: "/resume-builder",
     icon: <FileSpreadsheet className="h-6 w-6" />,
     description: "Create professional resumes",
+    category: "professional"
+  },
+  {
+    name: "Cover Letter Generator",
+    href: "/cover-letter-generator",
+    icon: <FileUser className="h-6 w-6" />,
+    description: "Write tailored cover letters instantly",
     category: "professional"
   },
   {

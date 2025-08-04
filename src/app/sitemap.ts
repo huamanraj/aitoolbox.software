@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/logo-generator',
     '/prompt-generator',
     '/resume-builder',
+    '/cover-letter-generator',
     '/text-summarizer',
     '/youtube-summarizer',
     '/startup-idea-generator',

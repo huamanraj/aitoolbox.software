@@ -24,22 +24,28 @@ import {
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent } from "@/components/ui/card"
-import { Loader2, User, Mail, Building2, Briefcase, Award, FileType, Send, Palette, Clock } from "lucide-react"
+import {
+  Loader2,
+  User,
+  Mail,
+  Building2,
+  Briefcase,
+  Award,
+  Send,
+  Palette,
+  Clock,
+} from "lucide-react"
 
 const tones = [
   "Professional",
-  "Enthusiastic", 
+  "Enthusiastic",
   "Confident",
   "Friendly",
   "Formal",
-  "Creative"
+  "Creative",
 ]
 
-const lengths = [
-  "Short",
-  "Medium", 
-  "Long"
-]
+const lengths = ["Short", "Medium", "Long"]
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Name is required." }),
@@ -64,10 +70,7 @@ interface CoverLetterFormProps {
   isLoading: boolean
 }
 
-export function CoverLetterForm({
-  onSubmit,
-  isLoading,
-}: CoverLetterFormProps) {
+export function CoverLetterForm({ onSubmit, isLoading }: CoverLetterFormProps) {
   const form = useForm<CoverLetterFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -88,238 +91,210 @@ export function CoverLetterForm({
       <CardContent className="p-4 pt-4">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            {/* Personal Information */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-medium text-gray-900 flex items-center gap-2">
-                <User className="w-5 h-5 text-blue-600" />
-                Personal Details
-              </h3>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-base flex items-center gap-2">
-                        <User className="h-4 w-4 text-zinc-500" />
-                        Full Name *
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="John Doe"
-                          className="rounded-none text-base"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-base flex items-center gap-2">
-                        <Mail className="h-4 w-4 text-zinc-500" />
-                        Email Address
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          type="email"
-                          placeholder="john@example.com"
-                          className="rounded-none text-base"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-            </div>
-
-            {/* Job Information */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-medium text-gray-900 flex items-center gap-2">
-                <Building2 className="w-5 h-5 text-blue-600" />
-                Job Details
-              </h3>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <FormField
-                  control={form.control}
-                  name="position"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-base">
-                        Position Title *
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Software Engineer"
-                          className="rounded-none text-base"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="company"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-base">
-                        Company Name *
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Tech Company Inc."
-                          className="rounded-none text-base"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-            </div>
-
-            {/* Experience & Skills */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-medium text-gray-900 flex items-center gap-2">
-                <Briefcase className="w-5 h-5 text-blue-600" />
-                Experience & Skills
-              </h3>
-              
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <FormField
                 control={form.control}
-                name="experience"
+                name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-base">
-                      Relevant Experience *
+                    <FormLabel className="text-base flex items-center gap-2">
+                      <User className="h-4 w-4 text-zinc-500" />
+                      Full Name
                     </FormLabel>
                     <FormControl>
-                      <Textarea
-                        placeholder="Describe your relevant work experience, projects, and achievements..."
-                        className="resize-y min-h-[120px] rounded-none text-base"
+                      <Input
+                        placeholder="John Doe"
+                        className="rounded-none text-base"
                         {...field}
                       />
                     </FormControl>
-                    <FormDescription className="text-sm text-zinc-500">
-                      Highlight your most relevant experience and accomplishments.
-                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              
               <FormField
                 control={form.control}
-                name="skills"
+                name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-base">
-                      Key Skills *
+                    <FormLabel className="text-base flex items-center gap-2">
+                      <Mail className="h-4 w-4 text-zinc-500" />
+                      Email Address (Optional)
                     </FormLabel>
                     <FormControl>
-                      <Textarea
-                        placeholder="List your relevant skills, technologies, and competencies..."
-                        className="resize-y min-h-[100px] rounded-none text-base"
+                      <Input
+                        type="email"
+                        placeholder="john@example.com"
+                        className="rounded-none text-base"
                         {...field}
                       />
                     </FormControl>
-                    <FormDescription className="text-sm text-zinc-500">
-                      Include technical skills, soft skills, and relevant certifications.
-                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
             </div>
 
-            {/* Customization Options */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-medium text-gray-900 flex items-center gap-2">
-                <Award className="w-5 h-5 text-blue-600" />
-                Customization
-              </h3>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <FormField
-                  control={form.control}
-                  name="tone"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-base flex items-center gap-2">
-                        <Palette className="h-4 w-4 text-zinc-500" />
-                        Tone
-                      </FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger className="rounded-none text-sm">
-                            <SelectValue placeholder="Select a tone" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent className="rounded-none">
-                          {tones.map(tone => (
-                            <SelectItem key={tone} value={tone}>
-                              {tone}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="length"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-base flex items-center gap-2">
-                        <Clock className="h-4 w-4 text-zinc-500" />
-                        Length
-                      </FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger className="rounded-none text-sm">
-                            <SelectValue placeholder="Select length" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent className="rounded-none">
-                          <SelectItem value="Short">Short (2-3 paragraphs)</SelectItem>
-                          <SelectItem value="Medium">Medium (3-4 paragraphs)</SelectItem>
-                          <SelectItem value="Long">Long (4-5 paragraphs)</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="position"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-base flex items-center gap-2">
+                      <Briefcase className="h-4 w-4 text-zinc-500" />
+                      Position Title
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Software Engineer"
+                        className="rounded-none text-base"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="company"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-base flex items-center gap-2">
+                      <Building2 className="h-4 w-4 text-zinc-500" />
+                      Company Name
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Tech Company Inc."
+                        className="rounded-none text-base"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
 
-            {/* Additional Information */}
+            <FormField
+              control={form.control}
+              name="experience"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-base flex items-center gap-2">
+                    <Award className="h-4 w-4 text-zinc-500" />
+                    Relevant Experience
+                  </FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Describe your relevant work experience, projects, and achievements..."
+                      className="resize-y min-h-[120px] rounded-none text-base"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription className="text-sm text-zinc-500">
+                    Highlight your most relevant experience and accomplishments.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="skills"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-base flex items-center gap-2">
+                    <Briefcase className="h-4 w-4 text-zinc-500" />
+                    Key Skills
+                  </FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="List your relevant skills, technologies, and competencies..."
+                      className="resize-y min-h-[100px] rounded-none text-base"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription className="text-sm text-zinc-500">
+                    Include technical skills, soft skills, and relevant certifications.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="tone"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-base flex items-center gap-2">
+                      <Palette className="h-4 w-4 text-zinc-500" />
+                      Tone
+                    </FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger className="rounded-none text-sm">
+                          <SelectValue placeholder="Select a tone" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent className="rounded-none">
+                        {tones.map((tone) => (
+                          <SelectItem key={tone} value={tone}>
+                            {tone}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="length"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-base flex items-center gap-2">
+                      <Clock className="h-4 w-4 text-zinc-500" />
+                      Length
+                    </FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger className="rounded-none text-sm">
+                          <SelectValue placeholder="Select length" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent className="rounded-none">
+                        <SelectItem value="Short">Short (2-3 paragraphs)</SelectItem>
+                        <SelectItem value="Medium">Medium (3-4 paragraphs)</SelectItem>
+                        <SelectItem value="Long">Long (4-5 paragraphs)</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
             <FormField
               control={form.control}
               name="additionalInfo"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-base">
-                    Additional Information
+                  <FormLabel className="text-base flex items-center gap-2">
+                    <Award className="h-4 w-4 text-zinc-500" />
+                    Additional Information (Optional)
                   </FormLabel>
                   <FormControl>
                     <Textarea

@@ -159,6 +159,31 @@ const aiTools: Tool[] = [
     icon: <Package className="h-5 w-5" />,
   },
   {
+    name: "Product Description",
+    href: "/product-description-generator",
+    icon: <PenTool className="h-5 w-5" />,
+  },
+  {
+    name: "Content Rewriter",
+    href: "/content-rewriter",
+    icon: <FileText className="h-5 w-5" />,
+  },
+  {
+    name: "Content Improver",
+    href: "/content-improver",
+    icon: <PenTool className="h-5 w-5" />,
+  },
+  {
+    name: "Content Expander",
+    href: "/content-expander",
+    icon: <PenTool className="h-5 w-5" />,
+  },
+  {
+    name: "Content Shortener",
+    href: "/content-shortener",
+    icon: <PenTool className="h-5 w-5" />,
+  },
+  {
     name: "Blog",
     href: "/blog",
     icon: <PenTool className="h-5 w-5" />,

@@ -74,6 +74,11 @@ const aiTools: Tool[] = [
     icon: <Globe className="h-5 w-5" />,
   },
   {
+    name: "AI Bio Genertor",
+    href: "/ai-bio-generator",
+    icon: <Siren className="h-5 w-5"/>,
+  },
+  {
     name: "LinkedIn Post Generator",
     href: "/linkedin-post-generator",
     icon: <Linkedin className="h-5 w-5" />,

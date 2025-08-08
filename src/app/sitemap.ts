@@ -34,6 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/ai-resume-builder-guide',
     '/ai-text-summarizer-guide',
     '/ai-youtube-summarizer-guide',
+    '/ai-bio-generator',
   ].map((route) => ({
     url: `${URL}${route}`,
     lastModified: new Date().toISOString(),

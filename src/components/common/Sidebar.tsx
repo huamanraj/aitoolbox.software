@@ -35,6 +35,7 @@ import {
   Package,
   Globe,
   MapPin,
+  FileUser,
   Target,
   Linkedin,
 } from "lucide-react";
@@ -127,6 +128,11 @@ const aiTools: Tool[] = [
     name: "Resume Builder",
     href: "/resume-builder",
     icon: <FileSpreadsheet className="h-5 w-5" />,
+  },
+  {
+    name: "Cover Letter Generator",
+    href: "/cover-letter-generator",
+    icon: <FileUser className="h-5 w-5" />,
   },
   {
     name: "Idea Generator",

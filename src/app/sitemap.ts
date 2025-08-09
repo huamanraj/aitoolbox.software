@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/grammar-fixer',
     '/idea-generator',
     '/image-generator',
+    '/anime-ai-generator',
     '/logo-generator',
     '/prompt-generator',
     '/resume-builder',

@@ -63,6 +63,13 @@ const aiTools = [
     category: "visual"
   },
   {
+    name: "Anime AI Generator",
+    href: "/anime-ai-generator",
+    icon: <ImageIcon className="h-6 w-6" />,
+    description: "Generate anime-style art from text prompts",
+    category: "visual"
+  },
+  {
     name: "Logo Generator",
     href: "/logo-generator",
     icon: <Box className="h-6 w-6" />,

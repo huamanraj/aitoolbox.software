@@ -12,11 +12,6 @@ const handleError = (error: unknown) => {
 
 // Check if API token is configured
 const POLLINATIONS_API_TOKEN = process.env.POLLINATIONS_API_TOKEN;
-console.log(POLLINATIONS_API_TOKEN);
-
-if (!POLLINATIONS_API_TOKEN) {
-  console.warn("Warning: POLLINATIONS_API_TOKEN is not configured in environment variables");
-}
 
 // Helper to add auth token to URLs
 const addAuthToUrl = (url: string) => {

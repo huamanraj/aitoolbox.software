@@ -89,6 +89,11 @@ const aiTools: Tool[] = [
     icon: <ImageIcon className="h-5 w-5" />,
   },
   {
+    name: "Anime AI Generator",
+    href: "/anime-ai-generator",
+    icon: <ImageIcon className="h-5 w-5" />,
+  },
+  {
     name: "Logo Generator",
     href: "/logo-generator",
     icon: <Box className="h-5 w-5" />,

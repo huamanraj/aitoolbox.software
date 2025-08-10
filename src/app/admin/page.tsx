@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Client, Account, ID, Databases, Storage } from "appwrite";
+import { Client, Account } from "appwrite";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -27,7 +27,6 @@ import {
   Save, 
   Plus, 
   LogOut,
-  Upload,
   Loader2
 } from "lucide-react";
 
@@ -49,9 +48,7 @@ export default function AdminPage() {
     return new Client().setEndpoint(endpoint).setProject(project);
   });
   const account = useMemo(() => (client ? new Account(client) : (null as unknown as Account)), [client]);
-  const databases = useMemo(() => (client ? new Databases(client) : (null as unknown as Databases)), [client]);
-  const storage = useMemo(() => (client ? new Storage(client) : (null as unknown as Storage)), [client]);
-
+  
   const [userChecked, setUserChecked] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
 
@@ -92,21 +89,23 @@ export default function AdminPage() {
   }, [userChecked, userId, router]);
 
   useEffect(() => {
-    if (!userId || !databases) return;
+    if (!userId) return;
     let cancelled = false;
     (async () => {
       try {
-        const res: any = await databases.listDocuments("content", "blogs");
-        const sortedBlogs = (res.documents || []).sort((a: any, b: any) => 
-          new Date(b.$createdAt).getTime() - new Date(a.$createdAt).getTime()
-        ).slice(0, 25);
+        const res = await fetch(`/api/blogs?limit=25`, { cache: "no-store" });
+        if (!res.ok) throw new Error("Failed to fetch blogs");
+        const list = await res.json();
+        const sortedBlogs = (list.documents || [])
+          .sort((a: any, b: any) => new Date(b.$createdAt).getTime() - new Date(a.$createdAt).getTime())
+          .slice(0, 25);
         if (!cancelled) setExisting(sortedBlogs);
       } catch {}
     })();
     return () => {
       cancelled = true;
     };
-  }, [databases, userId]);
+  }, [userId]);
 
   if (!userChecked) return null;
   if (!userId) {
@@ -132,9 +131,12 @@ export default function AdminPage() {
     if (!file) return;
     try {
       setUploading(true);
-      if (!storage) throw new Error("No Appwrite client");
-      const res = await storage.createFile("blog-covers", ID.unique(), file);
-      setForm((prev) => ({ ...prev, coverFileId: res.$id }));
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await fetch("/api/upload", { method: "POST", body: formData });
+      if (!res.ok) throw new Error("Upload failed");
+      const data = await res.json();
+      setForm((prev) => ({ ...prev, coverFileId: data.$id || data.id }));
       toast.success("Cover image uploaded");
     } catch (err: any) {
       toast.error(err?.message || "Failed to upload");
@@ -166,19 +168,32 @@ export default function AdminPage() {
         content: form.content,
         coverFileId: form.coverFileId || undefined,
       };
-      if (!databases) throw new Error("No Appwrite client");
+
+      let createdOrUpdated: any;
       if (form.id) {
-        await databases.updateDocument("content", "blogs", form.id, payload);
+        const res = await fetch(`/api/blogs/${form.id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok) throw new Error("Update failed");
+        createdOrUpdated = await res.json();
         toast.success("Blog updated successfully");
       } else {
-        const created = await databases.createDocument("content", "blogs", ID.unique(), payload);
-        setForm((prev) => ({ ...prev, id: created.$id }));
+        const res = await fetch(`/api/blogs`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok) throw new Error("Create failed");
+        createdOrUpdated = await res.json();
+        setForm((prev) => ({ ...prev, id: createdOrUpdated.$id }));
         toast.success("Blog published successfully");
       }
       
       // Redirect to the blog page after successful save
       setTimeout(() => {
-        router.push(`/${form.slug}`);
+        router.push(`/${payload.slug}`);
       }, 1000);
       
     } catch (err: any) {

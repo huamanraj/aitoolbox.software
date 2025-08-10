@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -24,6 +24,9 @@ import {
   Brain,
   Linkedin,
 } from "lucide-react";
+import Link from "next/link";
+import { Client, Databases } from "appwrite";
+import { getPublicFileViewUrl } from "@/lib/appwrite";
 
 // List of AI tools
 const aiTools = [
@@ -140,6 +143,27 @@ const categories = [...new Set(aiTools.map(tool => tool.category))];
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [latestBlogs, setLatestBlogs] = useState<any[]>([]);
+
+  useEffect(() => {
+    const endpoint = process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT;
+    const projectId = process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID;
+    
+    if (!endpoint || !projectId) return;
+    
+    const client = new Client().setEndpoint(endpoint).setProject(projectId);
+    const databases = new Databases(client);
+    (async () => {
+      try {
+        const res: any = await databases.listDocuments("content", "blogs");
+        // Sort by creation date and take first 6
+        const sortedBlogs = (res.documents || []).sort((a: any, b: any) => 
+          new Date(b.$createdAt).getTime() - new Date(a.$createdAt).getTime()
+        ).slice(0, 6);
+        setLatestBlogs(sortedBlogs);
+      } catch {}
+    })();
+  }, []);
 
   const filteredTools = aiTools.filter(tool => {
     const matchesSearch = tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -245,7 +269,36 @@ export default function Home() {
           )}
         </div>
 
-       
+        {/* Latest Blogs */}
+        <div className="mb-6">
+          <h2 className="text-xl font-semibold mb-3">Latest Blogs</h2>
+          {latestBlogs.length === 0 ? (
+            <p className="text-sm text-muted-foreground">No blogs yet</p>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+              {latestBlogs.map((b) => {
+                const cover = b.coverFileId ? getPublicFileViewUrl(b.coverFileId) : null;
+                return (
+                  <Link key={b.$id} href={`/${b.slug}`}>
+                    <Card className="overflow-hidden group">
+                      {cover ? (
+                        <div className="w-full h-40 overflow-hidden">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={cover} alt={b.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                        </div>
+                      ) : null}
+                      <div className="p-3 space-y-1">
+                        <h3 className="font-medium line-clamp-1">{b.title}</h3>
+                        <p className="text-sm text-muted-foreground line-clamp-2">{b.excerpt}</p>
+                      </div>
+                    </Card>
+                  </Link>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
       </div>
     </div>
   );

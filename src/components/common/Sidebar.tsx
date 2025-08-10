@@ -22,6 +22,7 @@ import {
   Code,
   FileText,
   PenTool,
+  Briefcase,
   Check,
   FileSpreadsheet,
   Lightbulb,
@@ -137,6 +138,11 @@ const aiTools: Tool[] = [
     name: "Resume Builder",
     href: "/resume-builder",
     icon: <FileSpreadsheet className="h-5 w-5" />,
+  },
+  {
+    name: "Mock Interview",
+    href: "/mock-interview",
+    icon: <Briefcase className="h-5 w-5" />,
   },
   {
     name: "Idea Generator",

@@ -38,7 +38,6 @@ import {
   Pen,
   Target,
   Linkedin,
- main
 } from "lucide-react";
 import {
   Tooltip,

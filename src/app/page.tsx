@@ -133,13 +133,6 @@ const aiTools = [
   category: "travel"
 },
 {
-    name: "LinkedIn Post Generator",
-    href: "/linkedin-post-generator",
-    icon: <Linkedin className="h-6 w-6" />,
-    description: "Create engaging professional LinkedIn posts",
-    category: "writing"
-  },
-{
   name: "AI Bio Generator",
   href: "/ai-bio-generator",
   icon: <FileText className="h-6 w-6" />,
@@ -156,6 +149,15 @@ const aiTools = [
 ];
 
 const categories = [...new Set(aiTools.map(tool => tool.category))];
+
+// Validation: Check for duplicate tool names to prevent React key errors
+const duplicateNames = aiTools
+  .map(tool => tool.name)
+  .filter((name, index, arr) => arr.indexOf(name) !== index);
+
+if (duplicateNames.length > 0) {
+  console.warn('Duplicate tool names found:', duplicateNames);
+}
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -240,9 +242,9 @@ export default function Home() {
               No tools found matching your search
             </div>
           ) : (
-            filteredTools.map((tool) => (
+            filteredTools.map((tool, index) => (
               <Card 
-                key={tool.name}
+                key={`${tool.name}-${tool.href}`}
                 className="p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group cursor-pointer"
               >
                 <a href={tool.href} className="space-y-2">

@@ -4,7 +4,7 @@ import { useState } from "react"
 import { toast } from "sonner"
 import { TextSummarizerForm, FormValues } from "./text-summarizer-form"
 import { TextSummarizerOutput } from "./text-summarizer-output"
-import NativeBannerAd from "@/components/NativeBannerAd";
+import NativeBannerAd from "@/components/ads/NativeBannerAd";
 
 export default function TextSummarizerClient() {
   const [isLoading, setIsLoading] = useState(false)

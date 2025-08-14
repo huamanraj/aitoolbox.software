@@ -13,7 +13,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { ChevronsUpDown, Target, Zap, Code, Rocket, Trophy, Layers, Brain } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
-import NativeBannerAd from "@/components/NativeBannerAd";
+import NativeBannerAd from "@/components/ads/NativeBannerAd";
 export default function ProjectRecommenderClient() {
   const [generatedProjects, setGeneratedProjects] = useState("")
   const [isLoading, setIsLoading] = useState(false)

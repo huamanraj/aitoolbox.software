@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import ImageGeneratorForm from "./image-generator-form";
 import ImageGeneratorOutput from "./image-generator-output";
 
-import NativeBannerAd from "@/components/NativeBannerAd";
+import NativeBannerAd from "@/components/ads/NativeBannerAd";
 
 export interface ImageGenerationOptions {
   style: string;

@@ -3,7 +3,7 @@
 import React, { useState,JSX } from 'react';
 import CodeExplainerInput from './code-explainer-input';
 import CodeExplainerOutput from './code-explainer-output';
-import NativeBannerAd from '@/components/NativeBannerAd';
+import NativeBannerAd from '@/components/ads/NativeBannerAd';
 
 interface FormData {
   code: string;

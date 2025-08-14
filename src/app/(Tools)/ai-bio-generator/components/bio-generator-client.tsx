@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import BioGeneratorForm from "./bio-generator-form";
 import BioGeneratorOutput from "./bio-generator-output";
-import NativeBannerAd from "@/components/NativeBannerAd";
+import NativeBannerAd from "@/components/ads/NativeBannerAd";
 const BioGeneratorClient = () => {
   const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(false);

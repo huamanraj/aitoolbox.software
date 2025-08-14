@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Input } from "@/components/ui/input";
 import { Sparkles, Zap, Users, Shield, Award, Download, Loader2, Info, Lightbulb } from "lucide-react";
 import Image from 'next/image';
-import NativeBannerAd from "@/components/NativeBannerAd";
+import NativeBannerAd from "@/components/ads/NativeBannerAd";
 export default function LogoGeneratorClient() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedLogo, setGeneratedLogo] = useState<string | null>(null);

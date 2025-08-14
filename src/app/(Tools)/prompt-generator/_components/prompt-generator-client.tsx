@@ -13,7 +13,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { ChevronsUpDown, Brain } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
-import NativeBannerAd from "@/components/NativeBannerAd";
+import NativeBannerAd from "@/components/ads/NativeBannerAd";
 export default function PromptGeneratorClient() {
   const [generatedPrompt, setGeneratedPrompt] = useState("")
   const [isLoading, setIsLoading] = useState(false)

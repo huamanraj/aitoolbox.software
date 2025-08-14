@@ -5,6 +5,8 @@ import { Calendar, Clock, User, Home, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import BannerAd320x50 from "@/components/ads/BannerAd320x50";
+
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -257,35 +259,50 @@ export default async function BlogPage({ params }: PageProps) {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbStructuredData),
+        }}
       />
       {faqStructuredData && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(faqStructuredData),
+          }}
         />
       )}
-      
+
       <div className="mx-auto max-w-4xl px-4 py-8">
         {/* Breadcrumb Navigation */}
         <nav className="mb-8" aria-label="Breadcrumb">
           <ol className="flex items-center space-x-2 text-sm text-zinc-600">
             <li>
-              <Link href="/" className="flex items-center hover:text-zinc-900 transition-colors">
+              <Link
+                href="/"
+                className="flex items-center hover:text-zinc-900 transition-colors"
+              >
                 <Home className="h-4 w-4" />
                 <span className="sr-only">Home</span>
               </Link>
             </li>
             <li className="flex items-center">
               <ChevronRight className="h-4 w-4 mx-2" />
-              <Link href="/blog" className="hover:text-zinc-900 transition-colors">
+              <Link
+                href="/blog"
+                className="hover:text-zinc-900 transition-colors"
+              >
                 Blog
               </Link>
             </li>
             <li className="flex items-center">
               <ChevronRight className="h-4 w-4 mx-2" />
-              <span className="text-zinc-900 font-medium truncate max-w-xs" title={doc.title}>
-                {doc.title.length > 50 ? doc.title.slice(0, 47) + '...' : doc.title}
+              <span
+                className="text-zinc-900 font-medium truncate max-w-xs"
+                title={doc.title}
+              >
+                {doc.title.length > 50
+                  ? doc.title.slice(0, 47) + "..."
+                  : doc.title}
               </span>
             </li>
           </ol>
@@ -329,8 +346,8 @@ export default async function BlogPage({ params }: PageProps) {
           <div className="mb-12">
             <div className="relative w-full h-64 md:h-80 lg:h-96 overflow-hidden rounded-lg bg-zinc-100">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img 
-                src={coverUrl} 
+              <img
+                src={coverUrl}
                 alt={doc.title}
                 className="object-cover w-full h-full"
                 loading="eager"
@@ -342,7 +359,7 @@ export default async function BlogPage({ params }: PageProps) {
         )}
 
         {/* Article Content */}
-        <article 
+        <article
           className="prose prose-lg prose-zinc max-w-none 
             prose-headings:font-bold prose-headings:text-zinc-900 prose-headings:tracking-tight
             prose-h1:text-3xl prose-h1:mt-12 prose-h1:mb-6
@@ -377,7 +394,7 @@ export default async function BlogPage({ params }: PageProps) {
           <meta itemProp="wordCount" content={wordCount.toString()} />
           <meta itemProp="inLanguage" content="en-US" />
           <meta itemProp="isAccessibleForFree" content="true" />
-          
+
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
@@ -412,9 +429,7 @@ export default async function BlogPage({ params }: PageProps) {
                 </h6>
               ),
               p: ({ children }) => (
-                <p className="text-zinc-700 leading-relaxed mb-6">
-                  {children}
-                </p>
+                <p className="text-zinc-700 leading-relaxed mb-6">{children}</p>
               ),
               ul: ({ children }) => (
                 <ul className="list-disc list-inside mb-6 space-y-2 text-zinc-700">
@@ -427,9 +442,7 @@ export default async function BlogPage({ params }: PageProps) {
                 </ol>
               ),
               li: ({ children }) => (
-                <li className="leading-relaxed">
-                  {children}
-                </li>
+                <li className="leading-relaxed">{children}</li>
               ),
               blockquote: ({ children }) => (
                 <blockquote className="border-l-4 border-zinc-300 pl-6 italic my-6 text-zinc-600 bg-zinc-50 py-4 rounded-r-lg">
@@ -460,9 +473,7 @@ export default async function BlogPage({ params }: PageProps) {
                 </div>
               ),
               thead: ({ children }) => (
-                <thead className="bg-zinc-100">
-                  {children}
-                </thead>
+                <thead className="bg-zinc-100">{children}</thead>
               ),
               th: ({ children }) => (
                 <th className="border border-zinc-300 px-4 py-3 font-semibold text-left text-zinc-900">
@@ -475,19 +486,21 @@ export default async function BlogPage({ params }: PageProps) {
                 </td>
               ),
               a: ({ children, href }) => (
-                <a 
-                  href={href} 
+                <a
+                  href={href}
                   className="text-blue-600 hover:text-blue-800 hover:underline transition-colors"
-                  target={href?.startsWith('http') ? '_blank' : undefined}
-                  rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  target={href?.startsWith("http") ? "_blank" : undefined}
+                  rel={
+                    href?.startsWith("http") ? "noopener noreferrer" : undefined
+                  }
                 >
                   {children}
                 </a>
               ),
               img: ({ src, alt }) => (
-                <img 
-                  src={src} 
-                  alt={alt} 
+                <img
+                  src={src}
+                  alt={alt}
                   className="rounded-lg shadow-sm max-w-full h-auto mb-6"
                   loading="lazy"
                 />
@@ -498,17 +511,13 @@ export default async function BlogPage({ params }: PageProps) {
                 </strong>
               ),
               em: ({ children }) => (
-                <em className="italic text-zinc-700">
-                  {children}
-                </em>
+                <em className="italic text-zinc-700">{children}</em>
               ),
               hr: () => (
                 <hr className="border-0 border-t border-zinc-300 my-8" />
               ),
               del: ({ children }) => (
-                <del className="line-through text-zinc-500">
-                  {children}
-                </del>
+                <del className="line-through text-zinc-500">{children}</del>
               ),
             }}
           >
@@ -522,24 +531,25 @@ export default async function BlogPage({ params }: PageProps) {
             Continue Learning
           </h3>
           <p className="text-zinc-600 mb-4">
-            Explore more AI tools and tutorials to enhance your productivity and skills.
+            Explore more AI tools and tutorials to enhance your productivity and
+            skills.
           </p>
           <div className="flex flex-wrap gap-3">
-            <Link 
-              href="/blog" 
+            <Link
+              href="/blog"
               className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
             >
               Browse All Articles
             </Link>
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="inline-flex items-center px-4 py-2 border border-zinc-300 text-zinc-700 rounded-lg hover:bg-zinc-100 transition-colors text-sm font-medium"
             >
               Try AI Tools
             </Link>
           </div>
         </aside>
-
+       
         {/* Footer */}
         <footer className="mt-16 pt-8 border-t border-zinc-200">
           <div className="text-center text-zinc-500">

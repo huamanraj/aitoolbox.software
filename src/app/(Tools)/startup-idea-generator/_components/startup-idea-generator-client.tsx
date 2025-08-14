@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button"
 import { ChevronsUpDown, Rocket, Lightbulb, Zap, Briefcase } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
 import Link from "next/link"
-import NativeBannerAd from "@/components/NativeBannerAd";
+import NativeBannerAd from "@/components/ads/NativeBannerAd";
 export default function StartupIdeaGeneratorClient() {
   const [generatedIdeas, setGeneratedIdeas] = useState("")
   const [isLoading, setIsLoading] = useState(false)

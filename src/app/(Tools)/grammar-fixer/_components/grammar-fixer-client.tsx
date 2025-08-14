@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import GrammarFixerForm from "./grammar-fixer-form";
 import GrammarFixerOutput from "./grammar-fixer-output";
 import { toast } from "sonner";
-import NativeBannerAd from "@/components/NativeBannerAd";
+import NativeBannerAd from "@/components/ads/NativeBannerAd";
 export interface GrammarFixerResult {
   originalText: string;
   correctedText: string;

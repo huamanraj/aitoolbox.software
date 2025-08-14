@@ -13,7 +13,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { ChevronsUpDown, Linkedin, Star, Clock, ThumbsUp, Copy, Settings, AlertCircle, RefreshCw, HelpCircle, FileEdit, User, FileText } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
-import NativeBannerAd from "@/components/NativeBannerAd";
+import NativeBannerAd from "@/components/ads/NativeBannerAd";
 export default function LinkedInPostGeneratorClient() {
   const [generatedPost, setGeneratedPost] = useState("")
   const [isLoading, setIsLoading] = useState(false)

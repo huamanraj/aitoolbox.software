@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import BlogWriterForm from "./blog-writer-form";
 import BlogWriterOutput from "./blog-writer-output";
 import { toast } from "sonner";
-import NativeBannerAd from "@/components/NativeBannerAd";
+import NativeBannerAd from "@/components/ads/NativeBannerAd";
 export interface BlogWriterResult {
   title: string;
   content: string;

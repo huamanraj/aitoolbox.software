@@ -8,7 +8,7 @@ import { initialResumeValues } from "../constant";
 import ResumePreviewSection from "./ResumePreviewSection";
 import { useResume } from "@/contexts/resume-context";
 import Loader from "./Loader";
-import NativeBannerAd from "@/components/NativeBannerAd";
+import NativeBannerAd from "@/components/ads/NativeBannerAd";
 // Debounce function
 const debounce = (func: Function, delay: number) => {
   let timeoutId: NodeJS.Timeout;

@@ -3,18 +3,17 @@
 ### 🔗 Related Issue
 Fixes #
 
-### 📝 What changes did you make?
+### 📝 What did you change?
 <!-- Briefly describe your changes -->
 
 
-### 📸 Screenshots/Screen Recording 
-<!-- Drag and drop images/videos here or paste links -->
+### 📸 Screenshots (optional)
+<!-- Add screenshots if relevant -->
 
 
-### ✅ Checklist
-- [ ] ⭐ I have starred the repository (Mandatory for GSSoC 25)
-- [ ] 🧪 I have tested my changes
-- [ ] 📖 I have read the [Contribution Guidelines](https://github.com/huamanraj/aitoolbox.software/tree/main/contributions)
+### ✅ Quick check
+- [ ] I tested my changes
+- [ ] I read the contribution guidelines
 
 ---
-*Thank you for contributing to AIToolbox.software!🌸*
+*Thank you for contributing to AIToolbox.software! 🌸*

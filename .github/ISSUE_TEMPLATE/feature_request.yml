@@ -4,25 +4,26 @@ title: "[FEATURE] "
 labels: ["enhancement", "feature-request"]
 
 body:
-  - type: markdown
-    attributes:
-      value: |
-        ## 📋 Available Features
-        **⚠️ Only features from this list can be implemented:** [**View Available Features**](https://drive.google.com/file/d/1QWFg2C5ih-XH3i_xRZBi_EVnaMLpzkh1/view?usp=sharing)
-
   - type: textarea
     id: feature-description
     attributes:
-      label: ✨ Feature Description
-      description: Which feature from the available list would you like to see added?
-      placeholder: Describe the feature you want from the available options...
+      label: ✨ What feature would you like?
+      description: Describe the feature you want to see added
+      placeholder: Describe your feature idea...
+    validations:
+      required: true
 
   - type: textarea
     id: use-cases
     attributes:
-      label: 🎨 Use Cases
-      description: How would you use this feature?
-      placeholder: |
-        1. Use case 1: ...
-        2. Use case 2: ...
-        3. Use case 3: ...
+      label: 🎨 How would you use it?
+      description: Tell us how this feature would be helpful
+      placeholder: Explain how you would use this feature...
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: 📝 Anything else?
+      description: Any other details or context

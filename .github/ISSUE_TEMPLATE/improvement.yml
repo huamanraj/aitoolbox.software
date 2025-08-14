@@ -5,128 +5,49 @@ labels: ["improvement", "enhancement", "needs-triage"]
 assignees: []
 
 body:
-  - type: markdown
-    attributes:
-      value: |
-        ## 📋 Before moving ahead
-        - ⭐ Please star the repository (Mandatory for GSSoC 25).
-        - 📖 Read the [Contribution Guidelines](https://github.com/AIToolbox-software/AIToolbox.software/blob/main/contribution/CONTRIBUTING.md).
-        - 📂 All contribution info is inside the [`/contribution`](https://github.com/AIToolbox-software/AIToolbox.software/tree/main/contribution) folder.
-        - 📚 AI and AdSense related documentation is inside the [`/doc`](https://github.com/AIToolbox-software/AIToolbox.software/tree/main/doc) folder.
-
   - type: dropdown
     id: improvement-area
     attributes:
-      label: 🎯 Area for Improvement
-      description: Which area needs improvement?
+      label: 🎯 What area needs improvement?
+      description: Which area would you like to improve?
       options:
-        - AI Blog Writer
-        - AI Email Writer
-        - Text Summarizer
-        - Blog Ideas Generator
-        - Product Ideas Generator
-        - Startup Ideas Generator
-        - App Ideas Generator
-        - YouTube Ideas Generator
-        - AI Image Generator
-        - AI Logo Generator
-        - AI Code Explainer
-        - AI Chatbot
+        - AI Tools
         - User Interface/Experience
-        - Performance/Speed
-        - Code Quality/Architecture
+        - Performance
         - Documentation
-        - Accessibility
-        - Mobile Responsiveness
-        - SEO Optimization
-        - Other (please specify)
+        - Other
     validations:
-      required: true
+      required: false
 
   - type: textarea
     id: current-behavior
     attributes:
-      label: 📊 Current Behavior
-      description: Describe how the feature/functionality currently works.
-      placeholder: How does it work now?
+      label: 📊 How does it work now?
+      description: Describe the current situation
+      placeholder: What happens currently?
     validations:
       required: true
 
   - type: textarea
     id: proposed-improvement
     attributes:
-      label: ✨ Proposed Improvement
-      description: Describe the improvement you'd like to see.
-      placeholder: How should it work better?
-    validations:
-      required: true
-
-  - type: dropdown
-    id: improvement-type
-    attributes:
-      label: 🏷️ Type of Improvement
-      description: What type of improvement is this?
-      options:
-        - Performance Enhancement
-        - User Experience (UX)
-        - User Interface (UI)
-        - Code Quality/Refactoring
-        - Security Enhancement
-        - Accessibility
-        - Error Handling
-        - Documentation
-        - Testing
-        - Configuration/Settings
-        - API Enhancement
-        - Other
+      label: ✨ How should it work better?
+      description: Describe your improvement idea
+      placeholder: What would you like to see improved?
     validations:
       required: true
 
   - type: textarea
     id: benefits
     attributes:
-      label: 🎁 Expected Benefits
+      label: 🎁 Why would this be helpful?
       description: What benefits would this improvement provide?
-      placeholder: |
-        - Benefit 1: ...
-        - Benefit 2: ...
-        - Benefit 3: ...
+      placeholder: How would this help users?
     validations:
-      required: true
-
-  - type: textarea
-    id: implementation-ideas
-    attributes:
-      label: 💡 Implementation Ideas
-      description: Do you have any ideas on how this could be implemented?
-      placeholder: Any technical suggestions or approaches?
-
-  - type: dropdown
-    id: complexity
-    attributes:
-      label: 🔧 Estimated Complexity
-      description: How complex do you think this improvement would be to implement?
-      options:
-        - Low - Simple changes
-        - Medium - Moderate effort required
-        - High - Significant development needed
-        - Unknown - Need technical assessment
+      required: false
 
   - type: textarea
     id: additional-context
     attributes:
-      label: 📝 Additional Context
-      description: Add any other context, screenshots, or examples.
-
-  - type: checkboxes
-    id: terms
-    attributes:
-      label: ✅ Checklist
-      description: Please confirm the following
-      options:
-        - label: I have starred the repository
-          required: true
-        - label: I have read the contribution guidelines
-          required: true
-        - label: I have searched for existing improvement suggestions
-          required: true
+      label: 📝 Anything else?
+      description: Any other details or examples

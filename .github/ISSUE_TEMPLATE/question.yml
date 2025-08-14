@@ -5,74 +5,40 @@ labels: ["question", "support", "needs-triage"]
 assignees: []
 
 body:
-  - type: markdown
-    attributes:
-      value: |
-        ## 📋 Before moving ahead
-        - ⭐ Please star the repository (Mandatory for GSSoC 25).
-        - 📖 Read the [Contribution Guidelines](https://github.com/AIToolbox-software/AIToolbox.software/blob/main/contribution/CONTRIBUTING.md).
-        - 📂 All contribution info is inside the [`/contribution`](https://github.com/AIToolbox-software/AIToolbox.software/tree/main/contribution) folder.
-        - 📚 AI and AdSense related documentation is inside the [`/doc`](https://github.com/AIToolbox-software/AIToolbox.software/tree/main/doc) folder.
-
   - type: dropdown
     id: question-category
     attributes:
-      label: 🏷️ Question Category
-      description: What is your question about?
+      label: 🏷️ What's your question about?
+      description: Choose the closest category
       options:
         - General Usage
         - Setup/Installation
-        - AI Tools Configuration
-        - API Integration
         - Contributing/Development
-        - GSSoC 25 Participation
-        - Technical Implementation
-        - Feature Usage
         - Troubleshooting
         - Other
     validations:
-      required: true
+      required: false
 
   - type: textarea
     id: question
     attributes:
       label: ❓ Your Question
-      description: Please describe your question in detail.
-      placeholder: What would you like to know?
+      description: What would you like to know?
+      placeholder: Ask your question here...
     validations:
       required: true
 
   - type: textarea
     id: context
     attributes:
-      label: 🔍 Context
-      description: Provide any relevant context that might help us answer your question.
+      label: 🔍 Context (optional)
+      description: Any relevant background information
       placeholder: |
         - What are you trying to achieve?
         - What have you already tried?
-        - Any specific use case or scenario?
-
-  - type: textarea
-    id: attempted-solutions
-    attributes:
-      label: 🔧 What have you tried?
-      description: List any solutions or approaches you've already attempted.
 
   - type: textarea
     id: additional-info
     attributes:
-      label: 📝 Additional Information
-      description: Any other details that might be relevant.
-
-  - type: checkboxes
-    id: terms
-    attributes:
-      label: ✅ Checklist
-      description: Please confirm the following
-      options:
-        - label: I have starred the repository
-          required: true
-        - label: I have searched existing issues and discussions
-          required: true
-        - label: I have read the documentation
-          required: true
+      label: 📝 Anything else?
+      description: Any other details that might help

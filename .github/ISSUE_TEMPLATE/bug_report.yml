@@ -5,119 +5,55 @@ labels: ["bug", "needs-triage"]
 assignees: []
 
 body:
-  - type: markdown
-    attributes:
-      value: |
-        ## 📋 Before moving ahead
-        - ⭐ Please star the repository (Mandatory for GSSoC 25).
-        - 📖 Read the [Contribution Guidelines](https://github.com/AIToolbox-software/AIToolbox.software/blob/main/contribution/CONTRIBUTING.md).
-        - 📂 All contribution info is inside the [`/contribution`](https://github.com/AIToolbox-software/AIToolbox.software/tree/main/contribution) folder.
-        - 📚 AI and AdSense related documentation is inside the [`/doc`](https://github.com/AIToolbox-software/AIToolbox.software/tree/main/doc) folder.
-
   - type: textarea
     id: bug-description
     attributes:
-      label: 🐛 Bug Description
-      description: A clear and concise description of what the bug is.
-      placeholder: Describe the bug...
+      label: 🐛 What's the bug?
+      description: Describe what went wrong
+      placeholder: Tell us about the bug...
     validations:
       required: true
 
   - type: dropdown
-    id: affected-tool
+    id: affected-area
     attributes:
-      label: 🛠️ Affected Tool/Feature
-      description: Which AI tool or feature is affected?
+      label: 🛠️ Where did this happen?
+      description: Which area is affected?
       options:
-        - AI Blog Writer
-        - AI Email Writer
-        - Text Summarizer
-        - Blog Ideas Generator
-        - Product Ideas Generator
-        - Startup Ideas Generator
-        - App Ideas Generator
-        - YouTube Ideas Generator
-        - AI Image Generator
-        - AI Logo Generator
-        - AI Code Explainer
-        - AI Chatbot
-        - General Website/UI
-        - Other (please specify in description)
+        - AI Tools (Blog Writer, Email Writer, etc.)
+        - Website/UI
+        - Other
     validations:
-      required: true
+      required: false
 
   - type: textarea
     id: steps-to-reproduce
     attributes:
-      label: 🔄 Steps to Reproduce
-      description: Steps to reproduce the behavior
+      label: 🔄 How to reproduce it?
+      description: Simple steps to reproduce the issue
       placeholder: |
-        1. Go to '...'
-        2. Click on '...'
-        3. Scroll down to '...'
-        4. See error
+        1. Go to...
+        2. Click on...
+        3. See error
     validations:
-      required: true
-
-  - type: textarea
-    id: expected-behavior
-    attributes:
-      label: ✅ Expected Behavior
-      description: A clear description of what you expected to happen.
-    validations:
-      required: true
-
-  - type: textarea
-    id: actual-behavior
-    attributes:
-      label: ❌ Actual Behavior
-      description: A clear description of what actually happened.
-    validations:
-      required: true
+      required: false
 
   - type: textarea
     id: screenshots
     attributes:
-      label: 📸 Screenshots
-      description: If applicable, add screenshots to help explain your problem.
-
-  - type: dropdown
-    id: browsers
-    attributes:
-      label: 🌐 Browser
-      description: What browser are you using?
-      options:
-        - Chrome
-        - Firefox
-        - Safari
-        - Edge
-        - Other (please specify)
-    validations:
-      required: true
-
-  - type: input
-    id: device
-    attributes:
-      label: 📱 Device Information
-      description: Device type and OS (e.g., Desktop Windows 11, iPhone iOS 17, etc.)
-    validations:
-      required: true
+      label: 📸 Screenshots (optional)
+      description: Add screenshots if helpful
 
   - type: textarea
     id: additional-context
     attributes:
-      label: 📝 Additional Context
-      description: Add any other context about the problem here.
+      label: 📝 Anything else?
+      description: Any other details
 
   - type: checkboxes
     id: terms
     attributes:
-      label: ✅ Checklist
-      description: Please confirm the following
+      label: ✅ Quick check
       options:
-        - label: I have starred the repository
-          required: true
-        - label: I have read the contribution guidelines
-          required: true
-        - label: I have searched for existing issues
-          required: true
+        - label: I searched for existing issues
+          required: false

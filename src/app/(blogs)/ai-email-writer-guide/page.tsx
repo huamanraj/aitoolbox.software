@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
+import NativeBannerAd from "@/components/ads/NativeBannerAd";
 
 export default function Page() {
   return (
@@ -16,7 +17,7 @@ export default function Page() {
             saving you time and stress.
           </p>
         </header>
-
+        <NativeBannerAd />
         <div className="space-y-12">
           <section>
             <h2 className="text-3xl font-bold tracking-tight text-foreground">
@@ -24,30 +25,31 @@ export default function Page() {
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
               Email remains the cornerstone of professional communication, but
-              it&apos;s a double-edged sword. A well-crafted email can open doors,
-              while a poorly written one can close them. The pressure to get the
-              tone, content, and structure just right is immense. This is where
-              an AI assistant becomes invaluable.
+              it&apos;s a double-edged sword. A well-crafted email can open
+              doors, while a poorly written one can close them. The pressure to
+              get the tone, content, and structure just right is immense. This
+              is where an AI assistant becomes invaluable.
             </p>
           </section>
-
+          <NativeBannerAd />
           <section>
             <h2 className="text-3xl font-bold tracking-tight text-foreground">
               Your Personal Communications Assistant
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-              Our{' '}
+              Our{" "}
               <Link
                 href="/email-writer"
                 className="text-primary underline-offset-4 hover:underline"
               >
                 AI Email Writer
-              </Link>{' '}
+              </Link>{" "}
               is like having a professional editor on call 24/7. Just specify
               the purpose of your email—be it a sales inquiry, a follow-up, or a
               formal request—and the AI will generate a polished draft ready for
               you to personalize and send.
             </p>
+            <NativeBannerAd />
             <div className="my-6 flex justify-center">
               <Button asChild size="lg">
                 <Link href="/email-writer">Write Your Next Email with AI</Link>
@@ -68,35 +70,35 @@ export default function Page() {
                   <li>
                     <strong className="text-foreground">
                       Sales & Outreach:
-                    </strong>{' '}
+                    </strong>{" "}
                     Craft compelling cold emails and follow-ups that get
                     responses.
                   </li>
                   <li>
                     <strong className="text-foreground">
                       Job Applications:
-                    </strong>{' '}
+                    </strong>{" "}
                     Write professional cover letters and networking emails. Pair
-                    it with our{' '}
+                    it with our{" "}
                     <Link
                       href="/resume-builder"
                       className="text-primary underline-offset-4 hover:underline"
                     >
                       Resume Builder
-                    </Link>{' '}
+                    </Link>{" "}
                     for a full application toolkit.
                   </li>
                   <li>
                     <strong className="text-foreground">
                       Internal Communications:
-                    </strong>{' '}
-                    Clearly and concisely communicate with your team, from project
-                    updates to official announcements.
+                    </strong>{" "}
+                    Clearly and concisely communicate with your team, from
+                    project updates to official announcements.
                   </li>
                   <li>
                     <strong className="text-foreground">
                       Customer Service:
-                    </strong>{' '}
+                    </strong>{" "}
                     Provide polite, consistent, and helpful responses to
                     customer inquiries.
                   </li>

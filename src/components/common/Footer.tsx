@@ -7,6 +7,7 @@ const toolLinks = [
   { name: "Idea Generator", href: "/idea-generator" },
   { name: "Resume Builder", href: "/resume-builder" },
   { name: "Image Generator", href: "/image-generator" },
+  { name: "Anime AI Generator", href: "/anime-ai-generator" },
   { name: "YouTube Summarizer", href: "/youtube-summarizer" },
   { name: "Code Explainer", href: "/code-explainer" },
   { name: "LinkedIn Post Generator", href: "/linkedin-post-generator" },

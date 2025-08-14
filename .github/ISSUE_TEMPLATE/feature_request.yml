@@ -1,115 +1,28 @@
 name: ✨ Feature Request
-description: Suggest a new feature or enhancement for AIToolbox.software
+description: Suggest a new feature for AIToolbox.software
 title: "[FEATURE] "
-labels: ["enhancement", "feature-request", "needs-triage"]
-assignees: []
+labels: ["enhancement", "feature-request"]
 
 body:
   - type: markdown
     attributes:
       value: |
-        ## 📋 Before moving ahead
-        - ⭐ Please star the repository (Mandatory for GSSoC 25).
-        - 📖 Read the [Contribution Guidelines](https://github.com/AIToolbox-software/AIToolbox.software/blob/main/contribution/CONTRIBUTING.md).
-        - 📂 All contribution info is inside the [`/contribution`](https://github.com/AIToolbox-software/AIToolbox.software/tree/main/contribution) folder.
-        - 📚 AI and AdSense related documentation is inside the [`/doc`](https://github.com/AIToolbox-software/AIToolbox.software/tree/main/doc) folder.
+        ## 📋 Available Features
+        **⚠️ Only features from this list can be implemented:** [**View Available Features**](https://drive.google.com/file/d/1QWFg2C5ih-XH3i_xRZBi_EVnaMLpzkh1/view?usp=sharing)
 
   - type: textarea
     id: feature-description
     attributes:
       label: ✨ Feature Description
-      description: A clear and concise description of the feature you'd like to see added.
-      placeholder: Describe your feature idea...
-    validations:
-      required: true
-
-  - type: dropdown
-    id: feature-category
-    attributes:
-      label: 🏷️ Feature Category
-      description: Which category does this feature belong to?
-      options:
-        - Writing Suite (Blog Writer, Email Writer, Text Summarizer)
-        - Idea Generation (Blog, Product, Startup, App, YouTube Ideas)
-        - Creative Tools (Image Generator, Logo Generator)
-        - Developer Tools (Code Explainer, Chatbot)
-        - UI/UX Improvement
-        - Performance Enhancement
-        - New AI Tool
-        - Integration/API
-        - Other (please specify in description)
-    validations:
-      required: true
-
-  - type: textarea
-    id: problem-solution
-    attributes:
-      label: 🎯 Problem & Solution
-      description: What problem does this feature solve? How would it benefit users?
-      placeholder: |
-        **Problem:** What issue or need does this address?
-        **Solution:** How would this feature solve the problem?
-        **Benefits:** How would users benefit from this feature?
-    validations:
-      required: true
-
-  - type: textarea
-    id: detailed-description
-    attributes:
-      label: 📋 Detailed Description
-      description: Provide a detailed description of how this feature should work.
-      placeholder: |
-        - How should the feature work?
-        - What should the user interface look like?
-        - What inputs/outputs are expected?
-        - Any specific AI models or APIs to use?
+      description: Which feature from the available list would you like to see added?
+      placeholder: Describe the feature you want from the available options...
 
   - type: textarea
     id: use-cases
     attributes:
       label: 🎨 Use Cases
-      description: Describe specific scenarios where this feature would be useful.
+      description: How would you use this feature?
       placeholder: |
         1. Use case 1: ...
         2. Use case 2: ...
         3. Use case 3: ...
-
-  - type: dropdown
-    id: priority
-    attributes:
-      label: 📊 Priority Level
-      description: How important is this feature?
-      options:
-        - Low - Nice to have
-        - Medium - Would improve user experience
-        - High - Important for platform growth
-        - Critical - Essential for core functionality
-    validations:
-      required: true
-
-  - type: textarea
-    id: alternatives
-    attributes:
-      label: 🔄 Alternatives Considered
-      description: Have you considered any alternative solutions or features?
-
-  - type: textarea
-    id: additional-context
-    attributes:
-      label: 📝 Additional Context
-      description: Add any other context, mockups, or examples about the feature request.
-
-  - type: checkboxes
-    id: terms
-    attributes:
-      label: ✅ Checklist
-      description: Please confirm the following
-      options:
-        - label: I have starred the repository
-          required: true
-        - label: I have read the contribution guidelines
-          required: true
-        - label: I have searched for existing feature requests
-          required: true
-        - label: This feature aligns with the project's goals
-          required: true

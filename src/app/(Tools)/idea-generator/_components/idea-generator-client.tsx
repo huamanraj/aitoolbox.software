@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button"
 import { ChevronsUpDown, Sparkles, Zap, Rocket, Youtube, PenTool, Smartphone, Package } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
 import Link from "next/link"
-
+import NativeBannerAd from "@/components/NativeBannerAd";
 export default function IdeaGeneratorClient() {
   const [generatedIdea, setGeneratedIdea] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -281,6 +281,7 @@ Please provide a comprehensive, well-structured idea that addresses all these re
   }, [generatedIdea, error, isMobile]);
 
   return (
+    <>
     <div className="container mx-auto p-4 md:p-6 lg:p-8">
       <div className="max-w-6xl mx-auto">
         <header className="text-center mb-8 md:mb-10 relative">
@@ -380,9 +381,15 @@ Please provide a comprehensive, well-structured idea that addresses all these re
                 </div>
               </CollapsibleContent>
             </Collapsible>
+             
           </div>
         </main>
       </div>
+     
+
     </div>
+    {/* Ad Banner */}
+      <NativeBannerAd />
+    </>
   )
 }

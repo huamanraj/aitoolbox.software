@@ -66,6 +66,13 @@ const aiTools = [
     category: "visual"
   },
   {
+    name: "Anime AI Generator",
+    href: "/anime-ai-generator",
+    icon: <ImageIcon className="h-6 w-6" />,
+    description: "Generate anime-style art from text prompts",
+    category: "visual"
+  },
+  {
     name: "Logo Generator",
     href: "/logo-generator",
     icon: <Box className="h-6 w-6" />,
@@ -129,16 +136,31 @@ const aiTools = [
   category: "travel"
 },
 {
+  name: "AI Bio Generator",
+  href: "/ai-bio-generator",
+  icon: <FileText className="h-6 w-6" />,
+  description: "Generate professional bios instantly with AI",
+  category: "writing"
+},
+  {
   name: "AI Project Recommender",
   href: "/project-recommender",
   icon: <Brain className="h-6 w-6" />, 
   description: "Get personalized project ideas based on your skills",
   category: "learning"
-}
-
+},
 ];
 
 const categories = [...new Set(aiTools.map(tool => tool.category))];
+
+// Validation: Check for duplicate tool names to prevent React key errors
+const duplicateNames = aiTools
+  .map(tool => tool.name)
+  .filter((name, index, arr) => arr.indexOf(name) !== index);
+
+if (duplicateNames.length > 0) {
+  console.warn('Duplicate tool names found:', duplicateNames);
+}
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -244,9 +266,9 @@ export default function Home() {
               No tools found matching your search
             </div>
           ) : (
-            filteredTools.map((tool) => (
+            filteredTools.map((tool, index) => (
               <Card 
-                key={tool.name}
+                key={`${tool.name}-${tool.href}`}
                 className="p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group cursor-pointer"
               >
                 <a href={tool.href} className="space-y-2">
@@ -269,38 +291,8 @@ export default function Home() {
           )}
         </div>
 
-        {/* Latest Blogs */}
-        <div className="mb-6">
-          <h2 className="text-xl font-semibold mb-3">Latest Blogs</h2>
-          {latestBlogs.length === 0 ? (
-            <p className="text-sm text-muted-foreground">No blogs yet</p>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-              {latestBlogs.map((b) => {
-                const cover = b.coverFileId ? getPublicFileViewUrl(b.coverFileId) : null;
-                return (
-                  <Link key={b.$id} href={`/${b.slug}`}>
-                    <Card className="overflow-hidden group">
-                      {cover ? (
-                        <div className="w-full h-40 overflow-hidden">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={cover} alt={b.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
-                        </div>
-                      ) : null}
-                      <div className="p-3 space-y-1">
-                        <h3 className="font-medium line-clamp-1">{b.title}</h3>
-                        <p className="text-sm text-muted-foreground line-clamp-2">{b.excerpt}</p>
-                      </div>
-                    </Card>
-                  </Link>
-                );
-              })}
-            </div>
-          )}
-        </div>
-
+       
       </div>
     </div>
   );
 }
-                  

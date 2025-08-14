@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import ImageGeneratorForm from "./image-generator-form";
 import ImageGeneratorOutput from "./image-generator-output";
 
+import NativeBannerAd from "@/components/NativeBannerAd";
+
 export interface ImageGenerationOptions {
   style: string;
   ratio: string;
@@ -76,6 +78,7 @@ export default function ImageGeneratorClient() {
   };
 
   return (
+    <>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
       <div className="md:col-span-1">
         <ImageGeneratorForm
@@ -96,6 +99,11 @@ export default function ImageGeneratorClient() {
           ratio={options.ratio}
         />
       </div>
+    
     </div>
+      {/* Ad Banner */}
+      <NativeBannerAd />
+
+    </>
   );
 } 

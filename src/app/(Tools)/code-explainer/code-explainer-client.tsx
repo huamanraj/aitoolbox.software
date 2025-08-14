@@ -3,6 +3,7 @@
 import React, { useState,JSX } from 'react';
 import CodeExplainerInput from './code-explainer-input';
 import CodeExplainerOutput from './code-explainer-output';
+import NativeBannerAd from '@/components/NativeBannerAd';
 
 interface FormData {
   code: string;
@@ -29,6 +30,7 @@ export default function CodeExplainerClient(): JSX.Element {
         currentFormData={currentFormData}
         setCurrentFormData={setCurrentFormData}
       />
+      
 
       {/* Output Component */}
       <CodeExplainerOutput
@@ -40,6 +42,9 @@ export default function CodeExplainerClient(): JSX.Element {
         setIsLoading={setIsLoading}
         setError={setError}
       />
+      {/* Ad Banner */}
+        <NativeBannerAd />
+
     </>
   );
 }

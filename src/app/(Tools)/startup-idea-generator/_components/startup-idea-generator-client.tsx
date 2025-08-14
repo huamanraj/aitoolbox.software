@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button"
 import { ChevronsUpDown, Rocket, Lightbulb, Zap, Briefcase } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
 import Link from "next/link"
-
+import NativeBannerAd from "@/components/NativeBannerAd";
 export default function StartupIdeaGeneratorClient() {
   const [generatedIdeas, setGeneratedIdeas] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -196,7 +196,10 @@ Format each idea with clear sections using markdown headers (##) and bullet poin
         <div className="w-full">
           <StartupIdeaOutput generatedIdeas={generatedIdeas} isLoading={isLoading} />
         </div>
+        {/* Ad Banner */}
+           <NativeBannerAd />
 
+          
         {/* Related Tools */}
         {!isLoading && generatedIdeas && (
           <div className="mt-8">

@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Input } from "@/components/ui/input";
 import { Sparkles, Zap, Users, Shield, Award, Download, Loader2, Info, Lightbulb } from "lucide-react";
 import Image from 'next/image';
-
+import NativeBannerAd from "@/components/NativeBannerAd";
 export default function LogoGeneratorClient() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedLogo, setGeneratedLogo] = useState<string | null>(null);
@@ -205,7 +205,6 @@ export default function LogoGeneratorClient() {
                   )}
                 </Button>
               </form>
-
               {/* Examples */}
               <div className="mt-6 p-4 bg-gray-50 rounded-lg">
                 <h3 className="font-medium text-sm text-gray-700 mb-2 flex items-center gap-2">
@@ -293,6 +292,8 @@ export default function LogoGeneratorClient() {
             </CardContent>
           </Card>
         </div>
+      {/* Ad Banner */}
+      <NativeBannerAd />
 
         {/* Comprehensive Guide Section */}
         <div className="mt-16 space-y-8">

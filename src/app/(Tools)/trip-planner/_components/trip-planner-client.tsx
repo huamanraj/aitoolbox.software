@@ -14,7 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { ChevronsUpDown, MapPin, Star, Clock, ThumbsUp, Plane, Settings, AlertCircle, RefreshCw, HelpCircle, FileEdit, User, FileText } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
-
+import NativeBannerAd from "@/components/NativeBannerAd";
 export interface Activity {
   name: string;
   location: string;
@@ -214,6 +214,7 @@ export default function TripPlannerClient() {
   }, [result, error, isMobile]);
 
   return (
+    <>
     <div className="w-full max-w-4xl mx-auto">
       <section>
         <h2 className="sr-only">Trip Planning Form</h2>
@@ -274,8 +275,12 @@ export default function TripPlannerClient() {
           </CollapsibleContent>
         </Collapsible>
       </div>
-
+          
       
     </div>
+    {/* Ad Banner */}
+<NativeBannerAd />
+    </>
+
   );
 }

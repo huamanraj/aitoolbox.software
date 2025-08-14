@@ -4,7 +4,7 @@ import { useState } from "react"
 import { toast } from "sonner"
 import { TextSummarizerForm, FormValues } from "./text-summarizer-form"
 import { TextSummarizerOutput } from "./text-summarizer-output"
-
+import NativeBannerAd from "@/components/NativeBannerAd";
 
 export default function TextSummarizerClient() {
   const [isLoading, setIsLoading] = useState(false)
@@ -58,6 +58,9 @@ export default function TextSummarizerClient() {
         <TextSummarizerForm onSubmit={handleSubmit} isLoading={isLoading} />
         <TextSummarizerOutput summary={summary} isLoading={isLoading} />
       </div>
+      {/* Ad Banner */}
+<NativeBannerAd />
+
     </div>
   )
 }

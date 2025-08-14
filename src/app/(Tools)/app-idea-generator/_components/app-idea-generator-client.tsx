@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button"
 import { ChevronsUpDown, Sparkles, Zap, Smartphone, Rocket, Lightbulb, Code } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
 import Link from "next/link"
-
+import NativeBannerAd from "@/components/NativeBannerAd";
 export default function AppIdeaGeneratorClient() {
   const [generatedIdeas, setGeneratedIdeas] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -227,6 +227,7 @@ Please provide 5 well-structured mobile app ideas with names, descriptions, feat
                 </div>
               )}
               
+              
               <CollapsibleContent className="rounded-b-lg border border-t-0 p-4 data-[state=closed]:hidden">
                 <div className="space-y-4">
                   {isLoading && (
@@ -256,6 +257,9 @@ Please provide 5 well-structured mobile app ideas with names, descriptions, feat
           </div>
         </main>
       </div>
+      {/* Ad Banner */}
+     <NativeBannerAd />
+
     </div>
   )
 }

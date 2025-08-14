@@ -23,7 +23,7 @@ import {
 } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
 import Link from "next/link"
-
+import NativeBannerAd from "@/components/NativeBannerAd";
 export default function ProductIdeaGeneratorClient() {
   const [generatedIdeas, setGeneratedIdeas] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -234,6 +234,9 @@ Format each idea with clear sections using markdown headers (##) and bullet poin
             </div>
           </div>
         )}
+        
+      {/* Ad Banner */}
+      <NativeBannerAd />
 
         {/* SEO Content - Server-side rendered */}
         <div className="mt-12 prose prose-gray max-w-none">

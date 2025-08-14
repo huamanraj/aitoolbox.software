@@ -13,7 +13,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { ChevronsUpDown, Mail, Star, Clock, ThumbsUp, Send, Settings, AlertCircle, RefreshCw, HelpCircle, FileEdit, User, FileText } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
-
+import NativeBannerAd from "@/components/NativeBannerAd";
 export default function EmailWriterClient() {
   const [generatedEmail, setGeneratedEmail] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -99,7 +99,7 @@ export default function EmailWriterClient() {
         <h2 className="sr-only">Email Generation Form</h2>
         <EmailWriterForm onSubmit={handleFormSubmit} isLoading={isLoading} />
       </section>
-
+  
       <div ref={outputRef} className="mt-6">
         <Collapsible
           open={isOutputOpen}
@@ -154,6 +154,9 @@ export default function EmailWriterClient() {
           </CollapsibleContent>
         </Collapsible>
       </div>
+      {/* Ad Banner */}
+      <NativeBannerAd />
+
       <article className="prose max-w-none mb-8">
         <h1 className="text-3xl font-bold mb-4 flex items-center gap-2">
           <FileEdit className="h-6 w-6 text-primary" />

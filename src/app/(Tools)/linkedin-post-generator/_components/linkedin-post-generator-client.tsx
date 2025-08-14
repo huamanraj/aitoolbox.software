@@ -13,7 +13,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { ChevronsUpDown, Linkedin, Star, Clock, ThumbsUp, Copy, Settings, AlertCircle, RefreshCw, HelpCircle, FileEdit, User, FileText } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
-
+import NativeBannerAd from "@/components/NativeBannerAd";
 export default function LinkedInPostGeneratorClient() {
   const [generatedPost, setGeneratedPost] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -154,6 +154,8 @@ export default function LinkedInPostGeneratorClient() {
           </CollapsibleContent>
         </Collapsible>
       </div>
+       {/* Ad Banner */}
+      <NativeBannerAd />
       <article className="prose max-w-none mb-8">
         <h1 className="text-3xl font-bold mb-4 flex items-center gap-2">
           <FileEdit className="h-6 w-6 text-primary" />

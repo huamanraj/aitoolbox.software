@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button"
 import { ChevronsUpDown, Sparkles, Zap, PenTool, BookOpen, FileText, Newspaper } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
 import Link from "next/link"
+import NativeBannerAd from "@/components/NativeBannerAd";
 
 export default function BlogIdeaGeneratorClient() {
   const [generatedIdeas, setGeneratedIdeas] = useState("")
@@ -199,7 +200,7 @@ Please provide 10 well-structured blog post ideas with headlines, descriptions, 
           <div>
             <BlogIdeaGeneratorForm onSubmit={handleFormSubmit} isLoading={isLoading} />
           </div>
-
+          
           <div ref={outputRef}>
             <Collapsible
               open={isOutputOpen}
@@ -253,6 +254,9 @@ Please provide 10 well-structured blog post ideas with headlines, descriptions, 
           </div>
         </main>
       </div>
+      {/* Ad Banner */}
+     <NativeBannerAd />
+
     </div>
   )
 }

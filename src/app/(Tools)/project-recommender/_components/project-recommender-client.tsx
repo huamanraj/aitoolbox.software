@@ -13,7 +13,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { ChevronsUpDown, Target, Zap, Code, Rocket, Trophy, Layers, Brain } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
-
+import NativeBannerAd from "@/components/NativeBannerAd";
 export default function ProjectRecommenderClient() {
   const [generatedProjects, setGeneratedProjects] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -215,7 +215,12 @@ ${data.additionalRequirements ? `- Additional Requirements: ${data.additionalReq
             </Collapsible>
           </div>
         </main>
+        {/* Ad Banner */}
+      <NativeBannerAd />
       </div>
+      
+    
+
     </div>
   )
 }

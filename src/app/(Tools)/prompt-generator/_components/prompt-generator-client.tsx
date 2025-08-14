@@ -13,7 +13,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { ChevronsUpDown, Brain } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
-
+import NativeBannerAd from "@/components/NativeBannerAd";
 export default function PromptGeneratorClient() {
   const [generatedPrompt, setGeneratedPrompt] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -453,6 +453,9 @@ Make it immediately deployable and significantly more effective than the origina
           </CollapsibleContent>
         </Collapsible>
       </div>
+      {/* Ad Banner */}
+      <NativeBannerAd />
+
     </div>
   )
 }

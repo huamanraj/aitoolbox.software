@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import BlogWriterForm from "./blog-writer-form";
 import BlogWriterOutput from "./blog-writer-output";
 import { toast } from "sonner";
-
+import NativeBannerAd from "@/components/NativeBannerAd";
 export interface BlogWriterResult {
   title: string;
   content: string;
@@ -119,8 +119,11 @@ export default function BlogWriterClient() {
               </CardContent>
             </Card>
           </div>
-        </TabsContent>
         
+        </TabsContent>
+        {/* Ad Banner */}
+        <NativeBannerAd />
+
         <TabsContent value="about">
           <Card>
             <CardHeader>

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/common/Sidebar";
@@ -67,17 +67,17 @@ export const metadata: Metadata = {
     title: "AIToolbox - All-in-One AI Tools Platform",
     description: "Access powerful AI tools for content creation, image generation, code explanation, and more. Boost your productivity with our comprehensive suite of AI-powered solutions.",
     images: ["/mainOG.webp"],
-    
-  },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
   },
   verification: {
     google: "verify-code", // Add your Google verification code
   },
   category: "Technology",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({

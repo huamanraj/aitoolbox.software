@@ -1,19 +1,9 @@
-## 📋 Pull Request
+## Pull Request
 
-### 🔗 Related Issue
-Fixes #
+**Related Issue:** Fixes #
 
-### 📝 What did you change?
-<!-- Briefly describe your changes -->
+**What changed?**
+<!-- Brief description -->
 
-
-### 📸 Screenshots (optional)
-<!-- Add screenshots if relevant -->
-
-
-### ✅ Quick check
-- [ ] I tested my changes
-- [ ] I read the contribution guidelines
-
----
-*Thank you for contributing to AIToolbox.software! 🌸*
+**Screenshots** (if relevant)
+<!-- Add images if helpful -->

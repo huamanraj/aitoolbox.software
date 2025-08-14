@@ -1,44 +1,19 @@
-name: ❓ Question/Support
-description: Ask a question or get support for AIToolbox.software
+name: ❓ Question
+description: Ask a question
 title: "[QUESTION] "
-labels: ["question", "support", "needs-triage"]
-assignees: []
+labels: ["question"]
 
 body:
-  - type: dropdown
-    id: question-category
-    attributes:
-      label: 🏷️ What's your question about?
-      description: Choose the closest category
-      options:
-        - General Usage
-        - Setup/Installation
-        - Contributing/Development
-        - Troubleshooting
-        - Other
-    validations:
-      required: false
-
   - type: textarea
     id: question
     attributes:
-      label: ❓ Your Question
-      description: What would you like to know?
-      placeholder: Ask your question here...
+      label: What's your question?
+      placeholder: Ask anything...
     validations:
       required: true
 
   - type: textarea
     id: context
     attributes:
-      label: 🔍 Context (optional)
-      description: Any relevant background information
-      placeholder: |
-        - What are you trying to achieve?
-        - What have you already tried?
-
-  - type: textarea
-    id: additional-info
-    attributes:
-      label: 📝 Anything else?
-      description: Any other details that might help
+      label: Anything else?
+      placeholder: Context, what you tried, etc.

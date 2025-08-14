@@ -1,53 +1,19 @@
 name: 🚀 Improvement
-description: Suggest an improvement to existing functionality in AIToolbox.software
+description: Suggest an improvement
 title: "[IMPROVEMENT] "
-labels: ["improvement", "enhancement", "needs-triage"]
-assignees: []
+labels: ["improvement"]
 
 body:
-  - type: dropdown
-    id: improvement-area
-    attributes:
-      label: 🎯 What area needs improvement?
-      description: Which area would you like to improve?
-      options:
-        - AI Tools
-        - User Interface/Experience
-        - Performance
-        - Documentation
-        - Other
-    validations:
-      required: false
-
   - type: textarea
-    id: current-behavior
+    id: improvement-description
     attributes:
-      label: 📊 How does it work now?
-      description: Describe the current situation
-      placeholder: What happens currently?
+      label: What should be improved?
+      placeholder: Describe what you'd like to see improved...
     validations:
       required: true
-
-  - type: textarea
-    id: proposed-improvement
-    attributes:
-      label: ✨ How should it work better?
-      description: Describe your improvement idea
-      placeholder: What would you like to see improved?
-    validations:
-      required: true
-
-  - type: textarea
-    id: benefits
-    attributes:
-      label: 🎁 Why would this be helpful?
-      description: What benefits would this improvement provide?
-      placeholder: How would this help users?
-    validations:
-      required: false
 
   - type: textarea
     id: additional-context
     attributes:
-      label: 📝 Anything else?
-      description: Any other details or examples
+      label: Anything else?
+      placeholder: Why would this improvement help?

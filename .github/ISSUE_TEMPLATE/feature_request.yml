@@ -1,29 +1,19 @@
 name: ✨ Feature Request
-description: Suggest a new feature for AIToolbox.software
+description: Suggest a new feature
 title: "[FEATURE] "
-labels: ["enhancement", "feature-request"]
+labels: ["enhancement"]
 
 body:
   - type: textarea
     id: feature-description
     attributes:
-      label: ✨ What feature would you like?
-      description: Describe the feature you want to see added
+      label: What feature do you want?
       placeholder: Describe your feature idea...
     validations:
       required: true
 
   - type: textarea
-    id: use-cases
-    attributes:
-      label: 🎨 How would you use it?
-      description: Tell us how this feature would be helpful
-      placeholder: Explain how you would use this feature...
-    validations:
-      required: false
-
-  - type: textarea
     id: additional-context
     attributes:
-      label: 📝 Anything else?
-      description: Any other details or context
+      label: Anything else?
+      placeholder: Why would this be useful?

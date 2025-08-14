@@ -1,59 +1,19 @@
 name: 🐛 Bug Report
-description: Report a bug or issue with AIToolbox.software
+description: Report a bug
 title: "[BUG] "
-labels: ["bug", "needs-triage"]
-assignees: []
+labels: ["bug"]
 
 body:
   - type: textarea
     id: bug-description
     attributes:
-      label: 🐛 What's the bug?
-      description: Describe what went wrong
-      placeholder: Tell us about the bug...
+      label: What's wrong?
+      placeholder: Describe the bug...
     validations:
       required: true
 
-  - type: dropdown
-    id: affected-area
-    attributes:
-      label: 🛠️ Where did this happen?
-      description: Which area is affected?
-      options:
-        - AI Tools (Blog Writer, Email Writer, etc.)
-        - Website/UI
-        - Other
-    validations:
-      required: false
-
   - type: textarea
-    id: steps-to-reproduce
+    id: additional-info
     attributes:
-      label: 🔄 How to reproduce it?
-      description: Simple steps to reproduce the issue
-      placeholder: |
-        1. Go to...
-        2. Click on...
-        3. See error
-    validations:
-      required: false
-
-  - type: textarea
-    id: screenshots
-    attributes:
-      label: 📸 Screenshots (optional)
-      description: Add screenshots if helpful
-
-  - type: textarea
-    id: additional-context
-    attributes:
-      label: 📝 Anything else?
-      description: Any other details
-
-  - type: checkboxes
-    id: terms
-    attributes:
-      label: ✅ Quick check
-      options:
-        - label: I searched for existing issues
-          required: false
+      label: Anything else?
+      placeholder: Screenshots, steps to reproduce, etc.

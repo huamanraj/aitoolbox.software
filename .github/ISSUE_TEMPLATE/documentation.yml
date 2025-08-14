@@ -1,49 +1,19 @@
 name: 📚 Documentation
-description: Report documentation issues or suggest documentation improvements
+description: Report documentation issues
 title: "[DOCS] "
-labels: ["documentation", "needs-triage"]
-assignees: []
+labels: ["documentation"]
 
 body:
-  - type: dropdown
-    id: doc-type
-    attributes:
-      label: 📋 What kind of documentation issue?
-      description: What type of documentation needs work?
-      options:
-        - Missing Documentation
-        - Incorrect Information
-        - Unclear Instructions
-        - Typos/Grammar
-        - Other
-    validations:
-      required: false
-
   - type: textarea
     id: issue-description
     attributes:
-      label: 📝 What needs to be fixed or added?
-      description: Describe the documentation issue or improvement needed
-      placeholder: What's wrong or missing in the documentation?
+      label: What's wrong with the docs?
+      placeholder: What needs to be fixed or added?
     validations:
       required: true
 
   - type: textarea
-    id: suggested-content
-    attributes:
-      label: ✏️ Suggested improvement (optional)
-      description: If you have ideas for better content, share them here
-      render: markdown
-
-  - type: input
-    id: page-url
-    attributes:
-      label: 🔗 Page/File location (optional)
-      description: Link to the specific page or file
-      placeholder: https://github.com/huamanraj/aitoolbox.software/...
-
-  - type: textarea
     id: additional-context
     attributes:
-      label: 📝 Anything else?
-      description: Any additional information
+      label: Anything else?
+      placeholder: Page links, suggestions, etc.

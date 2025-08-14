@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -25,6 +25,9 @@ import {
   Brain,
   Linkedin,
 } from "lucide-react";
+import Link from "next/link";
+import { Client, Databases } from "appwrite";
+import { getPublicFileViewUrl } from "@/lib/appwrite";
 
 // List of AI tools
 const aiTools = [
@@ -61,6 +64,13 @@ const aiTools = [
     href: "/image-generator",
     icon: <ImageIcon className="h-6 w-6" />,
     description: "Create unique AI-generated images",
+    category: "visual"
+  },
+  {
+    name: "Anime AI Generator",
+    href: "/anime-ai-generator",
+    icon: <ImageIcon className="h-6 w-6" />,
+    description: "Generate anime-style art from text prompts",
     category: "visual"
   },
   {
@@ -134,20 +144,56 @@ const aiTools = [
   category: "travel"
 },
 {
+  name: "AI Bio Generator",
+  href: "/ai-bio-generator",
+  icon: <FileText className="h-6 w-6" />,
+  description: "Generate professional bios instantly with AI",
+  category: "writing"
+},
+  {
   name: "AI Project Recommender",
   href: "/project-recommender",
   icon: <Brain className="h-6 w-6" />, 
   description: "Get personalized project ideas based on your skills",
   category: "learning"
-}
-
+},
 ];
 
 const categories = [...new Set(aiTools.map(tool => tool.category))];
 
+// Validation: Check for duplicate tool names to prevent React key errors
+const duplicateNames = aiTools
+  .map(tool => tool.name)
+  .filter((name, index, arr) => arr.indexOf(name) !== index);
+
+if (duplicateNames.length > 0) {
+  console.warn('Duplicate tool names found:', duplicateNames);
+}
+
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [latestBlogs, setLatestBlogs] = useState<any[]>([]);
+
+  useEffect(() => {
+    const endpoint = process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT;
+    const projectId = process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID;
+    
+    if (!endpoint || !projectId) return;
+    
+    const client = new Client().setEndpoint(endpoint).setProject(projectId);
+    const databases = new Databases(client);
+    (async () => {
+      try {
+        const res: any = await databases.listDocuments("content", "blogs");
+        // Sort by creation date and take first 6
+        const sortedBlogs = (res.documents || []).sort((a: any, b: any) => 
+          new Date(b.$createdAt).getTime() - new Date(a.$createdAt).getTime()
+        ).slice(0, 6);
+        setLatestBlogs(sortedBlogs);
+      } catch {}
+    })();
+  }, []);
 
   const filteredTools = aiTools.filter(tool => {
     const matchesSearch = tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -228,9 +274,9 @@ export default function Home() {
               No tools found matching your search
             </div>
           ) : (
-            filteredTools.map((tool) => (
+            filteredTools.map((tool, index) => (
               <Card 
-                key={tool.name}
+                key={`${tool.name}-${tool.href}`}
                 className="p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group cursor-pointer"
               >
                 <a href={tool.href} className="space-y-2">
@@ -258,4 +304,3 @@ export default function Home() {
     </div>
   );
 }
-                  

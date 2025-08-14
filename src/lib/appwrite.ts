@@ -30,6 +30,31 @@ export function getServerClients(): AppwriteServerClients {
   return { client, databases, storage, account };
 }
 
+// Create client for user session validation
+export function getUserSessionClient(sessionToken?: string): AppwriteServerClients {
+  const endpoint = process.env.APPWRITE_ENDPOINT;
+  const projectId = process.env.APPWRITE_PROJECT_ID;
+
+  if (!endpoint || !projectId) {
+    throw new Error(
+      "Missing Appwrite env: APPWRITE_ENDPOINT, APPWRITE_PROJECT_ID"
+    );
+  }
+
+  const client = new Client().setEndpoint(endpoint).setProject(projectId);
+  
+  if (sessionToken) {
+    // Set session for user authentication
+    client.setSession(sessionToken);
+  }
+
+  const databases = new Databases(client);
+  const storage = new Storage(client);
+  const account = new Account(client);
+
+  return { client, databases, storage, account };
+}
+
 export function getPublicFileViewUrl(fileId: string): string {
   const endpoint = process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT || process.env.APPWRITE_ENDPOINT || "";
   const projectId = process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID || process.env.APPWRITE_PROJECT_ID || "";

@@ -2,15 +2,15 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Client, Account } from "appwrite";
+import { Client, Account, Databases, Storage, ID } from "appwrite";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import dynamic from "next/dynamic";
-const RichEditor = dynamic(() => import("@/components/admin/RichEditor"), { ssr: false });
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import ReactMarkdown from "react-markdown";
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 import {
   Select,
   SelectContent,
@@ -27,8 +27,11 @@ import {
   Save, 
   Plus, 
   LogOut,
-  Loader2
+  Loader2,
+  Eye,
+  Code
 } from "lucide-react";
+import { BLOGS_DB_ID, BLOGS_COLLECTION_ID, BLOG_COVERS_BUCKET_ID } from "@/lib/appwrite";
 
 type BlogFormState = {
   id?: string;
@@ -43,11 +46,15 @@ export default function AdminPage() {
   const router = useRouter();
   const endpoint = process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT;
   const project = process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID;
+  
   const [client] = useState(() => {
     if (!endpoint || !project) return null as unknown as Client;
     return new Client().setEndpoint(endpoint).setProject(project);
   });
+  
   const account = useMemo(() => (client ? new Account(client) : (null as unknown as Account)), [client]);
+  const databases = useMemo(() => (client ? new Databases(client) : (null as unknown as Databases)), [client]);
+  const storage = useMemo(() => (client ? new Storage(client) : (null as unknown as Storage)), [client]);
   
   const [userChecked, setUserChecked] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
@@ -61,6 +68,7 @@ export default function AdminPage() {
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [existing, setExisting] = useState<any[]>([]);
+  const [previewMode, setPreviewMode] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -129,16 +137,19 @@ export default function AdminPage() {
   const onFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    
+    if (!storage) {
+      toast.error("Storage client not initialized");
+      return;
+    }
+    
     try {
       setUploading(true);
-      const formData = new FormData();
-      formData.append("file", file);
-      const res = await fetch("/api/upload", { method: "POST", body: formData });
-      if (!res.ok) throw new Error("Upload failed");
-      const data = await res.json();
-      setForm((prev) => ({ ...prev, coverFileId: data.$id || data.id }));
+      const uploadedFile = await storage.createFile(BLOG_COVERS_BUCKET_ID, ID.unique(), file);
+      setForm((prev) => ({ ...prev, coverFileId: uploadedFile.$id }));
       toast.success("Cover image uploaded");
     } catch (err: any) {
+      console.error("Upload failed:", err);
       toast.error(err?.message || "Failed to upload");
     } finally {
       setUploading(false);
@@ -150,15 +161,28 @@ export default function AdminPage() {
       toast.error("Title and slug are required");
       return;
     }
+    
+    if (!databases) {
+      toast.error("Database client not initialized");
+      return;
+    }
+    
     try {
       setSaving(true);
-      const extractExcerpt = (html: string) => {
-        if (!html) return "";
-        const el = document.createElement("div");
-        el.innerHTML = html;
-        const firstP = el.querySelector("p");
-        const text = (firstP?.textContent || el.textContent || "").trim();
-        return text.slice(0, 200);
+      
+      const extractExcerpt = (markdown: string) => {
+        if (!markdown) return "";
+        // Remove markdown syntax and get plain text
+        const plainText = markdown
+          .replace(/#{1,6}\s/g, '') // Remove headers
+          .replace(/\*\*(.*?)\*\*/g, '$1') // Remove bold
+          .replace(/\*(.*?)\*/g, '$1') // Remove italic
+          .replace(/\[(.*?)\]\(.*?\)/g, '$1') // Remove links
+          .replace(/`(.*?)`/g, '$1') // Remove inline code
+          .replace(/```[\s\S]*?```/g, '') // Remove code blocks
+          .replace(/\n+/g, ' ') // Replace newlines with spaces
+          .trim();
+        return plainText.slice(0, 200);
       };
 
       const payload: any = {
@@ -171,22 +195,20 @@ export default function AdminPage() {
 
       let createdOrUpdated: any;
       if (form.id) {
-        const res = await fetch(`/api/blogs/${form.id}`, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-        if (!res.ok) throw new Error("Update failed");
-        createdOrUpdated = await res.json();
+        createdOrUpdated = await databases.updateDocument(
+          BLOGS_DB_ID, 
+          BLOGS_COLLECTION_ID, 
+          form.id, 
+          payload
+        );
         toast.success("Blog updated successfully");
       } else {
-        const res = await fetch(`/api/blogs`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-        if (!res.ok) throw new Error("Create failed");
-        createdOrUpdated = await res.json();
+        createdOrUpdated = await databases.createDocument(
+          BLOGS_DB_ID, 
+          BLOGS_COLLECTION_ID, 
+          ID.unique(), 
+          payload
+        );
         setForm((prev) => ({ ...prev, id: createdOrUpdated.$id }));
         toast.success("Blog published successfully");
       }
@@ -197,6 +219,7 @@ export default function AdminPage() {
       }, 1000);
       
     } catch (err: any) {
+      console.error("Save failed:", err);
       toast.error(err?.message || "Save failed");
     } finally {
       setSaving(false);
@@ -328,17 +351,109 @@ export default function AdminPage() {
                 </div>
               </div>
 
-              {/* Content Editor */}
+              {/* Markdown Editor with Preview */}
               <div className="space-y-2">
-                <Label className="text-base flex items-center gap-2">
-                  <FileText className="h-4 w-4 text-zinc-500" />
-                  Content
-                </Label>
-                <div className="border border-zinc-200 rounded-none min-h-[400px]">
-                  <RichEditor 
-                    value={form.content} 
-                    onChange={(html) => setForm({ ...form, content: html })} 
-                  />
+                <div className="flex items-center justify-between">
+                  <Label className="text-base flex items-center gap-2">
+                    <FileText className="h-4 w-4 text-zinc-500" />
+                    Content (Markdown)
+                  </Label>
+                  <div className="flex gap-2">
+                    <Button
+                      type="button"
+                      variant={!previewMode ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => setPreviewMode(false)}
+                      className="rounded-none"
+                    >
+                      <Code className="h-4 w-4 mr-1" />
+                      Edit
+                    </Button>
+                    <Button
+                      type="button"
+                      variant={previewMode ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => setPreviewMode(true)}
+                      className="rounded-none"
+                    >
+                      <Eye className="h-4 w-4 mr-1" />
+                      Preview
+                    </Button>
+                  </div>
+                </div>
+                
+                <div className="border border-zinc-200 rounded-none min-h-[500px]">
+                  <ResizablePanelGroup direction="horizontal" className="min-h-[500px]">
+                    <ResizablePanel defaultSize={50} minSize={30}>
+                      <div className="h-full p-4">
+                        <Textarea
+                          value={form.content}
+                          onChange={(e) => setForm({ ...form, content: e.target.value })}
+                          placeholder="Write your blog content in Markdown..."
+                          className="h-full resize-none border-0 focus-visible:ring-0 font-mono text-sm"
+                        />
+                      </div>
+                    </ResizablePanel>
+                    
+                    <ResizableHandle withHandle />
+                    
+                    <ResizablePanel defaultSize={50} minSize={30}>
+                      <div className="h-full p-4 overflow-auto bg-zinc-50">
+                        <div className="prose prose-zinc max-w-none">
+                          <ReactMarkdown
+                            components={{
+                              h1: ({ children }) => <h1 className="text-2xl font-bold mb-4">{children}</h1>,
+                              h2: ({ children }) => <h2 className="text-xl font-bold mb-3">{children}</h2>,
+                              h3: ({ children }) => <h3 className="text-lg font-bold mb-2">{children}</h3>,
+                              p: ({ children }) => <p className="mb-4 leading-relaxed">{children}</p>,
+                              ul: ({ children }) => <ul className="list-disc list-inside mb-4 space-y-1">{children}</ul>,
+                              ol: ({ children }) => <ol className="list-decimal list-inside mb-4 space-y-1">{children}</ol>,
+                              li: ({ children }) => <li className="leading-relaxed">{children}</li>,
+                              blockquote: ({ children }) => (
+                                <blockquote className="border-l-4 border-zinc-300 pl-4 italic my-4 text-zinc-600">
+                                  {children}
+                                </blockquote>
+                              ),
+                              code: ({ children }) => (
+                                <code className="bg-zinc-200 px-1 py-0.5 rounded text-sm font-mono">
+                                  {children}
+                                </code>
+                              ),
+                              pre: ({ children }) => (
+                                <pre className="bg-zinc-800 text-zinc-100 p-4 rounded-lg overflow-x-auto mb-4">
+                                  {children}
+                                </pre>
+                              ),
+                              table: ({ children }) => (
+                                <table className="w-full border-collapse border border-zinc-300 mb-4">
+                                  {children}
+                                </table>
+                              ),
+                              th: ({ children }) => (
+                                <th className="border border-zinc-300 px-3 py-2 bg-zinc-100 font-semibold text-left">
+                                  {children}
+                                </th>
+                              ),
+                              td: ({ children }) => (
+                                <td className="border border-zinc-300 px-3 py-2">
+                                  {children}
+                                </td>
+                              ),
+                              a: ({ children, href }) => (
+                                <a href={href} className="text-blue-600 hover:underline">
+                                  {children}
+                                </a>
+                              ),
+                              strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+                              em: ({ children }) => <em className="italic">{children}</em>,
+                            }}
+                          >
+                            {form.content || "*Start typing to see preview...*"}
+                          </ReactMarkdown>
+                        </div>
+                      </div>
+                    </ResizablePanel>
+                  </ResizablePanelGroup>
                 </div>
               </div>
 

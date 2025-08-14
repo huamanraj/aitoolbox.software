@@ -3,6 +3,8 @@ import { getServerClients, BLOGS_DB_ID, BLOGS_COLLECTION_ID } from "@/lib/appwri
 import { Query } from "appwrite";
 import { rateLimiter } from "@/lib/rate-limiter";
 
+export const runtime = "nodejs";
+
 function getIp(req: NextRequest) {
   const xf = req.headers.get("x-forwarded-for");
   if (xf) return xf.split(",")[0].trim();
@@ -11,29 +13,28 @@ function getIp(req: NextRequest) {
   return "unknown";
 }
 
-export async function GET(req: NextRequest) {
+export async function GET(req: NextRequest, ctx: { params: Promise<{ slug: string }> }) {
   try {
     const ip = getIp(req);
     if (!rateLimiter(ip, 120, 60_000)) {
       return NextResponse.json({ error: "Too many requests" }, { status: 429 });
-    }
-    const limitParam = req.nextUrl.searchParams.get("limit");
-    const offsetParam = req.nextUrl.searchParams.get("offset");
-    const limit = Math.min(Math.max(parseInt(limitParam || "50", 10) || 50, 1), 100);
-    const offset = Math.max(parseInt(offsetParam || "0", 10) || 0, 0);
+      }
+    const { slug } = await ctx.params;
     const { databases } = getServerClients();
-    const list = await databases.listDocuments(
+    const result = await databases.listDocuments(
       BLOGS_DB_ID,
       BLOGS_COLLECTION_ID,
-      [Query.orderDesc("$createdAt"), Query.limit(limit), Query.offset(offset)]
+      [Query.equal("slug", slug), Query.limit(1)]
     );
-    return NextResponse.json(list);
+    const doc = (result as any).documents?.[0];
+    if (!doc) {
+      return NextResponse.json({ error: "Not found" }, { status: 404 });
+    }
+    return NextResponse.json(doc);
   } catch (error) {
-    console.error('Failed to fetch blogs:', error);
-    return NextResponse.json({ error: 'Failed to fetch blogs' }, { status: 500 });
+    console.error("Failed to get blog by slug:", error);
+    return NextResponse.json({ error: "Failed to get blog" }, { status: 500 });
   }
 }
-
-
 
 

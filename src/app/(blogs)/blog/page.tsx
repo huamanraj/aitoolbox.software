@@ -2,32 +2,85 @@ import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, Calendar, Clock, User } from 'lucide-react';
 import { getServerClients, BLOGS_DB_ID, BLOGS_COLLECTION_ID, getPublicFileViewUrl } from '@/lib/appwrite';
+import { Query } from 'appwrite';
 import { Badge } from '@/components/ui/badge';
+import { Metadata } from 'next';
 
-export const revalidate = 300; // Revalidate every 5 minutes
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
-async function getBlogs() {
+const PAGE_SIZE = 15;
+
+// Page-specific metadata is now handled in layout.tsx
+// This component focuses on content rendering and dynamic structured data
+
+async function getBlogs(page: number) {
   try {
     const { databases } = getServerClients();
-    const list = await databases.listDocuments(BLOGS_DB_ID, BLOGS_COLLECTION_ID);
+    const offset = Math.max((page - 1) * PAGE_SIZE, 0);
     
-    // Sort blogs by creation date (newest first)
-    const sortedBlogs = (list.documents || []).sort((a: any, b: any) => 
-      new Date(b.$createdAt).getTime() - new Date(a.$createdAt).getTime()
+    const list = await databases.listDocuments(
+      BLOGS_DB_ID,
+      BLOGS_COLLECTION_ID,
+      [Query.orderDesc("$createdAt"), Query.limit(PAGE_SIZE), Query.offset(offset)]
     );
     
-    return sortedBlogs;
+    const docs = list?.documents || [];
+    const total = list?.total ?? 0;
+    return { docs, total };
   } catch (error) {
     console.error('Failed to fetch blogs:', error);
-    return [];
+    return { docs: [], total: 0 };
   }
 }
 
-export default async function BlogPage() {
-  const blogs = await getBlogs();
+export default async function BlogPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
+  const { page: pageParam } = await searchParams;
+  const currentPage = Math.max(parseInt(pageParam || '1', 10) || 1, 1);
+  const { docs: blogs, total } = await getBlogs(currentPage);
+  const totalPages = Math.max(Math.ceil((total || blogs.length) / PAGE_SIZE), 1);
+
+  // Dynamic structured data for current blog posts (layout handles static blog data)
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://aitoolbox.software';
+  
+  const blogPostsStructuredData = blogs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": `AI Toolbox Blog Posts - Page ${currentPage}`,
+    "description": "Latest blog posts about AI tools and tutorials",
+    "numberOfItems": blogs.length,
+    "itemListElement": blogs.map((blog: any, index: number) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "BlogPosting",
+        "headline": blog.title,
+        "description": blog.excerpt || blog.content?.replace(/<[^>]*>/g, '').slice(0, 160),
+        "url": `${baseUrl}/${blog.slug}`,
+        "datePublished": blog.$createdAt,
+        "dateModified": blog.$updatedAt,
+        "author": {
+          "@type": "Organization",
+          "name": "AI Toolbox Team"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "AI Toolbox"
+        },
+        "image": blog.coverFileId ? getPublicFileViewUrl(blog.coverFileId) : `${baseUrl}/api/og?title=${encodeURIComponent(blog.title)}&excerpt=${encodeURIComponent(blog.excerpt || '')}&slug=${encodeURIComponent(blog.slug)}`
+      }
+    }))
+  } : null;
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Dynamic Structured Data for Current Page Content */}
+      {blogPostsStructuredData && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostsStructuredData) }}
+        />
+      )}
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         {/* Header */}
         <header className="mb-16 text-center">
@@ -56,8 +109,20 @@ export default async function BlogPage() {
               const readingTime = Math.ceil(wordCount / 200);
 
               return (
-                <Card key={blog.$id} className="group hover:shadow-xl transition-all duration-300 border-zinc-200 overflow-hidden">
-                  <Link href={`/${blog.slug}`}>
+                <Card 
+                  key={blog.$id} 
+                  className="group hover:shadow-xl transition-all duration-300 border-zinc-200 overflow-hidden"
+                  itemScope
+                  itemType="https://schema.org/BlogPosting"
+                >
+                  <Link href={`/${blog.slug}`} aria-label={`Read article: ${blog.title}`}>
+                    {/* Hidden microdata */}
+                    <meta itemProp="url" content={`${process.env.NEXT_PUBLIC_SITE_URL || 'https://aitoolbox.software'}/${blog.slug}`} />
+                    <meta itemProp="datePublished" content={blog.$createdAt} />
+                    <meta itemProp="dateModified" content={blog.$updatedAt} />
+                    <meta itemProp="author" content="AI Toolbox Team" />
+                    <meta itemProp="publisher" content="AI Toolbox" />
+                    
                     {/* Cover Image */}
                     {coverUrl && (
                       <div className="relative h-48 bg-zinc-100 overflow-hidden">
@@ -67,12 +132,16 @@ export default async function BlogPage() {
                           alt={blog.title}
                           className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
                           loading="lazy"
+                          itemProp="image"
                         />
                       </div>
                     )}
                     
                     <CardHeader className="pb-4">
-                      <CardTitle className="text-xl font-bold leading-tight text-zinc-900 group-hover:text-blue-600 transition-colors line-clamp-2">
+                      <CardTitle 
+                        className="text-xl font-bold leading-tight text-zinc-900 group-hover:text-blue-600 transition-colors line-clamp-2"
+                        itemProp="headline"
+                      >
                         {blog.title}
                       </CardTitle>
                       
@@ -92,7 +161,7 @@ export default async function BlogPage() {
                     <CardContent className="pt-0">
                       {/* Excerpt */}
                       {blog.excerpt && (
-                        <p className="text-zinc-600 leading-relaxed line-clamp-3 mb-4">
+                        <p className="text-zinc-600 leading-relaxed line-clamp-3 mb-4" itemProp="description">
                           {blog.excerpt}
                         </p>
                       )}
@@ -124,6 +193,27 @@ export default async function BlogPage() {
             </div>
           </div>
         )}
+
+        {/* Pagination */}
+        {blogs.length > 0 ? (
+          <div className="mt-10 flex items-center justify-center gap-4">
+            <a
+              className={`px-4 py-2 rounded border ${currentPage <= 1 ? 'pointer-events-none opacity-50' : 'hover:bg-zinc-50'}`}
+              href={`?page=${Math.max(currentPage - 1, 1)}`}
+              aria-disabled={currentPage <= 1}
+            >
+              Previous
+            </a>
+            <span className="text-sm text-zinc-600">Page {currentPage} of {totalPages}</span>
+            <a
+              className={`px-4 py-2 rounded border ${currentPage >= totalPages ? 'pointer-events-none opacity-50' : 'hover:bg-zinc-50'}`}
+              href={`?page=${Math.min(currentPage + 1, totalPages)}`}
+              aria-disabled={currentPage >= totalPages}
+            >
+              Next
+            </a>
+          </div>
+        ) : null}
 
         {/* Newsletter CTA */}
         <div className="mt-20 bg-zinc-50 rounded-2xl p-8 md:p-12 text-center">

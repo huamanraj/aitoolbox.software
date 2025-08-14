@@ -34,6 +34,7 @@ import {
   Send,
   Palette,
   Clock,
+  FileText,
 } from "lucide-react"
 
 const tones = [
@@ -52,6 +53,7 @@ const formSchema = z.object({
   email: z.string().email().optional().or(z.literal("")),
   position: z.string().min(1, { message: "Position title is required." }),
   company: z.string().min(1, { message: "Company name is required." }),
+  jobDescription: z.string().optional(),
   experience: z
     .string()
     .min(20, { message: "Please provide at least 20 characters describing your experience." }),
@@ -78,6 +80,7 @@ export function CoverLetterForm({ onSubmit, isLoading }: CoverLetterFormProps) {
       email: "",
       position: "",
       company: "",
+      jobDescription: "",
       experience: "",
       skills: "",
       tone: "Professional",
@@ -104,7 +107,7 @@ export function CoverLetterForm({ onSubmit, isLoading }: CoverLetterFormProps) {
                     <FormControl>
                       <Input
                         placeholder="John Doe"
-                        className="rounded-none text-base"
+                        className="text-base"
                         {...field}
                       />
                     </FormControl>
@@ -125,7 +128,7 @@ export function CoverLetterForm({ onSubmit, isLoading }: CoverLetterFormProps) {
                       <Input
                         type="email"
                         placeholder="john@example.com"
-                        className="rounded-none text-base"
+                        className="text-base"
                         {...field}
                       />
                     </FormControl>
@@ -148,7 +151,7 @@ export function CoverLetterForm({ onSubmit, isLoading }: CoverLetterFormProps) {
                     <FormControl>
                       <Input
                         placeholder="Software Engineer"
-                        className="rounded-none text-base"
+                        className="text-base"
                         {...field}
                       />
                     </FormControl>
@@ -168,7 +171,7 @@ export function CoverLetterForm({ onSubmit, isLoading }: CoverLetterFormProps) {
                     <FormControl>
                       <Input
                         placeholder="Tech Company Inc."
-                        className="rounded-none text-base"
+                        className="text-base"
                         {...field}
                       />
                     </FormControl>
@@ -177,6 +180,30 @@ export function CoverLetterForm({ onSubmit, isLoading }: CoverLetterFormProps) {
                 )}
               />
             </div>
+
+            <FormField
+              control={form.control}
+              name="jobDescription"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-base flex items-center gap-2">
+                    <FileText className="h-4 w-4 text-zinc-500" />
+                    Job Description (Optional)
+                  </FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Paste the job description here to get a more tailored cover letter..."
+                      className="resize-y min-h-[100px] text-base"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription className="text-sm text-zinc-500">
+                    Including the job description helps create a more targeted cover letter.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
             <FormField
               control={form.control}
@@ -190,7 +217,7 @@ export function CoverLetterForm({ onSubmit, isLoading }: CoverLetterFormProps) {
                   <FormControl>
                     <Textarea
                       placeholder="Describe your relevant work experience, projects, and achievements..."
-                      className="resize-y min-h-[120px] rounded-none text-base"
+                      className="resize-y min-h-[120px] text-base"
                       {...field}
                     />
                   </FormControl>
@@ -214,7 +241,7 @@ export function CoverLetterForm({ onSubmit, isLoading }: CoverLetterFormProps) {
                   <FormControl>
                     <Textarea
                       placeholder="List your relevant skills, technologies, and competencies..."
-                      className="resize-y min-h-[100px] rounded-none text-base"
+                      className="resize-y min-h-[100px] text-base"
                       {...field}
                     />
                   </FormControl>
@@ -241,11 +268,11 @@ export function CoverLetterForm({ onSubmit, isLoading }: CoverLetterFormProps) {
                       defaultValue={field.value}
                     >
                       <FormControl>
-                        <SelectTrigger className="rounded-none text-sm">
+                        <SelectTrigger className="text-sm">
                           <SelectValue placeholder="Select a tone" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent className="rounded-none">
+                      <SelectContent>
                         {tones.map((tone) => (
                           <SelectItem key={tone} value={tone}>
                             {tone}
@@ -271,11 +298,11 @@ export function CoverLetterForm({ onSubmit, isLoading }: CoverLetterFormProps) {
                       defaultValue={field.value}
                     >
                       <FormControl>
-                        <SelectTrigger className="rounded-none text-sm">
+                        <SelectTrigger className="text-sm">
                           <SelectValue placeholder="Select length" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent className="rounded-none">
+                      <SelectContent>
                         <SelectItem value="Short">Short (2-3 paragraphs)</SelectItem>
                         <SelectItem value="Medium">Medium (3-4 paragraphs)</SelectItem>
                         <SelectItem value="Long">Long (4-5 paragraphs)</SelectItem>
@@ -299,7 +326,7 @@ export function CoverLetterForm({ onSubmit, isLoading }: CoverLetterFormProps) {
                   <FormControl>
                     <Textarea
                       placeholder="Any specific points you want to highlight or company research you'd like to include..."
-                      className="resize-y min-h-[100px] rounded-none text-base"
+                      className="resize-y min-h-[100px] text-base"
                       {...field}
                     />
                   </FormControl>
@@ -314,7 +341,7 @@ export function CoverLetterForm({ onSubmit, isLoading }: CoverLetterFormProps) {
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full rounded-none text-base py-6"
+              className="w-full text-base py-6"
             >
               {isLoading ? (
                 <>

@@ -79,7 +79,7 @@ export function CoverLetterOutput({ generatedLetter, isLoading, onRegenerate }: 
 
   if (!generatedLetter) {
     return (
-      <div className="flex flex-col items-center justify-center h-52 text-center p-6 border bg-zinc-50">
+      <div className="flex flex-col items-center justify-center h-52 text-center p-6 border bg-zinc-50 rounded-lg">
         <div className="flex items-center justify-center w-12 h-12 mx-auto bg-primary/10 rounded-full mb-4">
           <Bot className="w-6 h-6 text-primary" />
         </div>
@@ -107,7 +107,7 @@ export function CoverLetterOutput({ generatedLetter, isLoading, onRegenerate }: 
               size="icon"
               onClick={onRegenerate}
               title="Regenerate"
-              className="h-8 w-8 rounded-none"
+              className="h-8 w-8"
             >
               <RefreshCw className="h-4 w-4" />
             </Button>
@@ -117,7 +117,7 @@ export function CoverLetterOutput({ generatedLetter, isLoading, onRegenerate }: 
             size="icon"
             onClick={handleEditToggle}
             title={isEditing ? "Save" : "Edit"}
-            className="h-8 w-8 rounded-none"
+            className="h-8 w-8"
           >
             <Edit className="h-4 w-4" />
           </Button>
@@ -126,7 +126,7 @@ export function CoverLetterOutput({ generatedLetter, isLoading, onRegenerate }: 
             size="icon"
             onClick={handleDownload}
             title="Download"
-            className="h-8 w-8 rounded-none"
+            className="h-8 w-8"
           >
             <Download className="h-4 w-4" />
           </Button>
@@ -135,7 +135,7 @@ export function CoverLetterOutput({ generatedLetter, isLoading, onRegenerate }: 
             size="icon"
             onClick={handleCopy}
             title="Copy"
-            className="h-8 w-8 rounded-none"
+            className="h-8 w-8"
           >
             {isCopied ? (
               <Check className="h-4 w-4" />

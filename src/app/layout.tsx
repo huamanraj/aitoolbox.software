@@ -7,7 +7,6 @@ import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import { Analytics } from "@vercel/analytics/next";
 import Footer from "@/components/common/Footer";
-import PopunderAd from "@/components/ads/PopunderAd";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -110,7 +109,7 @@ export default function RootLayout({
           dmSans.variable
         )}
       >
-        <PopunderAd />
+      
         <Analytics />
 
         <div className="flex flex-col h-screen">

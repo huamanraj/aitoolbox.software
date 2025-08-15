@@ -207,7 +207,7 @@ ${data.text}
               </Collapsible>
             </div>
             {/* Ad Banner */}
-            <NativeBannerAd />
+            {/* <NativeBannerAd /> */}
 
             <article className="prose max-w-none mb-8">
               <h1 className="text-3xl font-bold mb-4 flex items-center gap-2">

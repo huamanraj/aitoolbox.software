@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import BioGeneratorForm from "./bio-generator-form";
 import BioGeneratorOutput from "./bio-generator-output";
-import NativeBannerAd from "@/components/ads/NativeBannerAd";
+import SocialBarAd from "@/components/ads/SocialBarAd";
 const BioGeneratorClient = () => {
   const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -56,7 +56,7 @@ const BioGeneratorClient = () => {
       <BioGeneratorOutput output={output} isLoading={loading} />
                 
       {/* Ad Banner */}
-     <NativeBannerAd />
+     <SocialBarAd/>
 
 
        <div className="text-sm text-gray-600 mt-20  mx-auto">

@@ -39,6 +39,7 @@ import {
   Pen,
   Target,
   Linkedin,
+  Users, // + add
 } from "lucide-react";
 import {
   Tooltip,
@@ -179,6 +180,11 @@ const aiTools: Tool[] = [
     name: "Product Description",
     href: "/product-description-generator",
     icon: <Pen className="h-5 w-5" />,
+  },
+  {
+    name: "Community",
+    href: "/community",
+    icon: <Users className="h-5 w-5" />,
   },
   {
     name: "Blog",

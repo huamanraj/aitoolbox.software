@@ -33,26 +33,34 @@ function generateCoverLetter(data: any): string {
   });
 
   const toneAdjectives = {
-    professional: 'professional and experienced',
-    enthusiastic: 'enthusiastic and passionate',
-    confident: 'confident and results-driven',
-    friendly: 'collaborative and personable'
+    Professional: 'professional and experienced',
+    Enthusiastic: 'enthusiastic and passionate',
+    Confident: 'confident and results-driven',
+    Friendly: 'collaborative and personable',
+    Formal: 'dedicated and detail-oriented',
+    Creative: 'innovative and creative'
   };
 
   const lengthSettings = {
-    short: { paragraphs: 2, detailLevel: 'concise' },
-    medium: { paragraphs: 3, detailLevel: 'moderate' },
-    long: { paragraphs: 4, detailLevel: 'detailed' }
+    Short: { paragraphs: 2, detailLevel: 'concise' },
+    Medium: { paragraphs: 3, detailLevel: 'moderate' },
+    Long: { paragraphs: 4, detailLevel: 'detailed' }
   };
 
-  const settings = lengthSettings[data.length as keyof typeof lengthSettings] || lengthSettings.medium;
-  const toneDesc = toneAdjectives[data.tone as keyof typeof toneAdjectives] || toneAdjectives.professional;
+  const settings = lengthSettings[data.length as keyof typeof lengthSettings] || lengthSettings.Medium;
+  const toneDesc = toneAdjectives[data.tone as keyof typeof toneAdjectives] || toneAdjectives.Professional;
+
+  // Extract key requirements from job description if provided
+  let jobRequirementsMention = '';
+  if (data.jobDescription && data.jobDescription.trim()) {
+    jobRequirementsMention = ` I have carefully reviewed the job requirements you've outlined, and I am confident that my background aligns well with your needs.`;
+  }
 
   let letter = `${today}
 
 Dear Hiring Manager,
 
-I am writing to express my strong interest in the ${data.position} position at ${data.company}. As a ${toneDesc} professional with relevant experience in the field, I am excited about the opportunity to contribute to your team's continued success.
+I am writing to express my strong interest in the ${data.position} position at ${data.company}. As a ${toneDesc} professional with relevant experience in the field, I am excited about the opportunity to contribute to your team's continued success.${jobRequirementsMention}
 
 `;
 
@@ -63,9 +71,17 @@ I am writing to express my strong interest in the ${data.position} position at $
 
   // Add skills paragraph for medium/long letters
   if (settings.paragraphs >= 3) {
-    letter += `My technical and professional skill set includes ${data.skills.toLowerCase()}. I am particularly drawn to ${data.company} because of your reputation for innovation and excellence in the industry. I believe my background and enthusiasm make me an ideal candidate to contribute meaningfully to your team's objectives.
+    let skillsSection = `My technical and professional skill set includes ${data.skills.toLowerCase()}.`;
+    
+    // Add job description reference if available
+    if (data.jobDescription && data.jobDescription.trim()) {
+      skillsSection += ` Based on the job description, I believe my experience directly addresses your key requirements.`;
+    }
+    
+    skillsSection += ` I am particularly drawn to ${data.company} because of your reputation for innovation and excellence in the industry. I believe my background and enthusiasm make me an ideal candidate to contribute meaningfully to your team's objectives.
 
 `;
+    letter += skillsSection;
   }
 
   // Add additional paragraph for long letters

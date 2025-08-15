@@ -1,336 +1,70 @@
 "use client"
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import * as z from "zod"
+import { useState } from "react"
+import { CoverLetterForm, type CoverLetterFormValues } from "./cover-letter-form"
+import { CoverLetterOutput } from "./cover-letter-output"
 
-import { Button } from "@/components/ui/button"
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent } from "@/components/ui/card"
-import {
-  Loader2,
-  User,
-  Mail,
-  Building2,
-  Briefcase,
-  Award,
-  Send,
-  Palette,
-  Clock,
-} from "lucide-react"
+export function CoverLetterClient() {
+  const [generatedLetter, setGeneratedLetter] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [lastFormData, setLastFormData] = useState<CoverLetterFormValues | null>(null)
 
-const tones = [
-  "Professional",
-  "Enthusiastic",
-  "Confident",
-  "Friendly",
-  "Formal",
-  "Creative",
-]
+  const handleSubmit = async (data: CoverLetterFormValues) => {
+    setIsLoading(true)
+    setError(null)
+    setLastFormData(data)
+    
+    try {
+      const response = await fetch("/api/cover-letter", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
 
-const lengths = ["Short", "Medium", "Long"]
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || "Failed to generate cover letter")
+      }
 
-const formSchema = z.object({
-  name: z.string().min(1, { message: "Name is required." }),
-  email: z.string().email().optional().or(z.literal("")),
-  position: z.string().min(1, { message: "Position title is required." }),
-  company: z.string().min(1, { message: "Company name is required." }),
-  experience: z
-    .string()
-    .min(20, { message: "Please provide at least 20 characters describing your experience." }),
-  skills: z
-    .string()
-    .min(10, { message: "Please provide at least 10 characters describing your skills." }),
-  tone: z.string().min(1, { message: "Please select a tone." }),
-  length: z.string().min(1, { message: "Please select a length." }),
-  additionalInfo: z.string().optional(),
-})
+      const result = await response.json()
+      setGeneratedLetter(result.coverLetter)
+    } catch (error) {
+      console.error("Error generating cover letter:", error)
+      setError(error instanceof Error ? error.message : "An unexpected error occurred")
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
-export type CoverLetterFormValues = z.infer<typeof formSchema>
-
-interface CoverLetterFormProps {
-  onSubmit: (data: CoverLetterFormValues) => void
-  isLoading: boolean
-}
-
-export function CoverLetterForm({ onSubmit, isLoading }: CoverLetterFormProps) {
-  const form = useForm<CoverLetterFormValues>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      position: "",
-      company: "",
-      experience: "",
-      skills: "",
-      tone: "Professional",
-      length: "Medium",
-      additionalInfo: "",
-    },
-  })
+  const handleRegenerate = () => {
+    if (lastFormData) {
+      handleSubmit(lastFormData)
+    }
+  }
 
   return (
-    <Card className="rounded-none border-0 shadow-none">
-      <CardContent className="p-4 pt-4">
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-base flex items-center gap-2">
-                      <User className="h-4 w-4 text-zinc-500" />
-                      Full Name
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="John Doe"
-                        className="rounded-none text-base"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-base flex items-center gap-2">
-                      <Mail className="h-4 w-4 text-zinc-500" />
-                      Email Address (Optional)
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="email"
-                        placeholder="john@example.com"
-                        className="rounded-none text-base"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="position"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-base flex items-center gap-2">
-                      <Briefcase className="h-4 w-4 text-zinc-500" />
-                      Position Title
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Software Engineer"
-                        className="rounded-none text-base"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="company"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-base flex items-center gap-2">
-                      <Building2 className="h-4 w-4 text-zinc-500" />
-                      Company Name
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Tech Company Inc."
-                        className="rounded-none text-base"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <FormField
-              control={form.control}
-              name="experience"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-base flex items-center gap-2">
-                    <Award className="h-4 w-4 text-zinc-500" />
-                    Relevant Experience
-                  </FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Describe your relevant work experience, projects, and achievements..."
-                      className="resize-y min-h-[120px] rounded-none text-base"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription className="text-sm text-zinc-500">
-                    Highlight your most relevant experience and accomplishments.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="skills"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-base flex items-center gap-2">
-                    <Briefcase className="h-4 w-4 text-zinc-500" />
-                    Key Skills
-                  </FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="List your relevant skills, technologies, and competencies..."
-                      className="resize-y min-h-[100px] rounded-none text-base"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription className="text-sm text-zinc-500">
-                    Include technical skills, soft skills, and relevant certifications.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="tone"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-base flex items-center gap-2">
-                      <Palette className="h-4 w-4 text-zinc-500" />
-                      Tone
-                    </FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger className="rounded-none text-sm">
-                          <SelectValue placeholder="Select a tone" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent className="rounded-none">
-                        {tones.map((tone) => (
-                          <SelectItem key={tone} value={tone}>
-                            {tone}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="length"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-base flex items-center gap-2">
-                      <Clock className="h-4 w-4 text-zinc-500" />
-                      Length
-                    </FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger className="rounded-none text-sm">
-                          <SelectValue placeholder="Select length" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent className="rounded-none">
-                        <SelectItem value="Short">Short (2-3 paragraphs)</SelectItem>
-                        <SelectItem value="Medium">Medium (3-4 paragraphs)</SelectItem>
-                        <SelectItem value="Long">Long (4-5 paragraphs)</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <FormField
-              control={form.control}
-              name="additionalInfo"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-base flex items-center gap-2">
-                    <Award className="h-4 w-4 text-zinc-500" />
-                    Additional Information (Optional)
-                  </FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Any specific points you want to highlight or company research you'd like to include..."
-                      className="resize-y min-h-[100px] rounded-none text-base"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription className="text-sm text-zinc-500">
-                    Include any additional details that would make your cover letter more personalized.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <Button
-              type="submit"
-              disabled={isLoading}
-              className="w-full rounded-none text-base py-6"
-            >
-              {isLoading ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Generating Cover Letter...
-                </>
-              ) : (
-                <>
-                  <Send className="mr-2 h-4 w-4" />
-                  Generate Cover Letter
-                </>
-              )}
-            </Button>
-          </form>
-        </Form>
-      </CardContent>
-    </Card>
+    <div className="space-y-8">
+      <div>
+        <h2 className="text-xl font-semibold mb-4">Enter Your Details</h2>
+        <CoverLetterForm onSubmit={handleSubmit} isLoading={isLoading} />
+        {error && (
+          <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-md">
+            <p className="text-red-600 text-sm">{error}</p>
+          </div>
+        )}
+      </div>
+      
+      <div>
+        <h2 className="text-xl font-semibold mb-4">Generated Cover Letter</h2>
+        <CoverLetterOutput
+          generatedLetter={generatedLetter}
+          isLoading={isLoading}
+          onRegenerate={lastFormData ? handleRegenerate : undefined}
+        />
+      </div>
+    </div>
   )
 }

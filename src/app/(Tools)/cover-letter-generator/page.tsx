@@ -1,4 +1,4 @@
-import CoverLetterClient from "./_components/cover-letter-client";
+import { CoverLetterClient } from "./_components/cover-letter-client";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

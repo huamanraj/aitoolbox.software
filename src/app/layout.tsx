@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import { Analytics } from "@vercel/analytics/next";
 import Footer from "@/components/common/Footer";
+import SocialBarAd from "@/components/ads/SocialBarAd";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -109,9 +110,8 @@ export default function RootLayout({
           dmSans.variable
         )}
       >
-      
         <Analytics />
-
+        <SocialBarAd />
         <div className="flex flex-col h-screen">
           <Navbar />
           <div className="flex flex-1 overflow-hidden relative">
@@ -123,6 +123,7 @@ export default function RootLayout({
           </div>
         </div>
         <Toaster />
+        <SocialBarAd />
       </body>
     </html>
   );

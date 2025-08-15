@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import SocialBarAd from '@/components/ads/SocialBarAd';
 
 // Base metadata for individual blog posts - specific metadata is handled in page.tsx
 export const metadata: Metadata = {
@@ -58,23 +59,34 @@ export default function BlogPostLayout({ children }: { children: React.ReactNode
       {/* Organization structured data for better entity recognition */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationStructuredData) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(organizationStructuredData),
+        }}
       />
-      
+
       {/* Performance optimizations */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossOrigin="anonymous"
+      />
       <link rel="dns-prefetch" href="//www.google-analytics.com" />
-      
+
       {/* Additional meta tags for individual articles */}
       <meta name="theme-color" content="#3b82f6" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="format-detection" content="telephone=no" />
-      
+
       {/* Article-specific viewport optimization */}
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-      
-      {children}
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no"
+      />
+      <div>
+        <SocialBarAd />
+        {children}
+      </div>
     </>
   );
 }

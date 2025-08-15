@@ -11,7 +11,7 @@ const SocialBarAd: FC = () => {
     document.body.appendChild(script);
   }, []);
 
-  return null; // Social bar usually appears automatically
+  return null; 
 };
 
 export default SocialBarAd;

@@ -1,3 +1,5 @@
+>🔥🔥 Community highlight: Earn Level 3 by sharing AIToolbox on your social media.
+>⚠️Learn more: https://github.com/huamanraj/aitoolbox.software/blob/main/contributions/Community.md
 
 <div align="center">
   <a href="https://aitoolbox.software/">

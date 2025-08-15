@@ -5,6 +5,12 @@ labels: ["bug"]
 assignees: []
 
 body:
+  - type: markdown
+    attributes:
+      value: |
+        🔥🔥 Community highlight: Earn Level 3 by sharing AIToolbox on your social media.
+        Learn more: https://github.com/huamanraj/aitoolbox.software/blob/main/contributions/Community.md
+
   - type: textarea
     id: description
     attributes:

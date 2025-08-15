@@ -5,17 +5,6 @@ labels: ["improvement", "enhancement", "needs-triage"]
 assignees: []
 
 body:
-  - type: markdown
-    attributes:
-      value: |
-        ## 📋 Before moving ahead
-        - ⭐ Please star the repository (Mandatory for GSSoC 25).
-        - 📖 Read the [Contribution Guidelines](https://github.com/AIToolbox-software/AIToolbox.software/blob/main/contribution/CONTRIBUTING.md).
-        - 📂 All contribution info is inside the [`/contribution`](https://github.com/AIToolbox-software/AIToolbox.software/tree/main/contribution) folder.
-        - 📚 AI and AdSense related documentation is inside the [`/doc`](https://github.com/AIToolbox-software/AIToolbox.software/tree/main/doc) folder.
-
-
-
   - type: textarea
     id: proposed-improvement
     attributes:
@@ -24,7 +13,6 @@ body:
       placeholder: How should it work better?
     validations:
       required: true
-
 
   - type: textarea
     id: benefits
@@ -44,5 +32,3 @@ body:
       label: 💡 Implementation Ideas
       description: Do you have any ideas on how this could be implemented?
       placeholder: Any technical suggestions or approaches?
-
-

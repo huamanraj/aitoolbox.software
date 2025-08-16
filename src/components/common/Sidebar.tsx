@@ -22,6 +22,7 @@ import {
   Code,
   FileText,
   PenTool,
+  Briefcase,
   Check,
   FileSpreadsheet,
   Lightbulb,
@@ -35,9 +36,11 @@ import {
   Package,
   Globe,
   MapPin,
+  Pen,
   Target,
   Linkedin,
   Presentation,
+  Users, // + add
 } from "lucide-react";
 import {
   Tooltip,
@@ -75,6 +78,11 @@ const aiTools: Tool[] = [
     icon: <Globe className="h-5 w-5" />,
   },
   {
+    name: "AI Bio Genertor",
+    href: "/ai-bio-generator",
+    icon: <Siren className="h-5 w-5"/>,
+  },
+  {
     name: "LinkedIn Post Generator",
     href: "/linkedin-post-generator",
     icon: <Linkedin className="h-5 w-5" />,
@@ -87,6 +95,11 @@ const aiTools: Tool[] = [
   {
     name: "Image Generator",
     href: "/image-generator",
+    icon: <ImageIcon className="h-5 w-5" />,
+  },
+  {
+    name: "Anime AI Generator",
+    href: "/anime-ai-generator",
     icon: <ImageIcon className="h-5 w-5" />,
   },
   {
@@ -135,6 +148,11 @@ const aiTools: Tool[] = [
     icon: <FileSpreadsheet className="h-5 w-5" />,
   },
   {
+    name: "Mock Interview",
+    href: "/mock-interview",
+    icon: <Briefcase className="h-5 w-5" />,
+  },
+  {
     name: "Idea Generator",
     href: "/idea-generator",
     icon: <Lightbulb className="h-5 w-5" />,
@@ -163,6 +181,16 @@ const aiTools: Tool[] = [
     name: "Product Ideas",
     href: "/product-idea-generator",
     icon: <Package className="h-5 w-5" />,
+  },
+  {
+    name: "Product Description",
+    href: "/product-description-generator",
+    icon: <Pen className="h-5 w-5" />,
+  },
+  {
+    name: "Community",
+    href: "/community",
+    icon: <Users className="h-5 w-5" />,
   },
   {
     name: "Blog",

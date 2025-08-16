@@ -1,123 +1,33 @@
 name: 🐛 Bug Report
 description: Report a bug or issue with AIToolbox.software
 title: "[BUG] "
-labels: ["bug", "needs-triage"]
+labels: ["bug"]
 assignees: []
 
 body:
   - type: markdown
     attributes:
       value: |
-        ## 📋 Before moving ahead
-        - ⭐ Please star the repository (Mandatory for GSSoC 25).
-        - 📖 Read the [Contribution Guidelines](https://github.com/AIToolbox-software/AIToolbox.software/blob/main/contribution/CONTRIBUTING.md).
-        - 📂 All contribution info is inside the [`/contribution`](https://github.com/AIToolbox-software/AIToolbox.software/tree/main/contribution) folder.
-        - 📚 AI and AdSense related documentation is inside the [`/doc`](https://github.com/AIToolbox-software/AIToolbox.software/tree/main/doc) folder.
+        🔥🔥 Community highlight: Earn Level 3 by sharing AIToolbox on your social media.
+        Learn more: https://github.com/huamanraj/aitoolbox.software/blob/main/contributions/Community.md
 
   - type: textarea
-    id: bug-description
+    id: description
     attributes:
-      label: 🐛 Bug Description
-      description: A clear and concise description of what the bug is.
+      label: Description
+      description: What happened? What did you expect?
       placeholder: Describe the bug...
-    validations:
-      required: true
-
-  - type: dropdown
-    id: affected-tool
-    attributes:
-      label: 🛠️ Affected Tool/Feature
-      description: Which AI tool or feature is affected?
-      options:
-        - AI Blog Writer
-        - AI Email Writer
-        - Text Summarizer
-        - Blog Ideas Generator
-        - Product Ideas Generator
-        - Startup Ideas Generator
-        - App Ideas Generator
-        - YouTube Ideas Generator
-        - AI Image Generator
-        - AI Logo Generator
-        - AI Code Explainer
-        - AI Chatbot
-        - General Website/UI
-        - Other (please specify in description)
-    validations:
-      required: true
-
   - type: textarea
-    id: steps-to-reproduce
+    id: repro_or_recording
     attributes:
-      label: 🔄 Steps to Reproduce
-      description: Steps to reproduce the behavior
+      label: Steps or Recording
+      description: Steps to reproduce or a link to a screen recording.
       placeholder: |
-        1. Go to '...'
-        2. Click on '...'
-        3. Scroll down to '...'
-        4. See error
-    validations:
-      required: true
-
-  - type: textarea
-    id: expected-behavior
-    attributes:
-      label: ✅ Expected Behavior
-      description: A clear description of what you expected to happen.
-    validations:
-      required: true
-
-  - type: textarea
-    id: actual-behavior
-    attributes:
-      label: ❌ Actual Behavior
-      description: A clear description of what actually happened.
-    validations:
-      required: true
-
+        1. ...
+        2. ...
+        3. ...
   - type: textarea
     id: screenshots
     attributes:
-      label: 📸 Screenshots
-      description: If applicable, add screenshots to help explain your problem.
-
-  - type: dropdown
-    id: browsers
-    attributes:
-      label: 🌐 Browser
-      description: What browser are you using?
-      options:
-        - Chrome
-        - Firefox
-        - Safari
-        - Edge
-        - Other (please specify)
-    validations:
-      required: true
-
-  - type: input
-    id: device
-    attributes:
-      label: 📱 Device Information
-      description: Device type and OS (e.g., Desktop Windows 11, iPhone iOS 17, etc.)
-    validations:
-      required: true
-
-  - type: textarea
-    id: additional-context
-    attributes:
-      label: 📝 Additional Context
-      description: Add any other context about the problem here.
-
-  - type: checkboxes
-    id: terms
-    attributes:
-      label: ✅ Checklist
-      description: Please confirm the following
-      options:
-        - label: I have starred the repository
-          required: true
-        - label: I have read the contribution guidelines
-          required: true
-        - label: I have searched for existing issues
-          required: true
+      label: Screenshots
+      description: Paste screenshots/images if helpful.

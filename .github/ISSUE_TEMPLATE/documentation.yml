@@ -1,101 +1,24 @@
 name: 📚 Documentation
-description: Report documentation issues or suggest documentation improvements
+description: Report documentation issues or suggest improvements
 title: "[DOCS] "
-labels: ["documentation", "needs-triage"]
+labels: ["documentation"]
 assignees: []
 
 body:
   - type: markdown
     attributes:
       value: |
-        ## 📋 Before moving ahead
-        - ⭐ Please star the repository (Mandatory for GSSoC 25).
-        - 📖 Read the [Contribution Guidelines](https://github.com/AIToolbox-software/AIToolbox.software/blob/main/contribution/CONTRIBUTING.md).
-        - 📂 All contribution info is inside the [`/contribution`](https://github.com/AIToolbox-software/AIToolbox.software/tree/main/contribution) folder.
-        - 📚 AI and AdSense related documentation is inside the [`/doc`](https://github.com/AIToolbox-software/AIToolbox.software/tree/main/doc) folder.
-
-  - type: dropdown
-    id: doc-type
-    attributes:
-      label: 📋 Documentation Type
-      description: What type of documentation issue is this?
-      options:
-        - Missing Documentation
-        - Incorrect/Outdated Information
-        - Unclear Instructions
-        - Typos/Grammar Issues
-        - Code Examples Need Update
-        - API Documentation
-        - User Guide/Tutorial
-        - Developer Documentation
-        - README Improvements
-        - Contributing Guidelines
-        - Other
-    validations:
-      required: true
-
-  - type: dropdown
-    id: doc-section
-    attributes:
-      label: 📍 Documentation Section
-      description: Which section of documentation is affected?
-      options:
-        - README.md
-        - /contribution folder
-        - /doc folder (AI/AdSense docs)
-        - API Documentation
-        - Setup/Installation Guide
-        - User Guide
-        - Developer Guide
-        - Code Comments
-        - Issue Templates
-        - Other (please specify)
+        🔥🔥 Community highlight: Earn Level 3 by sharing AIToolbox on your social media.
+        Learn more: https://github.com/huamanraj/aitoolbox.software/blob/main/contributions/Community.md
 
   - type: textarea
-    id: issue-description
+    id: description
     attributes:
-      label: 📝 Issue Description
-      description: Describe the documentation issue or improvement needed.
-      placeholder: What's wrong with the current documentation or what's missing?
-    validations:
-      required: true
-
+      label: Description
+      description: What’s wrong or what should be improved?
+      placeholder: Describe the documentation issue or suggestion...
   - type: textarea
-    id: current-content
+    id: screenshots_or_recording
     attributes:
-      label: 📄 Current Content (if applicable)
-      description: Copy the current documentation content that needs to be fixed.
-      render: markdown
-
-  - type: textarea
-    id: suggested-content
-    attributes:
-      label: ✏️ Suggested Content
-      description: Provide the corrected or new content you'd like to see.
-      render: markdown
-
-  - type: input
-    id: page-url
-    attributes:
-      label: 🔗 Page/File URL
-      description: Link to the specific page or file that needs documentation work.
-      placeholder: https://github.com/AIToolbox-software/AIToolbox.software/...
-
-  - type: textarea
-    id: additional-context
-    attributes:
-      label: 📝 Additional Context
-      description: Any additional information that might be helpful.
-
-  - type: checkboxes
-    id: terms
-    attributes:
-      label: ✅ Checklist
-      description: Please confirm the following
-      options:
-        - label: I have starred the repository
-          required: true
-        - label: I have read the existing documentation
-          required: true
-        - label: I have searched for existing documentation issues
-          required: true
+      label: Screenshots or Recording
+      description: Add screenshots or a link to a recording if helpful.

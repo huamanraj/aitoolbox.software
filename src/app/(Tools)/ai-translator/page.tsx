@@ -2,6 +2,7 @@ import { Globe, Languages } from "lucide-react";
 import TranslatorClient from "./_components/translator-client";
 import { Metadata } from "next";
 import Link from "next/link";
+import SocialBarAd from "@/components/ads/SocialBarAd";
 
 export const metadata: Metadata = {
   title: "AI Translator - Translate Text Between 100+ Languages Instantly",
@@ -59,6 +60,7 @@ const translationUseCases = [
 export default function TranslatorPage() {
   return (
     <div className="container mx-auto p-4 md:p-8">
+      <SocialBarAd/>
       <div className="max-w-4xl mx-auto">
         <header className="mb-10">
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-center">

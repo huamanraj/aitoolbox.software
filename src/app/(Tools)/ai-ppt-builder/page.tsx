@@ -146,44 +146,54 @@ export default function Builder() {
       const slide = pres.addSlide();
       slide.background = { color: theme.palette.bg };
 
-      // Title - Top Center
+      // Title box (top center, 9" wide)
       slide.addText(s.title || "Untitled Slide", {
         x: 0.5,
         y: 0.3,
-        w: "90%",
+        w: 9,
+        h: 1,
         fontSize: theme.textStyles.titleSize,
         bold: true,
         color: theme.palette.fg,
         fontFace: theme.fonts.title,
-        align: "center"
+        align: "center",
+        autoFit: true,   // safe to use
       });
 
-      // Text bullets - Left side
+      // Bullets (left side, ~4.5" wide)
       if (s.bullets?.length) {
-        slide.addText(s.bullets.map((b) => `• ${b}`).join("\n"), {
-          x: 0.5,
-          y: 1.5,
-          w: "45%", // left half
-          h: 4.5,
-          fontSize: theme.textStyles.bodySize,
-          color: theme.palette.fg,
-          fontFace: theme.fonts.body,
-          bullet: true,
-          valign: "top"
-        });
+        slide.addText(
+          s.bullets.map((b) => `• ${b}`).join("\n"),
+          {
+            x: 0.5,
+            y: 1.5,
+            w: 4.5,
+            h: 4.5,
+            fontSize: theme.textStyles.bodySize,
+            color: theme.palette.fg,
+            fontFace: theme.fonts.body,
+            bullet: true,
+            valign: "top",
+            autoFit: true,
+          }
+        );
       }
 
-      // Image - Right side
+      // Image (right side, ~4.5" box, contained)
       if (s.image) {
         const imgBase64 = await ensureBase64Image(s.image);
         if (imgBase64.startsWith("data:image/")) {
           slide.addImage({
             data: imgBase64,
-            x: "55%",  // start from middle right
+            x: 5.5,   // start after bullet box
             y: 1.5,
-            w: "40%",
+            w: 4.5,
             h: 4.5,
-            sizing: { type: "contain", w: 4.5, h: 4.5 }
+            sizing: {
+              type: "contain",
+              w: 0,
+              h: 0
+            },
           });
         }
       }
@@ -192,26 +202,6 @@ export default function Builder() {
     const blob = (await pres.write({ outputType: "blob" })) as Blob;
     saveAs(blob, "presentation.pptx");
   }
-
-  // Function to split text into lines that fit within max width
-  function wrapText(text: string, font: any, fontSize: number, maxWidth: number) {
-    const words = text.split(" ");
-    const lines: string[] = [];
-    let currentLine = "";
-
-    words.forEach(word => {
-        const testLine = currentLine ? `${currentLine} ${word}` : word;
-        if (font.widthOfTextAtSize(testLine, fontSize) <= maxWidth) {
-          currentLine = testLine;
-        } else {
-          lines.push(currentLine);
-          currentLine = word;
-        }
-      });
-
-      if (currentLine) lines.push(currentLine);
-      return lines;
-    }
 
   // Download PDF function
   async function downloadPDF() {
@@ -523,4 +513,3 @@ export default function Builder() {
     </div>
   );
 }
-

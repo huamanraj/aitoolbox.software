@@ -3,10 +3,9 @@ import { persist } from "zustand/middleware";
 import { BuilderState, OutlineItem, SlideContent, Theme } from "./types";
 
 const defaultThemes: Theme[] = [
-  { id: "clean", name: "Clean", fonts: { title: "Inter", body: "Inter" }, palette: { bg: "#0b1020", fg: "#ffffff", accent: "#5ab0ff" }, textStyles: { titleSize: 40, bodySize: 20 }, layout: "image-right" },
-  { id: "light", name: "Light", fonts: { title: "Poppins", body: "Poppins" }, palette: { bg: "#ffffff", fg: "#111111", accent: "#4f46e5" }, textStyles: { titleSize: 40, bodySize: 20 }, layout: "image-left" },
-  { id: "modern", name: "Modern Minimal", fonts: { title: "Roboto", body: "Roboto" }, palette: { bg: "#5da0b9ff", fg: "#F3F4F6", accent: "#10B981" }, textStyles: { titleSize: 42, bodySize: 22 }, layout: "image-right" },
-  { id: "sunset", name: "Sunset Gradient", fonts: { title: "Lora", body: "Open Sans" }, palette: { bg: "#F59E0B", fg: "#FFFFFF", accent: "#EF4444" }, textStyles: { titleSize: 44, bodySize: 22 }, layout: "image-left" },
+  { id: "light", name: "Light", fonts: { title: "Poppins", body: "Poppins" }, palette: { bg: "#ffffff", fg: "#111111", accent: "#4f46e5" }, textStyles: { titleSize: 40, bodySize: 20 }, layout: "image-right" },
+  { id: "modern", name: "Modern Minimal", fonts: { title: "Roboto", body: "Roboto" }, palette: { bg: "#5da0b9", fg: "#F3F4F6", accent: "#10B981" }, textStyles: { titleSize: 42, bodySize: 22 }, layout: "image-right" },
+  { id: "sunset", name: "Sunset Gradient", fonts: { title: "Lora", body: "Open Sans" }, palette: { bg: "#F59E0B", fg: "#FFFFFF", accent: "#EF4444" }, textStyles: { titleSize: 44, bodySize: 22 }, layout: "image-right" },
   { id: "forest", name: "Forest Green", fonts: { title: "Merriweather", body: "Inter" }, palette: { bg: "#065F46", fg: "#D1FAE5", accent: "#34D399" }, textStyles: { titleSize: 40, bodySize: 20 }, layout: "image-right" },
   { id: "ocean", name: "Ocean Breeze", fonts: { title: "Nunito", body: "Nunito" }, palette: { bg: "#0EA5E9", fg: "#E0F2FE", accent: "#0369A1" }, textStyles: { titleSize: 42, bodySize: 21 }, layout: "image-left" },
   { id: "retro", name: "Retro 80s", fonts: { title: "Press Start 2P", body: "Inter" }, palette: { bg: "#FF00FF", fg: "#00FFFF", accent: "#FFFF00" }, textStyles: { titleSize: 38, bodySize: 18 }, layout: "image-right" },

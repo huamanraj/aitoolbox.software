@@ -36,6 +36,7 @@ import {
   Package,
   Globe,
   MapPin,
+  FileUser,
   Pen,
   Target,
   Linkedin,
@@ -142,9 +143,9 @@ const aiTools: Tool[] = [
     icon: <FileSpreadsheet className="h-5 w-5" />,
   },
   {
-    name: "Mock Interview",
-    href: "/mock-interview",
-    icon: <Briefcase className="h-5 w-5" />,
+    name: "Cover Letter Generator",
+    href: "/cover-letter-generator",
+    icon: <FileUser className="h-5 w-5" />,
   },
   {
     name: "Idea Generator",

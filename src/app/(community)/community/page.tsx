@@ -1,7 +1,7 @@
 import Link from "next/link";
 import EmbedClient from "@/components/community/EmbedClient";
 import { communityPosts } from "./data/data";
-
+import DirectLinkAdButton from "@/components/ads/DirectLinkAdButton";
 type EmbedItem = {
   url: string;
   html: string;
@@ -162,7 +162,10 @@ export default async function CommunityPage({
           aria-label="Pagination"
         >
           <Link
-            href={`/community?page=${Math.max(1, page - 1)}&pageSize=${pageSize}`}
+            href={`/community?page=${Math.max(
+              1,
+              page - 1
+            )}&pageSize=${pageSize}`}
             className={`px-3 py-1 rounded-md border ${
               page === 1 ? "opacity-50 pointer-events-none" : ""
             }`}
@@ -179,9 +182,7 @@ export default async function CommunityPage({
                   key={p}
                   href={`/community?page=${p}&pageSize=${pageSize}`}
                   className={`px-2 py-1 rounded ${
-                    p === page
-                      ? "bg-accent text-accent-foreground"
-                      : "border"
+                    p === page ? "bg-accent text-accent-foreground" : "border"
                   }`}
                 >
                   {p}
@@ -191,7 +192,10 @@ export default async function CommunityPage({
           </div>
 
           <Link
-            href={`/community?page=${Math.min(totalPages, page + 1)}&pageSize=${pageSize}`}
+            href={`/community?page=${Math.min(
+              totalPages,
+              page + 1
+            )}&pageSize=${pageSize}`}
             className={`px-3 py-1 rounded-md border ${
               page === totalPages ? "opacity-50 pointer-events-none" : ""
             }`}
@@ -199,6 +203,7 @@ export default async function CommunityPage({
             Next
           </Link>
         </nav>
+        <DirectLinkAdButton />
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import { getServerClients, BLOGS_DB_ID, BLOGS_COLLECTION_ID, getPublicFileViewUr
 import { Query } from 'appwrite';
 import { Badge } from '@/components/ui/badge';
 import { Metadata } from 'next';
+import DirectLinkAdButton from '@/components/ads/DirectLinkAdButton';
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -214,7 +215,7 @@ export default async function BlogPage({ searchParams }: { searchParams: Promise
             </a>
           </div>
         ) : null}
-
+        <DirectLinkAdButton/>
         {/* Newsletter CTA */}
         <div className="mt-20 bg-zinc-50 rounded-2xl p-8 md:p-12 text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-zinc-900 mb-4">

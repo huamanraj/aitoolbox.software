@@ -5,8 +5,8 @@ import { Calendar, Clock, User, Home, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import BannerAd320x50 from "@/components/ads/BannerAd320x50";
-
+import NativeBannerAd from "@/components/ads/NativeBannerAd";
+import DirectLinkAdButton from "@/components/ads/DirectLinkAdButton";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -357,7 +357,14 @@ export default async function BlogPage({ params }: PageProps) {
             </div>
           </div>
         )}
-
+        <div>
+          <p className="font-thin p-3 mb-5 border-1 rounded-3xl">
+            ➕# Ad- Scroll down for content
+          </p>
+          <div className="flex gap-4 overflow-x-auto no-scrollbar">
+            <NativeBannerAd />
+          </div>
+        </div>
         {/* Article Content */}
         <article
           className="prose prose-lg prose-zinc max-w-none 
@@ -524,7 +531,7 @@ export default async function BlogPage({ params }: PageProps) {
             {markdownContent}
           </ReactMarkdown>
         </article>
-
+            <DirectLinkAdButton/>
         {/* Related Content Suggestions for better engagement */}
         <aside className="mt-12 p-6 bg-zinc-50 rounded-lg">
           <h3 className="text-lg font-semibold text-zinc-900 mb-4">
@@ -549,7 +556,7 @@ export default async function BlogPage({ params }: PageProps) {
             </Link>
           </div>
         </aside>
-       
+        
         {/* Footer */}
         <footer className="mt-16 pt-8 border-t border-zinc-200">
           <div className="text-center text-zinc-500">

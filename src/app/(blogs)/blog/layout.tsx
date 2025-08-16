@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import SocialBarAd from '@/components/ads/SocialBarAd';
 
 // Enhanced metadata for blog section - moved from page component
 export async function generateMetadata(): Promise<Metadata> {
@@ -148,25 +149,33 @@ export default function BlogLayout({
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteStructuredData) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(websiteStructuredData),
+        }}
       />
-      
+
       {/* Preconnect to external domains for performance */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      
+      <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossOrigin="anonymous"
+      />
+
       {/* DNS prefetch for better performance */}
       <link rel="dns-prefetch" href="//www.google-analytics.com" />
       <link rel="dns-prefetch" href="//www.googletagmanager.com" />
-      
+
       {/* Additional meta tags for better SEO */}
       <meta name="theme-color" content="#3b82f6" />
       <meta name="msapplication-TileColor" content="#3b82f6" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="default" />
       <meta name="format-detection" content="telephone=no" />
-      
-      {children}
+      <div>
+        <SocialBarAd />
+        {children}
+      </div>
     </>
   );
 }

@@ -27,6 +27,7 @@ export const metadata: Metadata = {
     "image generator",
     "logo generator",
     "youtube summarizer",
+    "ai ppt builder",
     "code explainer",
     "text summarizer",
     "blog writer",

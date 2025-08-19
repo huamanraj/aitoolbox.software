@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
   Company: <company name>
   Start date: <format: YYYY-MM-DD> (only if provided)
   End date: <format: YYYY-MM-DD> (only if provided)
-  Description: <an optimized description in bullet format, might be inferred from the job title>
+  Description: <an optimized description in bullet format, each bullet point in the description must start with a '•' character, might be inferred from the job title>
   `;
 
   const userMessage = `

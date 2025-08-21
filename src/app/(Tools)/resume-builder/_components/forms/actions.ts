@@ -1,4 +1,5 @@
 import {
+  GenerateProjectInput,
   GenerateSummaryInput,
   generateSummarySchema,
   GenerateWorkExperienceInput,
@@ -11,16 +12,42 @@ interface WorkExperience {
   endDate?: string;
   description?: string;
 }
+interface Project {
+  projectTitle?: string;
+  description?: string;
+}
 
-interface ApiResponse {
+interface ExpApiResponse {
   experience: WorkExperience;
+  status: number;
+}
+interface ProApiResponse {
+  project: Project;
   status: number;
 }
 
 export async function generateWorkExperience(
   input: GenerateWorkExperienceInput
-): Promise<ApiResponse> {
+): Promise<ExpApiResponse> {
   const response = await fetch("/api/resume/generate-work-experience", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(input),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to generate work experience");
+  }
+
+  return response.json();
+}
+
+export async function generateProject(
+  input: GenerateProjectInput
+): Promise<ProApiResponse> {
+  const response = await fetch("/api/resume/generate-project", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

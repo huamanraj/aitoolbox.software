@@ -36,6 +36,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { GripHorizontal, Plus, Trash2 } from "lucide-react";
 import { useEffect } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
+import GenerateProjectButton from "../ai-features/GenerateProjectButton";
 
 export default function ProjectForm({
   resumeData,
@@ -52,7 +53,10 @@ export default function ProjectForm({
     const { unsubscribe } = form.watch((values) => {
       setResumeData({
         ...resumeData,
-        projects: (values.projects?.filter((proj): proj is NonNullable<typeof proj> => proj !== undefined) || []),
+        projects:
+          values.projects?.filter(
+            (proj): proj is NonNullable<typeof proj> => proj !== undefined
+          ) || [],
       });
     });
     return unsubscribe;
@@ -67,7 +71,7 @@ export default function ProjectForm({
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
-    }),
+    })
   );
 
   function handleDragEnd(event: DragEndEvent) {
@@ -186,6 +190,13 @@ function ProjectItem({
             <GripHorizontal className="h-4 w-4" />
           </button>
         </div>
+      </div>
+      <div className="flex justify-center">
+        <GenerateProjectButton
+          onProjectGenerated={(project) =>
+            form.setValue(`projects.${index}`, project)
+          }
+        />
       </div>
 
       <FormField

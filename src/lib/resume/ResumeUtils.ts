@@ -1,6 +1,8 @@
 import { WorkExperience } from "./validation";
 
-export function parseExperienceString(experienceString: string): WorkExperience {
+export function parseExperienceString(
+  experienceString: string
+): WorkExperience {
   // First try to parse as JSON if the string is already in JSON format
   try {
     const jsonResponse = JSON.parse(experienceString);
@@ -57,4 +59,70 @@ export function parseExperienceString(experienceString: string): WorkExperience 
   }
 
   return generatedExperience;
+}
+
+interface Project {
+  name: string;
+  description: string;
+  url ?: string;
+}
+
+export function parseProjectString(input: string): Project {
+  try {
+    // First, try to parse the entire string as JSON
+    const parsed = JSON.parse(input);
+
+    // Validate the structure
+    if (parsed.name && parsed.description) {
+      return {
+        name: parsed.name,
+        description: parsed.description,
+        url: ""
+      };
+    }
+
+    throw new Error("Invalid JSON structure");
+  } catch (error) {
+    // If parsing fails, try to extract from the string format
+    return extractProjectFromString(input);
+  }
+}
+
+function extractProjectFromString(input: string): Project {
+  const cleanedInput = input.trim();
+
+  // Remove any surrounding quotes or unwanted characters
+  const sanitizedInput = cleanedInput
+    .replace(/^\{|\}$/g, "") // Remove surrounding braces if present
+    .replace(/^"|"$/g, "") // Remove surrounding quotes
+    .trim();
+
+  // Extract name using regex
+  const titleMatch =
+    sanitizedInput.match(/"name":\s*"([^"]*)"/) ||
+    sanitizedInput.match(/name:\s*"([^"]*)"/) ||
+    sanitizedInput.match(/"name":\s*'([^']*)'/) ||
+    sanitizedInput.match(/name:\s*'([^']*)'/);
+
+  // Extract description using regex
+  const descMatch =
+    sanitizedInput.match(/"description":\s*"([^"]*)"/) ||
+    sanitizedInput.match(/description:\s*"([^"]*)"/) ||
+    sanitizedInput.match(/"description":\s*'([^']*)'/) ||
+    sanitizedInput.match(/description:\s*'([^']*)'/);
+
+  const name = titleMatch ? titleMatch[1] : "Untitled Project";
+  const description = descMatch ? descMatch[1] : "No description available";
+
+  // Handle escaped characters (like \n) in the description
+  const processedDescription = description
+    .replace(/\\n/g, "\n") // Convert \n to actual newlines
+    .replace(/\\"/g, '"') // Convert \" to "
+    .replace(/\\'/g, "'"); // Convert \' to '
+
+  return {
+    name,
+    description: processedDescription,
+    url : ""
+  };
 }

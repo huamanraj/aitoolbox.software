@@ -55,6 +55,10 @@ export const projectSchema = z.object({
 
 export type ProjectValues = z.infer<typeof projectSchema>;
 
+export type Project = NonNullable<
+  z.infer<typeof projectSchema>["projects"]
+>[number];
+
 export const educationSchema = z.object({
   educations: z
     .array(

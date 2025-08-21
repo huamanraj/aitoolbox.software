@@ -44,11 +44,11 @@ export default function ResumePreview({
         id="resumePreviewContent"
       >
         <PersonalInfoHeader resumeData={resumeData} />
-        <ProjectSection resumeData={resumeData}/>
         <SummarySection resumeData={resumeData} />
-        <WorkExperienceSection resumeData={resumeData} />
-        <EducationSection resumeData={resumeData} />
         <SkillsSection resumeData={resumeData} />
+        <WorkExperienceSection resumeData={resumeData} />
+        <ProjectSection resumeData={resumeData}/>
+        <EducationSection resumeData={resumeData} />
       </div>
     </div>
   );

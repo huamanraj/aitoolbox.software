@@ -74,6 +74,10 @@ export const educationSchema = z.object({
 
 export type EducationValues = z.infer<typeof educationSchema>;
 
+export type Education = NonNullable<
+  z.infer<typeof educationSchema>["educations"]
+>[number];
+
 export const skillsSchema = z.object({
   skills: z.array(z.string().trim()).optional(),
 });
@@ -131,6 +135,7 @@ export const generateSummarySchema = z.object({
   jobTitle: optionalString,
   ...generateProjectSchema.shape,
   ...workExperienceSchema.shape,
+  ...projectSchema.shape,
   ...educationSchema.shape,
   ...skillsSchema.shape,
 });

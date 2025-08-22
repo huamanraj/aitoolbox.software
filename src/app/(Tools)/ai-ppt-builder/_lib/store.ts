@@ -2,14 +2,91 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { BuilderState, OutlineItem, SlideContent, Theme } from "./types";
 
-const defaultThemes: Theme[] = [
-  { id: "light", name: "Light", fonts: { title: "Poppins", body: "Poppins" }, palette: { bg: "#ffffff", fg: "#111111", accent: "#4f46e5" }, textStyles: { titleSize: 40, bodySize: 20 }, layout: "image-right" },
-  { id: "modern", name: "Modern Minimal", fonts: { title: "Roboto", body: "Roboto" }, palette: { bg: "#5da0b9", fg: "#F3F4F6", accent: "#10B981" }, textStyles: { titleSize: 42, bodySize: 22 }, layout: "image-right" },
-  { id: "sunset", name: "Sunset Gradient", fonts: { title: "Lora", body: "Open Sans" }, palette: { bg: "#F59E0B", fg: "#FFFFFF", accent: "#EF4444" }, textStyles: { titleSize: 44, bodySize: 22 }, layout: "image-right" },
-  { id: "forest", name: "Forest Green", fonts: { title: "Merriweather", body: "Inter" }, palette: { bg: "#065F46", fg: "#D1FAE5", accent: "#34D399" }, textStyles: { titleSize: 40, bodySize: 20 }, layout: "image-right" },
-  { id: "ocean", name: "Ocean Breeze", fonts: { title: "Nunito", body: "Nunito" }, palette: { bg: "#0EA5E9", fg: "#E0F2FE", accent: "#0369A1" }, textStyles: { titleSize: 42, bodySize: 21 }, layout: "image-left" },
-  { id: "retro", name: "Retro 80s", fonts: { title: "Press Start 2P", body: "Inter" }, palette: { bg: "#FF00FF", fg: "#00FFFF", accent: "#FFFF00" }, textStyles: { titleSize: 38, bodySize: 18 }, layout: "image-right" },
-  { id: "dark", name: "Dark Mode", fonts: { title: "Inter", body: "Inter" }, palette: { bg: "#0F172A", fg: "#E2E8F0", accent: "#38BDF8" }, textStyles: { titleSize: 40, bodySize: 20 }, layout: "image-left" },
+export const defaultThemes: Theme[] = [
+  { 
+    id: "modern-light",
+    name: "Modern Light",
+    fonts: { title: "Poppins", body: "Inter" },
+    palette: { 
+      bg: "linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)",
+      fg: "#1e293b",
+      accent: "#3b82f6"
+    },
+    textStyles: { titleSize: 42, bodySize: 20 },
+    layout: "image-right"
+  },
+  {
+    id: "aurora",
+    name: "Aurora",
+    fonts: { title: "Montserrat", body: "Roboto" },
+    palette: {
+      bg: "linear-gradient(120deg, #4f46e5 0%, #3b82f6 50%, #0ea5e9 100%)",
+      fg: "#ffffff",
+      accent: "#22d3ee"
+    },
+    textStyles: { titleSize: 44, bodySize: 21 },
+    layout: "image-right"
+  },
+  {
+    id: "sunset-vibes",
+    name: "Sunset Vibes",
+    fonts: { title: "Playfair Display", body: "Source Sans Pro" },
+    palette: {
+      bg: "linear-gradient(150deg, #f97316 0%, #db2777 50%, #7c3aed 100%)",
+      fg: "#ffffff",
+      accent: "#fbbf24"
+    },
+    textStyles: { titleSize: 42, bodySize: 20 },
+    layout: "image-right"
+  },
+  {
+    id: "forest-mist",
+    name: "Forest Mist",
+    fonts: { title: "Merriweather", body: "Inter" },
+    palette: {
+      bg: "linear-gradient(135deg, #059669 0%, #047857 50%, #065f46 100%)",
+      fg: "#f0fdf4",
+      accent: "#6ee7b7"
+    },
+    textStyles: { titleSize: 40, bodySize: 20 },
+    layout: "image-right"
+  },
+  {
+    id: "cosmic-night",
+    name: "Cosmic Night",
+    fonts: { title: "Space Grotesk", body: "Inter" },
+    palette: {
+      bg: "linear-gradient(145deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%)",
+      fg: "#e0e7ff",
+      accent: "#818cf8"
+    },
+    textStyles: { titleSize: 42, bodySize: 20 },
+    layout: "image-right"
+  },
+  {
+    id: "rose-gold",
+    name: "Rose Gold",
+    fonts: { title: "Cormorant Garamond", body: "Lato" },
+    palette: {
+      bg: "linear-gradient(135deg, #fdf2f8 0%, #fbcfe8 50%, #f9a8d4 100%)",
+      fg: "#831843",
+      accent: "#be185d"
+    },
+    textStyles: { titleSize: 44, bodySize: 21 },
+    layout: "image-right"
+  },
+  {
+    id: "ocean-depth",
+    name: "Ocean Depth",
+    fonts: { title: "Abril Fatface", body: "Work Sans" },
+    palette: {
+      bg: "linear-gradient(165deg, #0c4a6e 0%, #0369a1 50%, #0ea5e9 100%)",
+      fg: "#f0f9ff",
+      accent: "#38bdf8"
+    },
+    textStyles: { titleSize: 40, bodySize: 20 },
+    layout: "image-right"
+  }
 ];
 
 type Actions = {

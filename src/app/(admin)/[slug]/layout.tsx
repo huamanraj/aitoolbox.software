@@ -86,6 +86,7 @@ export default function BlogPostLayout({ children }: { children: React.ReactNode
       <div>
         <SocialBarAd />
         {children}
+        
       </div>
     </>
   );

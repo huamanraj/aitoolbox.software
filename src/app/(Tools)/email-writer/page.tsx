@@ -1,6 +1,6 @@
 import EmailWriterClient from "./_components/email-writer-client";
 import { Metadata } from "next";
-
+import DirectLinkAdButton from "@/components/ads/DirectLinkAdButton";
 export const metadata: Metadata = {
   title: "AI Email Writer - Write Professional Emails Instantly",
   description:
@@ -71,7 +71,7 @@ export default function EmailWriterPage() {
             ))}
           </div>
         </div>
-
+        <DirectLinkAdButton />
         <div className="mb-8">
           <h2 className="text-2xl font-bold mb-4">How It Works</h2>
           <ol className="list-decimal ml-5 space-y-2">

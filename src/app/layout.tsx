@@ -110,9 +110,10 @@ export default function RootLayout({
           "min-h-screen bg-background font-sans antialiased",
           dmSans.variable
         )}
-      >
+      > 
+        
         <Analytics />
-        <SocialBarAd />
+        
         <div className="flex flex-col h-screen">
           <Navbar />
           <div className="flex flex-1 overflow-hidden relative">

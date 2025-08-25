@@ -18,6 +18,7 @@ import {
   Check,
   FileSpreadsheet,
   Lightbulb,
+  FileUser,
   Search,
   Globe,
   Map,
@@ -127,6 +128,13 @@ const aiTools = [
     href: "/resume-builder",
     icon: <FileSpreadsheet className="h-6 w-6" />,
     description: "Create professional resumes",
+    category: "professional"
+  },
+  {
+    name: "Cover Letter Generator",
+    href: "/cover-letter-generator",
+    icon: <FileUser className="h-6 w-6" />,
+    description: "Craft personalized cover letters",
     category: "professional"
   },
   {

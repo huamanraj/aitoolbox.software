@@ -33,6 +33,7 @@ export const metadata: Metadata = {
     "blog writer",
     "grammar checker",
     "resume builder",
+    "Cover Letter Generator",
     "idea generator",
     "artificial intelligence",
     "productivity tools",

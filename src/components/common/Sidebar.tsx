@@ -39,6 +39,7 @@ import {
   Pen,
   Target,
   Linkedin,
+  Presentation,
   Users,
   FileUser,
 } from "lucide-react";
@@ -116,6 +117,11 @@ const aiTools: Tool[] = [
     name: "YouTube Summarizer",
     href: "/youtube-summarizer",
     icon: <Youtube className="h-5 w-5" />,
+  },
+  {
+    name: "AI PPT Builder",
+    href: "/ai-ppt-builder",
+    icon: <Presentation className="h-5 w-5" />,
   },
   {
     name: "Code Explainer",

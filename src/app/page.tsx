@@ -24,6 +24,7 @@ import {
   Map,
   Brain,
   Linkedin,
+  Presentation
 } from "lucide-react";
 import Link from "next/link";
 import { Client, Databases } from "appwrite";
@@ -85,6 +86,13 @@ const aiTools = [
     href: "/youtube-summarizer",
     icon: <Youtube className="h-6 w-6" />,
     description: "Get quick summaries of YouTube videos",
+    category: "content"
+  },
+  {
+    name: "AI PPT Builder",
+    href: "/ai-ppt-builder",
+    icon: <Presentation className="h-5 w-5" />,
+    description: "Build Presentations with different themes",
     category: "content"
   },
   {

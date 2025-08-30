@@ -1,5 +1,22 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Lightbulb, Lock, RocketIcon, Brain, Sparkles, Bot, FileText, UserCheck, Shield, Download, Eye, Zap, BookOpen, Target, BarChart, Clock, Code, MessageSquare, CheckCircle, Users, FileCheck, FileSearch, Calendar, Award, Palette, Cpu, Mail, Smartphone } from "lucide-react";
+import {
+  Lock,
+  RocketIcon,
+  Brain,
+  Sparkles,
+  UserCheck,
+  Shield,
+  Download,
+  Eye,
+  Zap,
+  Code,
+  MessageSquare,
+  CheckCircle,
+  FileCheck,
+  FileSearch,
+  Award,
+  Cpu,
+} from "lucide-react";
 
 export default function AboutResumeBuilder() {
   return (
@@ -10,31 +27,37 @@ export default function AboutResumeBuilder() {
           AI-Powered Resume Builder
         </h1>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-          Create professional, ATS-optimized resumes in minutes with our privacy-first AI assistant. 
-          No signups, no data storage, just powerful resume building.
+          Create professional, ATS-optimized resumes in minutes with our
+          privacy-first AI assistant. No signups, no data storage, just powerful
+          resume building.
         </p>
       </section>
 
       {/* Key Benefits Grid */}
       <section>
-        <h2 className="text-3xl font-bold mb-8 text-center">Why Choose Our Resume Builder?</h2>
+        <h2 className="text-3xl font-bold mb-8 text-center">
+          Why Choose Our Resume Builder?
+        </h2>
         <div className="grid md:grid-cols-3 gap-6">
           {[
             {
               icon: <Cpu className="w-10 h-10 text-primary mb-4" />,
               title: "AI-Powered Content",
-              description: "Generate optimized summaries, work experiences, and project descriptions with our advanced AI"
+              description:
+                "Generate optimized summaries, work experiences, and project descriptions with our advanced AI",
             },
             {
               icon: <Shield className="w-10 h-10 text-primary mb-4" />,
               title: "Complete Privacy",
-              description: "Your data never leaves your device. We don't store, share, or analyze your personal information"
+              description:
+                "Your data never leaves your device. We don't store, share, or analyze your personal information",
             },
             {
               icon: <FileCheck className="w-10 h-10 text-primary mb-4" />,
               title: "ATS Optimized",
-              description: "Resumes designed to pass Applicant Tracking Systems used by 99% of Fortune 500 companies"
-            }
+              description:
+                "Resumes designed to pass Applicant Tracking Systems used by 99% of Fortune 500 companies",
+            },
           ].map((item, index) => (
             <Card key={index} className="text-center p-6">
               {item.icon}
@@ -57,26 +80,26 @@ export default function AboutResumeBuilder() {
               step: "1",
               title: "Enter Basic Info",
               description: "Fill in your personal and professional details",
-              icon: <UserCheck className="w-6 h-6" />
+              icon: <UserCheck className="w-6 h-6" />,
             },
             {
               step: "2",
               title: "AI Enhancement",
               description: "Use our AI tools to optimize your content",
-              icon: <Sparkles className="w-6 h-6" />
+              icon: <Sparkles className="w-6 h-6" />,
             },
             {
               step: "3",
               title: "Real-Time Preview",
               description: "See your resume update as you make changes",
-              icon: <Eye className="w-6 h-6" />
+              icon: <Eye className="w-6 h-6" />,
             },
             {
               step: "4",
               title: "Download & Apply",
               description: "Export to PDF and start applying",
-              icon: <Download className="w-6 h-6" />
-            }
+              icon: <Download className="w-6 h-6" />,
+            },
           ].map((item) => (
             <div key={item.step} className="text-center">
               <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground text-lg font-bold mx-auto mb-4">
@@ -84,7 +107,9 @@ export default function AboutResumeBuilder() {
               </div>
               <div className="flex justify-center mb-2">{item.icon}</div>
               <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
-              <p className="text-muted-foreground text-sm">{item.description}</p>
+              <p className="text-muted-foreground text-sm">
+                {item.description}
+              </p>
             </div>
           ))}
         </div>
@@ -96,7 +121,7 @@ export default function AboutResumeBuilder() {
           <Brain className="h-8 w-8" />
           AI-Powered Features
         </h2>
-        
+
         <div className="grid md:grid-cols-2 gap-8">
           <Card>
             <CardHeader>
@@ -106,16 +131,25 @@ export default function AboutResumeBuilder() {
               </div>
             </CardHeader>
             <CardContent>
-              <p className="mb-4">Our AI analyzes your experience and creates compelling professional summaries that highlight your unique value proposition.</p>
+              <p className="mb-4">
+                Our AI analyzes your experience and creates compelling
+                professional summaries that highlight your unique value
+                proposition.
+              </p>
               <div className="bg-muted p-4 rounded-lg">
                 <h4 className="font-medium mb-2">Example Input:</h4>
-                <p className="text-sm text-muted-foreground mb-4">"5 years as a software developer at tech companies, experience with React and Node.js, led a team of 3 developers"</p>
-                
+                <p className="text-sm text-muted-foreground mb-4">
+                  "5 years as a software developer at tech companies, experience
+                  with React and Node.js, led a team of 3 developers"
+                </p>
+
                 <h4 className="font-medium mb-2">AI-Generated Output:</h4>
                 <p className="text-sm">
-                  "Experienced software developer with 5 years of expertise in building scalable web applications using React and Node.js. 
-                  Proven leadership abilities having managed a team of 3 developers to deliver projects 20% ahead of schedule. 
-                  Strong problem-solving skills and passion for clean, efficient code."
+                  "Experienced software developer with 5 years of expertise in
+                  building scalable web applications using React and Node.js.
+                  Proven leadership abilities having managed a team of 3
+                  developers to deliver projects 20% ahead of schedule. Strong
+                  problem-solving skills and passion for clean, efficient code."
                 </p>
               </div>
             </CardContent>
@@ -129,16 +163,32 @@ export default function AboutResumeBuilder() {
               </div>
             </CardHeader>
             <CardContent>
-              <p className="mb-4">Transform basic job descriptions into achievement-oriented bullet points with quantifiable results.</p>
+              <p className="mb-4">
+                Transform basic job descriptions into achievement-oriented
+                bullet points with quantifiable results.
+              </p>
               <div className="bg-muted p-4 rounded-lg">
                 <h4 className="font-medium mb-2">Example Input:</h4>
-                <p className="text-sm text-muted-foreground mb-4">"I was a project manager at XYZ Corp. I managed projects and coordinated teams"</p>
-                
+                <p className="text-sm text-muted-foreground mb-4">
+                  "I was a project manager at XYZ Corp. I managed projects and
+                  coordinated teams"
+                </p>
+
                 <h4 className="font-medium mb-2">AI-Generated Output:</h4>
                 <ul className="text-sm list-disc pl-5 space-y-1">
-                  <li>Managed 15+ cross-functional projects with budgets totaling $2M, delivering 95% on time and within budget</li>
-                  <li>Coordinated teams of up to 12 members, improving team productivity by 25% through implementation of Agile methodologies</li>
-                  <li>Reduced project delivery timelines by 20% by optimizing resource allocation and workflow processes</li>
+                  <li>
+                    Managed 15+ cross-functional projects with budgets totaling
+                    $2M, delivering 95% on time and within budget
+                  </li>
+                  <li>
+                    Coordinated teams of up to 12 members, improving team
+                    productivity by 25% through implementation of Agile
+                    methodologies
+                  </li>
+                  <li>
+                    Reduced project delivery timelines by 20% by optimizing
+                    resource allocation and workflow processes
+                  </li>
                 </ul>
               </div>
             </CardContent>
@@ -152,16 +202,31 @@ export default function AboutResumeBuilder() {
               </div>
             </CardHeader>
             <CardContent>
-              <p className="mb-4">Create impactful project descriptions that showcase your technical skills and business impact.</p>
+              <p className="mb-4">
+                Create impactful project descriptions that showcase your
+                technical skills and business impact.
+              </p>
               <div className="bg-muted p-4 rounded-lg">
                 <h4 className="font-medium mb-2">Example Input:</h4>
-                <p className="text-sm text-muted-foreground mb-4">"Built an e-commerce website with payment processing"</p>
-                
+                <p className="text-sm text-muted-foreground mb-4">
+                  "Built an e-commerce website with payment processing"
+                </p>
+
                 <h4 className="font-medium mb-2">AI-Generated Output:</h4>
                 <ul className="text-sm list-disc pl-5 space-y-1">
-                  <li>Developed a full-stack e-commerce platform using React, Node.js, and MongoDB, integrating Stripe for secure payment processing</li>
-                  <li>Implemented responsive design principles, resulting in a 35% increase in mobile conversions</li>
-                  <li>Reduced cart abandonment by 22% by optimizing checkout flow and adding guest purchase option</li>
+                  <li>
+                    Developed a full-stack e-commerce platform using React,
+                    Node.js, and MongoDB, integrating Stripe for secure payment
+                    processing
+                  </li>
+                  <li>
+                    Implemented responsive design principles, resulting in a 35%
+                    increase in mobile conversions
+                  </li>
+                  <li>
+                    Reduced cart abandonment by 22% by optimizing checkout flow
+                    and adding guest purchase option
+                  </li>
                 </ul>
               </div>
             </CardContent>
@@ -175,19 +240,37 @@ export default function AboutResumeBuilder() {
               </div>
             </CardHeader>
             <CardContent>
-              <p className="mb-4">Our AI identifies the most relevant keywords for your industry and optimizes your resume to pass ATS screening.</p>
+              <p className="mb-4">
+                Our AI identifies the most relevant keywords for your industry
+                and optimizes your resume to pass ATS screening.
+              </p>
               <div className="bg-muted p-4 rounded-lg">
                 <h4 className="font-medium mb-2">Before AI:</h4>
-                <p className="text-sm text-muted-foreground mb-4">"Experienced with programming, databases, and project management"</p>
-                
+                <p className="text-sm text-muted-foreground mb-4">
+                  "Experienced with programming, databases, and project
+                  management"
+                </p>
+
                 <h4 className="font-medium mb-2">After AI Optimization:</h4>
                 <div className="text-sm grid grid-cols-2 gap-2">
-                  <span className="bg-primary/10 px-2 py-1 rounded">JavaScript</span>
-                  <span className="bg-primary/10 px-2 py-1 rounded">React.js</span>
-                  <span className="bg-primary/10 px-2 py-1 rounded">Node.js</span>
-                  <span className="bg-primary/10 px-2 py-1 rounded">MongoDB</span>
-                  <span className="bg-primary/10 px-2 py-1 rounded">Agile Methodology</span>
-                  <span className="bg-primary/10 px-2 py-1 rounded">CI/CD Pipelines</span>
+                  <span className="bg-primary/10 px-2 py-1 rounded">
+                    JavaScript
+                  </span>
+                  <span className="bg-primary/10 px-2 py-1 rounded">
+                    React.js
+                  </span>
+                  <span className="bg-primary/10 px-2 py-1 rounded">
+                    Node.js
+                  </span>
+                  <span className="bg-primary/10 px-2 py-1 rounded">
+                    MongoDB
+                  </span>
+                  <span className="bg-primary/10 px-2 py-1 rounded">
+                    Agile Methodology
+                  </span>
+                  <span className="bg-primary/10 px-2 py-1 rounded">
+                    CI/CD Pipelines
+                  </span>
                 </div>
               </div>
             </CardContent>
@@ -201,7 +284,7 @@ export default function AboutResumeBuilder() {
           <Shield className="h-8 w-8" />
           Privacy & Security
         </h2>
-        
+
         <Card>
           <CardHeader>
             <CardTitle>Your Data Stays Yours. Always.</CardTitle>
@@ -232,7 +315,7 @@ export default function AboutResumeBuilder() {
                   </li>
                 </ul>
               </div>
-              
+
               <div>
                 <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
                   <FileSearch className="w-5 h-5 text-primary" />
@@ -242,8 +325,12 @@ export default function AboutResumeBuilder() {
                   <div className="flex justify-between items-center border-b pb-2">
                     <span>Data Storage</span>
                     <div className="flex gap-4">
-                      <span className="font-medium text-destructive">Others</span>
-                      <span className="font-medium text-primary">Our Builder</span>
+                      <span className="font-medium text-destructive">
+                        Others
+                      </span>
+                      <span className="font-medium text-primary">
+                        Our Builder
+                      </span>
                     </div>
                   </div>
                   <div className="flex justify-between items-center">
@@ -274,36 +361,40 @@ export default function AboutResumeBuilder() {
         </Card>
       </section>
 
-
       {/* FAQ Section */}
       <section>
         <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
           <MessageSquare className="h-8 w-8" />
           Frequently Asked Questions
         </h2>
-        
+
         <div className="space-y-6">
           {[
             {
               question: "How does the AI resume builder work?",
-              answer: "Our builder uses advanced natural language processing to analyze your input and generate professional, optimized resume content. You provide basic information about your experience, and our AI suggests improvements, identifies relevant keywords, and structures your content for maximum impact."
+              answer:
+                "Our builder uses advanced natural language processing to analyze your input and generate professional, optimized resume content. You provide basic information about your experience, and our AI suggests improvements, identifies relevant keywords, and structures your content for maximum impact.",
             },
             {
               question: "Is my data really private?",
-              answer: "Yes. We designed our resume builder with privacy as the core principle. Your data is processed locally when possible, and any AI processing uses anonymized data. We don't store your resume information, require accounts, or use tracking technologies."
+              answer:
+                "Yes. We designed our resume builder with privacy as the core principle. Your data is processed locally when possible, and any AI processing uses anonymized data. We don't store your resume information, require accounts, or use tracking technologies.",
             },
             {
               question: "Will my resume pass ATS screening?",
-              answer: "Absolutely. Our templates and content recommendations are specifically designed to be ATS-friendly. We focus on proper formatting, relevant keywords, and clear structure that applicant tracking systems can easily parse and understand."
+              answer:
+                "Absolutely. Our templates and content recommendations are specifically designed to be ATS-friendly. We focus on proper formatting, relevant keywords, and clear structure that applicant tracking systems can easily parse and understand.",
             },
             {
               question: "Can I customize the AI-generated content?",
-              answer: "Yes, all AI suggestions are editable. The AI provides a strong foundation, but you have full control to modify, accept, or reject any suggestions to ensure your resume accurately represents your experience and voice."
+              answer:
+                "Yes, all AI suggestions are editable. The AI provides a strong foundation, but you have full control to modify, accept, or reject any suggestions to ensure your resume accurately represents your experience and voice.",
             },
             {
               question: "What formats can I download my resume in?",
-              answer: "You can download your resume as a PDF, which is the standard format for job applications. We also offer plain text export for easy copying and pasting into online application forms."
-            }
+              answer:
+                "You can download your resume as a PDF, which is the standard format for job applications. We also offer plain text export for easy copying and pasting into online application forms.",
+            },
           ].map((faq, index) => (
             <Card key={index} className="p-6">
               <h3 className="font-semibold text-lg mb-2">{faq.question}</h3>

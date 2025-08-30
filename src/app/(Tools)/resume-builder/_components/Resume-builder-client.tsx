@@ -19,18 +19,18 @@ const debounce = (func: Function, delay: number) => {
 };
 
 export default function ResumeBuilder() {
-    const { resumeData, setResumeData,isLoaded } = useResume();
+  const { resumeData, setResumeData, isLoaded } = useResume();
   const [mobileView, setMobileView] = useState<"form" | "preview">("form");
 
   useEffect(() => {
-  // Only access localStorage after mount
-  if (typeof window !== "undefined") {
-    const savedData = localStorage.getItem("resumeData");
-    if (savedData) {
-      setResumeData(JSON.parse(savedData));
+    // Only access localStorage after mount
+    if (typeof window !== "undefined") {
+      const savedData = localStorage.getItem("resumeData");
+      if (savedData) {
+        setResumeData(JSON.parse(savedData));
+      }
     }
-  }
-}, []);
+  }, []);
 
   // Debounced save function
   const saveToLocalStorage = debounce((data: typeof initialResumeValues) => {
@@ -42,20 +42,15 @@ export default function ResumeBuilder() {
     saveToLocalStorage(resumeData);
   }, [resumeData]);
 
-
-  
   if (!isLoaded) {
-    return <Loader/>
+    return <Loader />;
   }
 
   return (
     <>
-      <Head key="resume-builder">
+      <Head>
         <title>Resume Builder</title>
-        <meta
-          name="description"
-          content="Create professional resumes"
-        />
+        <meta name="description" content="Create professional resumes" />
       </Head>
 
       <div className="container mx-auto px-4 py-8">
@@ -89,9 +84,11 @@ export default function ResumeBuilder() {
 
           {/* Preview Section */}
           <div className="sticky top-4 h-fit w-full lg:w-1/2">
-            <div suppressHydrationWarning className="rounded-lg border p-4 shadow-sm">
-              <ResumePreviewSection
-              />
+            <div
+              suppressHydrationWarning
+              className="rounded-lg border p-4 shadow-sm"
+            >
+              <ResumePreviewSection />
             </div>
           </div>
         </div>
@@ -99,18 +96,18 @@ export default function ResumeBuilder() {
         {/* Mobile Layout */}
         <div className="lg:hidden">
           {mobileView === "form" ? (
-            <ResumeForm  />
+            <ResumeForm />
           ) : (
-            <div suppressHydrationWarning className="rounded-lg border p-4 shadow-sm">
-              <ResumePreviewSection
-              />
+            <div
+              suppressHydrationWarning
+              className="rounded-lg border p-4 shadow-sm"
+            >
+              <ResumePreviewSection />
             </div>
           )}
         </div>
-      {/* Ad Banner */}
-      <NativeBannerAd />
-         
-       
+        {/* Ad Banner */}
+        <NativeBannerAd />
       </div>
     </>
   );

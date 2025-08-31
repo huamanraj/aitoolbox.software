@@ -178,3 +178,5 @@ We welcome contributions to AIToolbox! Here's how you can help:
 [⭐ Star this repo](https://github.com/huamanraj/aitoolbox.software) • [🐛 Report Bug](https://github.com/huamanraj/aitoolbox.software/issues/new?template=bug_report.yml) • [✨ Request Feature](https://github.com/huamanraj/aitoolbox.software/issues/new?template=feature_request.yml)
 
 </div>
+Tip: If installation fails, run `pip install -r requirements.txt`.
+

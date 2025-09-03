@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -12,7 +11,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { workExperienceSchema, WorkExperienceValues } from "@/lib/resume/validation";
+import { projectSchema, ProjectValues } from "@/lib/resume/validation";
 import { cn } from "@/lib/utils";
 import { EditorFormProps } from "@/types/types";
 import {
@@ -37,16 +36,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { GripHorizontal, Plus, Trash2 } from "lucide-react";
 import { useEffect } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
-import GenerateWorkExperienceButton from "../ai-features/GenerateWorkExperienceButton";
+import GenerateProjectButton from "../ai-features/GenerateProjectButton";
 
-export default function WorkExperienceForm({
+export default function ProjectForm({
   resumeData,
   setResumeData,
 }: EditorFormProps) {
-  const form = useForm<WorkExperienceValues>({
-    resolver: zodResolver(workExperienceSchema),
+  const form = useForm<ProjectValues>({
+    resolver: zodResolver(projectSchema),
     defaultValues: {
-      workExperiences: resumeData.workExperiences || [],
+      projects: resumeData.projects || [],
     },
   });
 
@@ -54,7 +53,10 @@ export default function WorkExperienceForm({
     const { unsubscribe } = form.watch((values) => {
       setResumeData({
         ...resumeData,
-        workExperiences : (values.workExperiences?.filter((exp): exp is NonNullable<typeof exp> => exp !== undefined) || []),
+        projects:
+          values.projects?.filter(
+            (proj): proj is NonNullable<typeof proj> => proj !== undefined
+          ) || [],
       });
     });
     return unsubscribe;
@@ -62,14 +64,14 @@ export default function WorkExperienceForm({
 
   const { fields, append, remove, move } = useFieldArray({
     control: form.control,
-    name: "workExperiences",
+    name: "projects",
   });
 
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
-    }),
+    })
   );
 
   function handleDragEnd(event: DragEndEvent) {
@@ -84,9 +86,9 @@ export default function WorkExperienceForm({
   return (
     <div className="space-y-6">
       <div className="space-y-1.5">
-        <h2 className="text-2xl font-semibold">Work Experience</h2>
+        <h2 className="text-2xl font-semibold">Projects</h2>
         <p className="text-sm text-muted-foreground">
-          Showcase your professional journey
+          Showcase your notable projects
         </p>
       </div>
 
@@ -103,7 +105,7 @@ export default function WorkExperienceForm({
               strategy={verticalListSortingStrategy}
             >
               {fields.map((field, index) => (
-                <WorkExperienceItem
+                <ProjectItem
                   key={field.id}
                   id={field.id}
                   index={index}
@@ -120,16 +122,14 @@ export default function WorkExperienceForm({
             className="w-full"
             onClick={() =>
               append({
-                position: "",
-                company: "",
-                startDate: "",
-                endDate: "",
+                name: "",
                 description: "",
+                url: "",
               })
             }
           >
             <Plus className="mr-2 h-4 w-4" />
-            Add Work Experience
+            Add Project
           </Button>
         </div>
       </Form>
@@ -137,14 +137,14 @@ export default function WorkExperienceForm({
   );
 }
 
-function WorkExperienceItem({
+function ProjectItem({
   id,
   form,
   index,
   remove,
 }: {
   id: string;
-  form: ReturnType<typeof useForm<WorkExperienceValues>>;
+  form: ReturnType<typeof useForm<ProjectValues>>;
   index: number;
   remove: (index: number) => void;
 }) {
@@ -171,7 +171,7 @@ function WorkExperienceItem({
     >
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-medium text-muted-foreground">
-          Experience #{index + 1}
+          Project #{index + 1}
         </h3>
         <div className="flex items-center gap-2">
           <button
@@ -192,21 +192,21 @@ function WorkExperienceItem({
         </div>
       </div>
       <div className="flex justify-center">
-        <GenerateWorkExperienceButton
-          onWorkExperienceGenerated={(exp) =>
-            form.setValue(`workExperiences.${index}`, exp)
+        <GenerateProjectButton
+          onProjectGenerated={(project) =>
+            form.setValue(`projects.${index}`, project)
           }
         />
       </div>
 
       <FormField
         control={form.control}
-        name={`workExperiences.${index}.position`}
+        name={`projects.${index}.name`}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Job Title</FormLabel>
+            <FormLabel>Project Name</FormLabel>
             <FormControl>
-              <Input {...field} placeholder="e.g., Software Engineer" />
+              <Input {...field} placeholder="e.g., E-commerce Platform" />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -215,66 +215,28 @@ function WorkExperienceItem({
 
       <FormField
         control={form.control}
-        name={`workExperiences.${index}.company`}
+        name={`projects.${index}.url`}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Company</FormLabel>
+            <FormLabel>Project URL</FormLabel>
             <FormControl>
-              <Input {...field} placeholder="e.g., Acme Inc." />
+              <Input {...field} placeholder="e.g., https://example.com" />
             </FormControl>
             <FormMessage />
           </FormItem>
         )}
       />
 
-      <div className="grid grid-cols-2 gap-4">
-        <FormField
-          control={form.control}
-          name={`workExperiences.${index}.startDate`}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Start Date</FormLabel>
-              <FormControl>
-                <Input {...field} type="date" value={field.value?.slice(0, 10)} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name={`workExperiences.${index}.endDate`}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>End Date</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  type="date"
-                  value={field.value?.slice(0, 10)}
-                  placeholder="Present"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </div>
-
-      <FormDescription className="text-xs">
-        Leave end date empty if currently employed
-      </FormDescription>
-
       <FormField
         control={form.control}
-        name={`workExperiences.${index}.description`}
+        name={`projects.${index}.description`}
         render={({ field }) => (
           <FormItem>
             <FormLabel>Description</FormLabel>
             <FormControl>
               <Textarea
                 {...field}
-                placeholder="Describe your responsibilities and achievements"
+                placeholder="Describe the project, technologies used, and your contributions"
                 className="min-h-[100px]"
               />
             </FormControl>

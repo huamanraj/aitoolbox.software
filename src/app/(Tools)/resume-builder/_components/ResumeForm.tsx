@@ -12,9 +12,11 @@ import EducationForm from "./forms/EducationForm";
 import SkillsForm from "./forms/SkillsForm";
 import SummaryForm from "./forms/SummaryForm";
 import { useResume } from "@/contexts/resume-context";
+import ProjectForm from "./forms/ProjectForm";
 
 const steps = [
   { id: "personal", title: "Personal" },
+  { id: "project", title: "Project" },
   { id: "experience", title: "Experience" },
   { id: "education", title: "Education" },
   { id: "skills", title: "Skills" },
@@ -78,21 +80,27 @@ export default function ResumeForm() {
             />
           )}
           {currentStep === 1 && (
-            <WorkExperienceForm
+            <ProjectForm
               resumeData={resumeData}
               setResumeData={setResumeData}
             />
           )}
           {currentStep === 2 && (
-            <EducationForm
+            <WorkExperienceForm
               resumeData={resumeData}
               setResumeData={setResumeData}
             />
           )}
           {currentStep === 3 && (
-            <SkillsForm resumeData={resumeData} setResumeData={setResumeData} />
+            <EducationForm
+              resumeData={resumeData}
+              setResumeData={setResumeData}
+            />
           )}
           {currentStep === 4 && (
+            <SkillsForm resumeData={resumeData} setResumeData={setResumeData} />
+          )}
+          {currentStep === 5 && (
             <SummaryForm
               resumeData={resumeData}
               setResumeData={setResumeData}

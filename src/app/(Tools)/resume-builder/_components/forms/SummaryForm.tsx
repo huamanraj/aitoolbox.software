@@ -12,6 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { EditorFormProps } from "@/types/types";
+import GenerateSummaryButton from "./GenerateSummaryButton";
 
 export default function SummaryForm({
   resumeData,
@@ -42,6 +43,12 @@ export default function SummaryForm({
           from your entered data.
         </p>
       </div>
+      <div>
+        <GenerateSummaryButton
+          resumeData={resumeData}
+          onSummaryGenerated={(summary) => form.setValue(`summary`, summary)}
+        />
+      </div>
       <Form {...form}>
         <form className="space-y-3">
           <FormField
@@ -57,14 +64,11 @@ export default function SummaryForm({
                   />
                 </FormControl>
                 <FormMessage />
-              
               </FormItem>
             )}
           />
         </form>
       </Form>
-
-      
     </div>
   );
 }

@@ -1,25 +1,24 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
-import { ReactNode } from "react";
+import { ComponentProps, ReactNode } from "react";
 
-interface LoadingButtonProps {
+type ButtonProps = ComponentProps<typeof Button>;
+
+interface LoadingButtonProps extends ButtonProps {
   loading: boolean;
-  disabled?: boolean;
-  className? : string;
-  children ?: ReactNode
+  children: ReactNode;
 }
 
-export default function LoadingButton({
+export function LoadingButton({
   loading,
-  disabled,
+  children,
   className,
-  children ,
   ...props
 }: LoadingButtonProps) {
   return (
-    <Button
-      disabled={loading || disabled}
+    <Button 
+      disabled={loading} 
       className={cn("flex items-center gap-2", className)}
       {...props}
     >

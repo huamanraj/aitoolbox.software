@@ -6,6 +6,7 @@ import { ResumeValues } from "@/lib/resume/validation";
 import { Badge } from "@/components/ui/badge";
 import useDimensions from "@/hooks/use-demension";
 import { BorderStyles } from "./BorderStyleButtons";
+import { Link } from "lucide-react";
 
 interface ResumePreviewProps {
   resumeData: ResumeValues;
@@ -44,9 +45,10 @@ export default function ResumePreview({
       >
         <PersonalInfoHeader resumeData={resumeData} />
         <SummarySection resumeData={resumeData} />
-        <WorkExperienceSection resumeData={resumeData} />
-        <EducationSection resumeData={resumeData} />
         <SkillsSection resumeData={resumeData} />
+        <WorkExperienceSection resumeData={resumeData} />
+        <ProjectSection resumeData={resumeData}/>
+        <EducationSection resumeData={resumeData} />
       </div>
     </div>
   );
@@ -125,6 +127,67 @@ function SummarySection({ resumeData }: ResumeSectionProps) {
           Professional profile
         </p>
         <div className="whitespace-pre-line text-sm">{summary}</div>
+      </div>
+    </>
+  );
+}
+
+function ProjectSection({ resumeData }: ResumeSectionProps) {
+  const { projects, colorHex } = resumeData;
+
+  const projectsNotEmpty = projects?.filter(
+    (proj) => Object.values(proj).filter(Boolean).length > 0
+  );
+
+  if (!projectsNotEmpty?.length) return null;
+
+  return (
+    <>
+      <hr
+        className="border-2"
+        style={{
+          borderColor: colorHex,
+        }}
+      />
+      <div className="space-y-3">
+        <p
+          className="text-lg font-semibold"
+          style={{
+            color: colorHex,
+          }}
+        >
+          Projects
+        </p>
+        {projectsNotEmpty.map((project, index) => (
+          <div key={index} className="break-inside-avoid space-y-1">
+            <div className="flex items-center ">
+              <span
+                className="text-sm font-semibold"
+                style={{
+                  color: colorHex,
+                }}
+              >
+                {project.name}
+              </span>
+              {project.url && (
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs underline px-2 "
+                  style={{
+                    color: colorHex,
+                  }}
+                >
+                  <Link size={18}/>
+                  </a>
+              )}
+            </div>
+            <div className="whitespace-pre-line text-xs">
+              {project.description}
+            </div>
+          </div>
+        ))}
       </div>
     </>
   );

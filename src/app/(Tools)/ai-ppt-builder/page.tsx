@@ -772,22 +772,22 @@ export default function Builder() {
                 Suggested Topics to Create :
               </h2>
               <div className="mt-8 grid gap-4 md:grid-cols-3">
-                <div onClick={() => handleSuggestionClick("Hardwork Vs Smartwork")} className="hover:bg-gray-100 hover:border-gray-500 flex items-center justify-center rounded-2xl h-30 bg-white text-black border p-6 cursor-pointer">
+                <div onClick={() => handleSuggestionClick("Hardwork Vs Smartwork")} className="hover:bg-gray-100 hover:border-gray-500 flex items-center justify-center rounded-2xl h-30 bg-background text-black border p-6 cursor-pointer">
                   Hardwork Vs Smartwork
                 </div>
-                <div onClick={() => handleSuggestionClick("Global Warming")} className="hover:bg-gray-100 hover:border-gray-500 rounded-2xl flex items-center justify-center h-30 bg-white text-black border p-6 cursor-pointer">
+                <div onClick={() => handleSuggestionClick("Global Warming")} className="hover:bg-gray-100 hover:border-gray-500 rounded-2xl flex items-center justify-center h-30 bg-background text-black border p-6 cursor-pointer">
                   Global Warming
                 </div>
-                <div onClick={() => handleSuggestionClick("History of Computers")} className="hover:bg-gray-100 hover:border-gray-500 rounded-2xl flex items-center justify-center h-30 bg-white text-black border p-6 cursor-pointer">
+                <div onClick={() => handleSuggestionClick("History of Computers")} className="hover:bg-gray-100 hover:border-gray-500 rounded-2xl flex items-center justify-center h-30 bg-background text-black border p-6 cursor-pointer">
                   History of Computers
                 </div>
-                <div onClick={() => handleSuggestionClick("Technology and Innovation")} className="hover:bg-gray-100 hover:border-gray-500 rounded-2xl flex items-center justify-center h-30 bg-white text-black border p-6 cursor-pointer">
+                <div onClick={() => handleSuggestionClick("Technology and Innovation")} className="hover:bg-gray-100 hover:border-gray-500 rounded-2xl flex items-center justify-center h-30 bg-background text-black border p-6 cursor-pointer">
                   Technology and Innovation
                 </div>
-                <div onClick={() => handleSuggestionClick("Advancements in Robotics and Automation")} className="hover:bg-gray-100 hover:border-gray-500 rounded-2xl flex items-center justify-center text-center h-30 bg-white text-black border p-6 cursor-pointer">
+                <div onClick={() => handleSuggestionClick("Advancements in Robotics and Automation")} className="hover:bg-gray-100 hover:border-gray-500 rounded-2xl flex items-center justify-center text-center h-30 bg-background text-black border p-6 cursor-pointer">
                   Advancements in Robotics and Automation
                 </div>
-                <div onClick={() => handleSuggestionClick("Cybersecurity and Data Privacy")} className="hover:bg-gray-100 hover:border-gray-500 rounded-2xl flex items-center justify-center h-30 bg-white text-black border p-6 cursor-pointer">
+                <div onClick={() => handleSuggestionClick("Cybersecurity and Data Privacy")} className="hover:bg-gray-100 hover:border-gray-500 rounded-2xl flex items-center justify-center h-30 bg-background text-black border p-6 cursor-pointer">
                   Cybersecurity and Data Privacy
                 </div>
               </div>

@@ -29,6 +29,7 @@ import {
 import Link from "next/link";
 import { Client, Databases } from "appwrite";
 import { getPublicFileViewUrl } from "@/lib/appwrite";
+import Footer from "@/components/common/Footer";
 
 // List of AI tools
 const aiTools = [
@@ -309,6 +310,7 @@ export default function Home() {
 
        
       </div>
+      <Footer/>
     </div>
   );
 }

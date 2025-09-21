@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { Analytics } from "@vercel/analytics/next";
 import Footer from "@/components/common/Footer";
 import SocialBarAd from "@/components/ads/SocialBarAd";
+import { ThemeProvider } from "@/contexts/theme-context";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -91,11 +92,37 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning >
       <head>
         <meta
           name="google-site-verification"
           content="IKfVdoOA7AW1tFnZw-vtB-Nml7a2DdyYXs7NJ3gZjZ4"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const theme = localStorage.getItem('theme');
+                  const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  const shouldUseDark = theme === 'dark' || (!theme && systemPrefersDark);
+                  
+                  if (shouldUseDark) {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.add('light');
+                  }
+                } catch (e) {
+                  // Fallback to system preference
+                  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.add('light');
+                  }
+                }
+              })();
+            `,
+          }}
         />
         <script
           src="https://cdn.databuddy.cc/databuddy.js"
@@ -108,25 +135,25 @@ export default function RootLayout({
 
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-screen bg-background text-foreground font-sans antialiased ",
           dmSans.variable
         )}
       > 
-        
+       <ThemeProvider>
         <Analytics />
         
-        <div className="flex flex-col h-screen">
+        <div className="flex flex-col h-screen ">
           <Navbar />
           <div className="flex flex-1 overflow-hidden relative">
             <Sidebar />
-            <main className="flex-1 overflow-auto">
+            <main className="flex-1 overflow-auto ">
               {children}
-              <Footer />
             </main>
           </div>
         </div>
         <Toaster />
         <SocialBarAd />
+        </ThemeProvider> 
       </body>
     </html>
   );

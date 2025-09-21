@@ -33,7 +33,7 @@ export default function PromptGeneratorPage() {
               <h3 className="font-medium text-lg mb-2">
                 Creative Writing Assistant
               </h3>
-              <div className="bg-zinc-50 p-3 border rounded-none text-sm mb-2">
+              <div className="bg-zinc-50  p-3 border rounded-none text-sm mb-2">
                 <pre className="whitespace-pre-wrap font-sans text-xs">
                   {`I need you to act as a creative writing coach focused on helping me craft compelling short stories. When I share a story idea or draft with you, first analyze its key elements (plot, character, setting, conflict, theme) and identify 3 specific strengths and 3 areas for improvement. Then provide actionable suggestions for enhancing character development, plot structure, dialogue, and emotional impact. Include one specific example of how to rewrite a weak section. Your feedback should be constructive, specific, and focused on helping me develop my unique voice while adhering to storytelling principles that engage readers. Let's begin with this story idea: [STORY IDEA].`}
                 </pre>

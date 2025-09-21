@@ -61,7 +61,7 @@ export default function ImageGeneratorPage() {
           <h2 className="text-2xl font-bold">Endless Creative Possibilities</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {imageUseCases.map((useCase, index) => (
-              <div key={index} className="border p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+              <div key={index} className="border p-4 bg-background rounded-lg shadow-sm hover:shadow-md transition-shadow">
                 <h3 className="font-medium mb-1">{useCase.title}</h3>
                 <p className="text-sm text-muted-foreground">
                   {useCase.description}

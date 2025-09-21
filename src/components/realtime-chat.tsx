@@ -143,7 +143,8 @@ export function RealtimeChat({ systemPrompt }: RealtimeChatProps) {
   };
   if (!mounted) return null;
   return (
-    <div className="flex h-[calc(100vh-4rem)] flex-col bg-background">
+    <div className="flex h-[calc(100vh-4rem)] flex-col bg-background ">
+      
       <div
         ref={containerRef}
         className="flex-1 overflow-y-auto"

@@ -61,7 +61,7 @@ export default function LinkedInPostGeneratorPage() {
         <div className="grid gap-6 mb-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {postTypes.map((type, index) => (
-              <div key={index} className="border p-4 bg-white">
+              <div key={index} className="border p-4 bg-background">
                 <h3 className="font-medium mb-1">{type.title}</h3>
                 <p className="text-sm text-muted-foreground">
                   {type.description}
@@ -146,19 +146,19 @@ export default function LinkedInPostGeneratorPage() {
             Creating engaging content is essential for building your professional brand and expanding your network.
           </p>
           <div className="grid md:grid-cols-3 gap-4">
-            <div className="border p-4 bg-white">
+            <div className="border p-4 bg-background">
               <h4 className="font-medium mb-2">Build Authority</h4>
               <p className="text-sm text-muted-foreground">
                 Share insights and expertise to establish yourself as a thought leader in your industry.
               </p>
             </div>
-            <div className="border p-4 bg-white">
+            <div className="border p-4 bg-background">
               <h4 className="font-medium mb-2">Expand Network</h4>
               <p className="text-sm text-muted-foreground">
                 Connect with professionals, potential clients, and industry leaders through valuable content.
               </p>
             </div>
-            <div className="border p-4 bg-white">
+            <div className="border p-4 bg-background">
               <h4 className="font-medium mb-2">Career Growth</h4>
               <p className="text-sm text-muted-foreground">
                 Showcase achievements and skills to attract new opportunities and career advancement.

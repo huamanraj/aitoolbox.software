@@ -62,7 +62,7 @@ export default function EmailWriterPage() {
         <div className="grid gap-6 mb-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {emailTypes.map((type, index) => (
-              <div key={index} className="border p-4 bg-white">
+              <div key={index} className="border p-4 bg-background">
                 <h3 className="font-medium mb-1">{type.title}</h3>
                 <p className="text-sm text-muted-foreground">
                   {type.description}

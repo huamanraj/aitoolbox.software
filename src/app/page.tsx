@@ -24,7 +24,8 @@ import {
   Map,
   Brain,
   Linkedin,
-  Presentation
+  Presentation,
+  Cpu,
 } from "lucide-react";
 import Link from "next/link";
 import { Client, Databases } from "appwrite";
@@ -37,145 +38,152 @@ const aiTools = [
     href: "/email-writer",
     icon: <Mail className="h-6 w-6" />,
     description: "Write professional emails with AI assistance",
-    category: "writing"
+    category: "writing",
   },
   {
     name: "GPT Chatbot",
     href: "/chatbot",
     icon: <MessagesSquare className="h-6 w-6" />,
     description: "Interactive AI chatbot for conversations",
-    category: "communication"
+    category: "communication",
   },
   {
     name: "AI Translator",
     href: "/ai-translator",
     icon: <Globe className="h-6 w-6" />,
     description: "Translate text between multiple languages",
-    category: "writing"
+    category: "writing",
   },
   {
     name: "LinkedIn Post Generator",
     href: "/linkedin-post-generator",
     icon: <Linkedin className="h-6 w-6" />,
     description: "Create engaging professional LinkedIn posts",
-    category: "writing"
+    category: "writing",
   },
   {
     name: "Image Generator",
     href: "/image-generator",
     icon: <ImageIcon className="h-6 w-6" />,
     description: "Create unique AI-generated images",
-    category: "visual"
+    category: "visual",
   },
   {
     name: "Anime AI Generator",
     href: "/anime-ai-generator",
     icon: <ImageIcon className="h-6 w-6" />,
     description: "Generate anime-style art from text prompts",
-    category: "visual"
+    category: "visual",
   },
   {
     name: "Logo Generator",
     href: "/logo-generator",
     icon: <Box className="h-6 w-6" />,
     description: "Design professional logos with AI",
-    category: "visual"
+    category: "visual",
   },
   {
     name: "YouTube Summarizer",
     href: "/youtube-summarizer",
     icon: <Youtube className="h-6 w-6" />,
     description: "Get quick summaries of YouTube videos",
-    category: "content"
+    category: "content",
   },
   {
     name: "AI PPT Builder",
     href: "/ai-ppt-builder",
     icon: <Presentation className="h-5 w-5" />,
     description: "Build Presentations with different themes",
-    category: "content"
+    category: "content",
   },
   {
     name: "Code Explainer",
     href: "/code-explainer",
     icon: <Code className="h-6 w-6" />,
     description: "Understand code snippets easily",
-    category: "development"
+    category: "development",
   },
   {
     name: "Text Summarizer",
     href: "/text-summarizer",
     icon: <FileText className="h-6 w-6" />,
     description: "Summarize long texts quickly",
-    category: "content"
+    category: "content",
   },
   {
     name: "Blog Writer",
     href: "/blog-writer",
     icon: <PenTool className="h-6 w-6" />,
     description: "Create engaging blog content",
-    category: "writing"
+    category: "writing",
   },
   {
     name: "Grammar Fixer",
     href: "/grammar-fixer",
     icon: <Check className="h-6 w-6" />,
     description: "Fix grammar and improve writing",
-    category: "writing"
+    category: "writing",
   },
   {
     name: "Resume Builder",
     href: "/resume-builder",
     icon: <FileSpreadsheet className="h-6 w-6" />,
     description: "Create professional resumes",
-    category: "professional"
+    category: "professional",
   },
   {
     name: "Cover Letter Generator",
     href: "/cover-letter-generator",
     icon: <FileUser className="h-6 w-6" />,
     description: "Craft personalized cover letters",
-    category: "professional"
+    category: "professional",
   },
   {
     name: "Idea Generator",
     href: "/idea-generator",
     icon: <Lightbulb className="h-6 w-6" />,
     description: "Generate creative ideas",
-    category: "creativity"
+    category: "creativity",
   },
   {
-  name: "AI Trip Planner",
-  href: "/trip-planner",
-  icon: <Map className="h-6 w-6" />, // or use a relevant Lucide/FontAwesome icon
-  description: "Plan your travels intelligently with AI",
-  category: "travel"
-},
-{
-  name: "AI Bio Generator",
-  href: "/ai-bio-generator",
-  icon: <FileText className="h-6 w-6" />,
-  description: "Generate professional bios instantly with AI",
-  category: "writing"
-},
+    name: "AI Trip Planner",
+    href: "/trip-planner",
+    icon: <Map className="h-6 w-6" />, // or use a relevant Lucide/FontAwesome icon
+    description: "Plan your travels intelligently with AI",
+    category: "travel",
+  },
   {
-  name: "AI Project Recommender",
-  href: "/project-recommender",
-  icon: <Brain className="h-6 w-6" />, 
-  description: "Get personalized project ideas based on your skills",
-  category: "learning"
-},
+    name: "AI Bio Generator",
+    href: "/ai-bio-generator",
+    icon: <FileText className="h-6 w-6" />,
+    description: "Generate professional bios instantly with AI",
+    category: "writing",
+  },
+  {
+    name: "AI Project Recommender",
+    href: "/project-recommender",
+    icon: <Brain className="h-6 w-6" />,
+    description: "Get personalized project ideas based on your skills",
+    category: "learning",
+  },
+  {
+    name: "AI Question Paper Generator",
+    href: "/question-paper-generator",
+    icon: <Cpu className="h-6 w-6" />, // Use a suitable icon
+    description: "Generate fully structured question papers with AI",
+    category: "education",
+  },
 ];
 
-const categories = [...new Set(aiTools.map(tool => tool.category))];
+const categories = [...new Set(aiTools.map((tool) => tool.category))];
 
 // Validation: Check for duplicate tool names to prevent React key errors
 const duplicateNames = aiTools
-  .map(tool => tool.name)
+  .map((tool) => tool.name)
   .filter((name, index, arr) => arr.indexOf(name) !== index);
 
 if (duplicateNames.length > 0) {
-  console.warn('Duplicate tool names found:', duplicateNames);
+  console.warn("Duplicate tool names found:", duplicateNames);
 }
 
 export default function Home() {
@@ -186,27 +194,33 @@ export default function Home() {
   useEffect(() => {
     const endpoint = process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT;
     const projectId = process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID;
-    
+
     if (!endpoint || !projectId) return;
-    
+
     const client = new Client().setEndpoint(endpoint).setProject(projectId);
     const databases = new Databases(client);
     (async () => {
       try {
         const res: any = await databases.listDocuments("content", "blogs");
         // Sort by creation date and take first 6
-        const sortedBlogs = (res.documents || []).sort((a: any, b: any) => 
-          new Date(b.$createdAt).getTime() - new Date(a.$createdAt).getTime()
-        ).slice(0, 6);
+        const sortedBlogs = (res.documents || [])
+          .sort(
+            (a: any, b: any) =>
+              new Date(b.$createdAt).getTime() -
+              new Date(a.$createdAt).getTime()
+          )
+          .slice(0, 6);
         setLatestBlogs(sortedBlogs);
       } catch {}
     })();
   }, []);
 
-  const filteredTools = aiTools.filter(tool => {
-    const matchesSearch = tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         tool.description.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = selectedCategory === "all" || tool.category === selectedCategory;
+  const filteredTools = aiTools.filter((tool) => {
+    const matchesSearch =
+      tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      tool.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory =
+      selectedCategory === "all" || tool.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
@@ -225,17 +239,18 @@ export default function Home() {
               priority
             />
           </div>
-          
+
           <h1 className="text-3xl sm:text-4xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text animate-fade-in">
             AIToolbox
           </h1>
-          
+
           <h2 className="text-lg sm:text-xl font-medium mb-3 text-muted-foreground">
             Your All-in-One AI Tool Platform
           </h2>
-          
+
           <p className="text-sm sm:text-base mb-6 max-w-xl mx-auto text-muted-foreground">
-            Unlock the power of AI with our comprehensive suite of tools for enhanced productivity.
+            Unlock the power of AI with our comprehensive suite of tools for
+            enhanced productivity.
           </p>
         </div>
 
@@ -251,7 +266,7 @@ export default function Home() {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
-          
+
           <div className="flex flex-wrap gap-2">
             <Button
               variant={selectedCategory === "all" ? "default" : "outline"}
@@ -283,13 +298,13 @@ export default function Home() {
             </div>
           ) : (
             filteredTools.map((tool, index) => (
-              <Card 
+              <Card
                 key={`${tool.name}-${tool.href}`}
                 className="p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group cursor-pointer"
               >
                 <a href={tool.href} className="space-y-2">
                   <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                    {React.cloneElement(tool.icon, { className: 'h-5 w-5' })}
+                    {React.cloneElement(tool.icon, { className: "h-5 w-5" })}
                   </div>
                   <h3 className="text-base sm:text-lg font-semibold group-hover:text-primary transition-colors">
                     {tool.name}
@@ -299,15 +314,15 @@ export default function Home() {
                   </p>
                   <div className="flex items-center text-primary text-sm">
                     Try now
-                    <span className="ml-2 transition-transform group-hover:translate-x-1">→</span>
+                    <span className="ml-2 transition-transform group-hover:translate-x-1">
+                      →
+                    </span>
                   </div>
                 </a>
               </Card>
             ))
           )}
         </div>
-
-       
       </div>
     </div>
   );

@@ -72,7 +72,8 @@ export default function QuestionPaperClient() {
       }
 
       const result = await response.json();
-      setGeneratedPaper(result.data);
+      setGeneratedPaper(result.questionPaper);
+      console.log(result.questionPaper);
       toast.success("Question Paper Generated!", {
         description: "Your AI-powered question paper is ready.",
       });
@@ -157,7 +158,7 @@ export default function QuestionPaperClient() {
               )}
 
               {generatedPaper && !isLoading && (
-                <div className="p-4 border rounded-md whitespace-pre-wrap bg-white">
+                <div className="p-4 border rounded-md whitespace-pre-wrap bg-white m-5">
                   {generatedPaper}
                   <Button
                     variant="outline"

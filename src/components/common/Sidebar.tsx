@@ -27,7 +27,7 @@ import {
   FileSpreadsheet,
   Lightbulb,
   Settings,
-  Search, 
+  Search,
   Menu as MenuIcon,
   Rocket,
   Video,
@@ -81,7 +81,7 @@ const aiTools: Tool[] = [
   {
     name: "AI Bio Genertor",
     href: "/ai-bio-generator",
-    icon: <Siren className="h-5 w-5"/>,
+    icon: <Siren className="h-5 w-5" />,
   },
   {
     name: "LinkedIn Post Generator",
@@ -138,6 +138,12 @@ const aiTools: Tool[] = [
     href: "/blog-writer",
     icon: <PenTool className="h-5 w-5" />,
   },
+  {
+    name: "Question Paper Generator",
+    href: "/question-paper-generator",
+    icon: <FileText className="h-5 w-5" />,
+  },
+
   {
     name: "Grammar Fixer",
     href: "/grammar-fixer",
@@ -206,22 +212,22 @@ const aiTools: Tool[] = [
   {
     name: "Privacy-Policy",
     href: "/privacy-policy",
-    icon: <Scale className="h-5 w-5"/>,
+    icon: <Scale className="h-5 w-5" />,
   },
   {
     name: "Cookie-Policy",
     href: "/cookie-policy",
-    icon: <Cookie className="h-5 w-5"/>,
+    icon: <Cookie className="h-5 w-5" />,
   },
   {
     name: "Terms of Service",
     href: "/terms-of-service",
-    icon: <ReceiptText className="h-5 w-5"/>,
+    icon: <ReceiptText className="h-5 w-5" />,
   },
   {
     name: "DMCA Policy",
     href: "/dmca-policy",
-    icon: <Siren className="h-5 w-5"/>,
+    icon: <Siren className="h-5 w-5" />,
   },
 ];
 
@@ -229,7 +235,7 @@ export default function Sidebar() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isCollapsed, setIsCollapsed] = useState(false);
   const pathname = usePathname();
-  const isMobile =  useIsMobile();
+  const isMobile = useIsMobile();
 
   // Filter tools based on search query (disabled when collapsed)
   const filteredTools = aiTools.filter((tool) =>

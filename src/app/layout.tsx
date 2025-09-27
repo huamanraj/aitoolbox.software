@@ -39,6 +39,7 @@ export const metadata: Metadata = {
     "productivity tools",
     "trip planner",
     "project recommender",
+    "Question paper Generator",
   ],
   authors: [{ name: "AIToolbox" }],
   creator: "AIToolbox",
@@ -111,10 +112,9 @@ export default function RootLayout({
           "min-h-screen bg-background font-sans antialiased",
           dmSans.variable
         )}
-      > 
-        
+      >
         <Analytics />
-        
+
         <div className="flex flex-col h-screen">
           <Navbar />
           <div className="flex flex-1 overflow-hidden relative">

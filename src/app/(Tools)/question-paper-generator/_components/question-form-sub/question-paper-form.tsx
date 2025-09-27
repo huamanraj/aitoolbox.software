@@ -15,7 +15,6 @@ import { Input } from "@/components/ui/input";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Plus, Trash2, FileText } from "lucide-react";
-import QuestionType from "./question-type";
 
 // Question type options
 const questionTypesOptions = [
@@ -74,7 +73,6 @@ export function QuestionPaperForm({
 
   const { control, watch, setValue, getValues } = form;
 
-  // Top-level sections
   const {
     fields: sections,
     append: addSection,
@@ -94,29 +92,28 @@ export function QuestionPaperForm({
   const sectionsWatch = watch("sections");
 
   return (
-    <div className="shadow-card mt-10">
-      <CardHeader className="text-center">
+    <div className="shadow-card mt-6 md:mt-10">
+      <CardHeader className="text-center px-4 sm:px-6">
         <FileText className="h-10 w-10 text-primary mx-auto mb-3" />
-        <CardTitle className="text-3xl md:text-4xl font-bold tracking-tight">
+        <CardTitle className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
           AI Question Paper Generator
         </CardTitle>
-        <p className="text-muted-foreground">
-          Transform your assessment creation process with our advanced
-          AI-powered generator. Easily build question papers with multiple
-          sections, topics, and question types — from MCQs to coding problems.
-          <br className="hidden sm:inline" />
-          Save time while ensuring variety, structure, and professional
-          formatting.
+        <p className="text-muted-foreground text-sm sm:text-base">
+          Easily build question papers with multiple sections, topics, and
+          question types. Save time while ensuring variety, structure, and
+          professional formatting.
         </p>
       </CardHeader>
 
-      <CardContent className="mt-10">
+      <CardContent className="mt-6 md:mt-10 px-2 sm:px-4 overflow-x-hidden">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-4 sm:space-y-6"
+          >
             {sections.map((section, sectionIndex) => {
               const sectionValues = sectionsWatch[sectionIndex];
 
-              // Topics handlers
               const addTopic = (value: string) => {
                 const current = getValues(`sections.${sectionIndex}.topics`);
                 setValue(`sections.${sectionIndex}.topics`, [
@@ -124,6 +121,7 @@ export function QuestionPaperForm({
                   { value },
                 ]);
               };
+
               const removeTopic = (topicIndex: number) => {
                 const current = getValues(`sections.${sectionIndex}.topics`);
                 setValue(
@@ -132,7 +130,6 @@ export function QuestionPaperForm({
                 );
               };
 
-              // Question types handlers
               const addQuestionType = () => {
                 const current = getValues(
                   `sections.${sectionIndex}.questionTypes`
@@ -142,6 +139,7 @@ export function QuestionPaperForm({
                   { type: "MCQ", count: 1, marks: 1 },
                 ]);
               };
+
               const removeQuestionType = (qtIndex: number) => {
                 const current = getValues(
                   `sections.${sectionIndex}.questionTypes`
@@ -155,19 +153,21 @@ export function QuestionPaperForm({
               return (
                 <Card
                   key={section.id}
-                  className="border rounded-lg p-4 space-y-4"
+                  className="border rounded-lg p-3 sm:p-4 space-y-3 sm:space-y-4"
                 >
                   {/* Section Header */}
                   <div className="flex justify-between items-center">
-                    <h3 className="font-semibold text-lg">{section.title}</h3>
+                    <h3 className="font-semibold text-base sm:text-lg">
+                      {section.title}
+                    </h3>
                     {sections.length > 1 && (
                       <Button
                         variant="ghost"
-                        size="sm"
-                        className="h-8 w-8 p-0 text-destructive"
+                        size="icon"
+                        className="h-7 w-7 p-0 text-destructive"
                         onClick={() => removeSection(sectionIndex)}
                       >
-                        <Trash2 className="h-4 w-4" />
+                        <Trash2 className="h-3 w-3" />
                       </Button>
                     )}
                   </div>
@@ -193,18 +193,20 @@ export function QuestionPaperForm({
                   {/* Topics */}
                   <div className="space-y-2">
                     <FormLabel>Topics</FormLabel>
-                    <div className="flex gap-2">
+                    <div className="flex flex-col sm:flex-row gap-2">
                       <Input
                         placeholder="Add a topic"
                         id={`topic-input-${sectionIndex}`}
+                        className="flex-1"
                         onKeyDown={(e) => {
                           if (e.key === "Enter") {
                             e.preventDefault();
-                            const inputEl = e.currentTarget;
-                            const value = inputEl.value.trim();
+                            const value = (
+                              e.currentTarget as HTMLInputElement
+                            ).value.trim();
                             if (value) {
                               addTopic(value);
-                              inputEl.value = "";
+                              (e.currentTarget as HTMLInputElement).value = "";
                             }
                           }
                         }}
@@ -224,8 +226,7 @@ export function QuestionPaperForm({
                         variant="outline"
                         size="sm"
                       >
-                        <Plus className="h-4 w-4" />
-                        Add
+                        <Plus className="h-4 w-4" /> Add
                       </Button>
                     </div>
                     <div className="flex flex-wrap gap-2">
@@ -258,38 +259,108 @@ export function QuestionPaperForm({
                         size="sm"
                         onClick={addQuestionType}
                       >
-                        <Plus className="h-4 w-4" />
-                        Add Type
+                        <Plus className="h-4 w-4" /> Add Type
                       </Button>
                     </div>
 
                     {sectionValues.questionTypes.map((qt, qtIndex) => (
-                      <QuestionType
+                      <div
                         key={qtIndex}
-                        control={control}
-                        sectionIndex={sectionIndex}
-                        qtIndex={qtIndex}
-                        qtData={qt}
-                        sectionValues={sectionValues}
-                        removeQuestionType={removeQuestionType}
-                      />
+                        className="flex flex-col sm:flex-row sm:items-center gap-2 w-full border rounded p-2"
+                      >
+                        {/* Type */}
+                        <FormField
+                          control={control}
+                          name={`sections.${sectionIndex}.questionTypes.${qtIndex}.type`}
+                          render={({ field }) => (
+                            <FormItem className="flex-1">
+                              <FormLabel>Type</FormLabel>
+                              <FormControl>
+                                <Input {...field} placeholder="MCQ" />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        {/* Count */}
+                        <FormField
+                          control={control}
+                          name={`sections.${sectionIndex}.questionTypes.${qtIndex}.count`}
+                          render={({ field }) => (
+                            <FormItem className="flex-1">
+                              <FormLabel>Count</FormLabel>
+                              <FormControl>
+                                <Input
+                                  type="number"
+                                  {...field}
+                                  placeholder="1"
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        {/* Marks */}
+                        <FormField
+                          control={control}
+                          name={`sections.${sectionIndex}.questionTypes.${qtIndex}.marks`}
+                          render={({ field }) => (
+                            <FormItem className="flex-1">
+                              <FormLabel>Marks</FormLabel>
+                              <FormControl>
+                                <Input
+                                  type="number"
+                                  {...field}
+                                  placeholder="1"
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        {/* Total */}
+                        <div className="flex-1">
+                          <FormLabel>Total</FormLabel>
+                          <div className="px-2 py-1 border rounded">
+                            {qt.count * qt.marks}
+                          </div>
+                        </div>
+
+                        {/* Remove Button */}
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-7 w-7 p-0 text-destructive self-end sm:self-auto"
+                          onClick={() => removeQuestionType(qtIndex)}
+                        >
+                          <Trash2 className="h-3 w-3" />
+                        </Button>
+                      </div>
                     ))}
                   </div>
                 </Card>
               );
             })}
 
+            {/* Add Section */}
             <Button
               type="button"
               variant="outline"
               onClick={handleAddSection}
               className="w-full"
             >
-              <Plus className="h-4 w-4" />
-              Add Section
+              <Plus className="h-4 w-4" /> Add Section
             </Button>
 
-            <Button type="submit" className="w-full mt-4" disabled={isLoading}>
+            {/* Submit */}
+            <Button
+              type="submit"
+              className="w-full mt-2 sm:mt-4"
+              disabled={isLoading}
+            >
               {isLoading ? "Generating..." : "Generate Question Paper"}
             </Button>
           </form>

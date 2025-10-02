@@ -110,6 +110,13 @@ const aiTools = [
     category: "content"
   },
   {
+    name: "PDF Q&A Tool",
+    href: "/pdf-qa-tool",
+    icon: <FileText className="h-6 w-6"/>,
+    description: "Ask any questions and get answers from your PDF documents",
+    category: "content"
+  },
+  {
     name: "Blog Writer",
     href: "/blog-writer",
     icon: <PenTool className="h-6 w-6" />,

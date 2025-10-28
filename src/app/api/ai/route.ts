@@ -107,15 +107,18 @@ export async function POST(req: NextRequest) {
       case "chat": {
         const { prompt, options = {} } = body;
         // Handle chat/text generation
+        // Note: Don't send temperature/max_tokens as some providers reject non-default values
+        const { temperature, max_tokens, ...cleanOptions } = options;
+        
         const response = await fetch("https://text.pollinations.ai/openai", {
           method: "POST",
           headers: getAuthHeaders(),
           body: JSON.stringify({
-            model: options.model || "openai",
-            messages: options.messages || [
+            model: cleanOptions.model || "openai",
+            messages: cleanOptions.messages || [
               { role: "user", content: prompt }
             ],
-            ...options
+            ...cleanOptions
           })
         });
 
@@ -140,31 +143,46 @@ export async function POST(req: NextRequest) {
         }
 
         const firstChoice = data.choices[0];
-        if (!firstChoice || !firstChoice.message || !firstChoice.message.content) {
-          console.error("Invalid choice structure:", firstChoice);
+        // Handle provider safety/content filter responses gracefully
+        if (firstChoice?.finish_reason === "content_filter") {
+          const categories = firstChoice?.content_filter_results || undefined;
+          console.warn("Content filtered by provider:", categories);
           return NextResponse.json(
-            { error: "Invalid response format from AI service" },
-            { status: 500 }
+            { error: "Your prompt was blocked by the safety system. Please rephrase and avoid explicit or unsafe content." },
+            { status: 400 }
           );
         }
 
-        return NextResponse.json({ 
-          success: true, 
-          data: firstChoice.message.content 
-        });
+        // Some providers may return content in different fields or omit message.content
+        const content = firstChoice?.message?.content
+          ?? firstChoice?.content
+          ?? (typeof data === "string" ? data : undefined);
+
+        if (!content || typeof content !== "string") {
+          console.error("Invalid choice structure:", firstChoice);
+          return NextResponse.json(
+            { error: "Invalid response format from AI service" },
+            { status: 502 }
+          );
+        }
+
+        return NextResponse.json({ success: true, data: content });
       }
 
       case "audio": {
         const { prompt, options = {} } = body;
         // Handle text-to-speech
+        // Remove temperature/max_tokens to avoid provider errors
+        const { temperature, max_tokens, ...cleanOptions } = options;
+        
         const response = await fetch("https://text.pollinations.ai/openai", {
           method: "POST",
           headers: getAuthHeaders(),
           body: JSON.stringify({
             model: "openai-audio",
             messages: [{ role: "user", content: prompt }],
-            voice: options.voice || "nova",
-            ...options
+            voice: cleanOptions.voice || "nova",
+            ...cleanOptions
           })
         });
 
@@ -189,18 +207,23 @@ export async function POST(req: NextRequest) {
         }
 
         const firstChoice = data.choices[0];
-        if (!firstChoice || !firstChoice.message || !firstChoice.message.audio || !firstChoice.message.audio.data) {
+        if (firstChoice?.finish_reason === "content_filter") {
+          console.warn("Audio request filtered by provider:", firstChoice?.content_filter_results);
+          return NextResponse.json(
+            { error: "Your request was blocked by the safety system. Please rephrase and try again." },
+            { status: 400 }
+          );
+        }
+        const audioData = firstChoice?.message?.audio?.data;
+        if (!audioData) {
           console.error("Invalid audio choice structure:", firstChoice);
           return NextResponse.json(
             { error: "Invalid audio response format" },
-            { status: 500 }
+            { status: 502 }
           );
         }
 
-        return NextResponse.json({ 
-          success: true, 
-          data: firstChoice.message.audio.data // Returns base64 audio
-        });
+        return NextResponse.json({ success: true, data: audioData });
       }
 
       default:

@@ -20,8 +20,7 @@ export function getServerClients(): AppwriteServerClients {
 
   const client = new Client().setEndpoint(endpoint).setProject(projectId);
   // The setKey method is available on server runtimes. Cast to any to satisfy TS in mixed envs.
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (client as any).setKey?.(apiKey);
+  (client as any).setKey?.(apiKey); // eslint-disable-line
 
   const databases = new Databases(client);
   const storage = new Storage(client);

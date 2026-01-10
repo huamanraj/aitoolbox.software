@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+<div align="center">
+  <a href="https://aitoolbox.software">
+    <img src="public/logo.png" alt="AI Toolbox Logo" width="140" />
+  </a>
+
+  <h1>AI Toolbox</h1>
+
+  <p>
+    <em>
+      Free AI tools for everyone. Generate images, enhance writing,
+      download media, and create content using AI.
+    </em>
+  </p>
+
+  <p>No signup required for basic features.</p>
+
+  <p>
+    <a href="https://aitoolbox.software">Website</a> •
+    <a href="https://github.com/huamanraj/aitoolbox.software">GitHub</a> •
+    <a href="https://github.com/huamanraj/aitoolbox.software/issues">Issues</a>
+  </p>
+</div>
+
+## Tech Stack
+
+| Category   | Technology |
+|-----------|------------|
+| Framework | Next.js    |
+| Language  | TypeScript |
+| Styling   | Tailwind CSS |
+| UI        | shadcn/ui  |
+| Deployment| Vercel     |
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### Requirements
+- Node.js 18+
+
+### Setup
 
 ```bash
+git clone https://github.com/huamanraj/aitoolbox.software.git
+cd aitoolbox.software
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+````
+
+Open [http://localhost:3000](http://localhost:3000)
+
+---
+
+## Contributing
+
+Contributions are welcome.
+
+1. Star the repository
+2. Read `contribution/CONTRIBUTING.md`
+3. Pick an issue or open a new one
+4. Get assigned before working
+5. Submit a PR referencing the issue
+
+Unassigned pull requests may be closed.
+
+---
+
+## Project Admin
+
+**Aman Raj**
+GitHub: [https://github.com/huamanraj](https://github.com/huamanraj)
+Website: [https://amanraj.me](https://amanraj.me)
+
+---
+
+## Contributors
+
+<div align="center">
+  Thanks to everyone who has contributed to this project.
+  <a href="https://github.com/huamanraj/aitoolbox.software/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=huamanraj/aitoolbox.software" alt="Contributors" />
+  </a>
+</div>
+
+---
+
+## License
+
+MIT License. See the `LICENSE` file for details.
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

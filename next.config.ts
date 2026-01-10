@@ -1,12 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  webpack: (config) => {
-    return config;
-  },
+  /* config options here */
 };
 
 export default nextConfig;

@@ -49,7 +49,9 @@ git clone https://github.com/huamanraj/aitoolbox.software.git
 cd aitoolbox.software
 npm install
 npm run dev
-````
+
+```
+
 Open [http://localhost:3000](http://localhost:3000)
 ---
 
@@ -64,16 +66,6 @@ Contributions are welcome.
 5. Submit a PR referencing the issue
 
 Unassigned pull requests may be closed.
-
----
-
-## Community
-
-Want to level up as a contributor?
-Level 3 requires sharing AI Toolbox on social media.
-
-Details:
-[https://github.com/huamanraj/aitoolbox.software/blob/main/contributions/Community.md](https://github.com/huamanraj/aitoolbox.software/blob/main/contributions/Community.md)
 
 
 

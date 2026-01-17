@@ -17,13 +17,10 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           issue-number: ${{ github.event.issue.number }}
           body: |
-            🔥🔥 Community highlight: Earn Level 3 by sharing AIToolbox on your social media.
-            ⚠️Learn more: https://github.com/huamanraj/aitoolbox.software/blob/main/contributions/Community.md
+            Thank you for opening an issue! 🚀
 
-            Before moving ahead:
-            - ⭐ Please star the repository (Mandatory for GSSoC 25).
-            - 📖 Read the [Contribution Guidelines](https://github.com/${{ github.repository }}/blob/main/contribution/CONTRIBUTING.md).
-            - 📂 All contribution info is inside the [`/contribution`](https://github.com/${{ github.repository }}/tree/main/contribution) folder.
-            - 📚 AI and AdSense related documentation is inside the [`/doc`](https://github.com/${{ github.repository }}/tree/main/doc) folder.
+            Before you start fixing anything or creating a new feature, please:
+            - Read our [Contributing Guidelines](https://github.com/${{ github.repository }}/blob/main/CONTRIBUTING.md).
+            - Read the documentation in the [`/docs`](https://github.com/${{ github.repository }}/tree/main/docs) folder, especially the [`/docs/adsense`](https://github.com/${{ github.repository }}/tree/main/docs/adsense) folder.
 
-            We’ll review your issue soon.
+            We will review your issue as soon as possible.

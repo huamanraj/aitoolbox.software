@@ -1,0 +1,3 @@
+Contact: https://aitoolbox.software
+Preferred-Languages: en
+Canonical: https://aitoolbox.software/.well-known/security.txt

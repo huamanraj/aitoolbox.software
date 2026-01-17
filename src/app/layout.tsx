@@ -94,6 +94,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <meta name="google-adsense-account" content="ca-pub-8422803804849110" />
+        <meta
+          name="google-site-verification"
+          content="3DcD_AZXssd0F1Q-X5TElSbA-mReJhJQOVeFTx-kO3o"
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -103,16 +108,13 @@ export default function RootLayout({
         <script
           src="https://cdn.databuddy.cc/databuddy.js"
           data-client-id="XWPQ_xMGsuAeFkJg4_hYc"
+          data-track-hash-changes="true"
           data-track-attributes="true"
           data-track-outgoing-links="true"
           data-track-interactions="true"
-          data-track-engagement="true"
           data-track-scroll-depth="true"
-          data-track-exit-intent="true"
-          data-track-bounce-rate="true"
           data-track-web-vitals="true"
           data-track-errors="true"
-          data-enable-batching="true"
           crossOrigin="anonymous"
           async
         ></script>

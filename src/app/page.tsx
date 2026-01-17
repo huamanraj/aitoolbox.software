@@ -67,9 +67,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://aitoolbox.software/",
   },
-  verification: {
-    google: "your-google-verification-code",
-  },
 };
 
 export default function HomePage() {

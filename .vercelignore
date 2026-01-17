@@ -1,0 +1,36 @@
+# Vercel ignore patterns
+# These files/folders won't trigger rebuilds
+
+# Documentation
+*.md
+!README.md
+
+# IDE files
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# CI/CD (except Vercel)
+.github
+
+# Test files
+**/__tests__/**
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
+
+# Config files that don't affect build
+.editorconfig
+.prettierrc
+.eslintignore

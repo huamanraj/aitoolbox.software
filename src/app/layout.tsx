@@ -3,6 +3,7 @@ import { Questrial, Instrument_Serif } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
+import Script from "next/script";
 
 const questrial = Questrial({
   weight: "400",
@@ -105,24 +106,6 @@ export default function RootLayout({
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
-        <script
-          src="https://cdn.databuddy.cc/databuddy.js"
-          data-client-id="XWPQ_xMGsuAeFkJg4_hYc"
-          data-track-hash-changes="true"
-          data-track-attributes="true"
-          data-track-outgoing-links="true"
-          data-track-interactions="true"
-          data-track-scroll-depth="true"
-          data-track-web-vitals="true"
-          data-track-errors="true"
-          crossOrigin="anonymous"
-          async
-        ></script>
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8422803804849110"
-          crossOrigin="anonymous"
-        ></script>
         <link rel="llms-txt" href="/llms.txt" />
       </head>
       <body
@@ -140,6 +123,24 @@ export default function RootLayout({
           </div>
           <Toaster />
         </ThemeProvider>
+        <Script
+          src="https://cdn.databuddy.cc/databuddy.js"
+          data-client-id="XWPQ_xMGsuAeFkJg4_hYc"
+          data-track-hash-changes="true"
+          data-track-attributes="true"
+          data-track-outgoing-links="true"
+          data-track-interactions="true"
+          data-track-scroll-depth="true"
+          data-track-web-vitals="true"
+          data-track-errors="true"
+          crossOrigin="anonymous"
+          strategy="lazyOnload"
+        />
+        <Script
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8422803804849110"
+          crossOrigin="anonymous"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   );

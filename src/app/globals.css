@@ -196,6 +196,11 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+  .render-optimize {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 300px;
+  }
 }
 
 /* Respect reduced motion settings */

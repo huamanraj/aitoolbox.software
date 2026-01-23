@@ -42,11 +42,12 @@ export const ToolsGrid = ({ tools, title }: ToolsGridProps) => {
         <motion.div
           variants={container}
           initial="hidden"
-          animate="show"
+          whileInView="show"
+          viewport={{ once: true, margin: "-50px" }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
         >
           {tools.map((tool) => (
-            <motion.div key={tool.id} variants={item}>
+            <motion.div key={tool.id} className=" render-optimize" variants={item}>
               <ToolCard {...tool} />
             </motion.div>
           ))}
